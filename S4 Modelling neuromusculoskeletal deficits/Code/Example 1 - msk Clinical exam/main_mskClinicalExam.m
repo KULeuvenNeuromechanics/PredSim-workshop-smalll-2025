@@ -32,6 +32,7 @@ osim_path = fullfile(Seminar_path,'Models',subject_name,[subject_name,'_PredSim.
 % load model info
 [f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(subject_name, osim_path, PredSim_path);
 
+
 %% In step 3 and 4 you will work with the data from the Clinical Exam (CE)
 % Passive range of motion and muscle strength scores are provided in the 'Clinical Exam'/BCN_CP#:
 
@@ -168,7 +169,7 @@ end
 % ------- start edit -------
 
 % Define scaling factor range
-sf_lMo = flip([0.8:0.05:0.95]); 
+sf_lMo = flip([0.85:0.01:1]); 
 
 % ------- stop edit -------
 
@@ -209,7 +210,7 @@ for j = 1:length(sf_lMo)
     if ~isempty(scale)
         try
             % scale
-            [model_info.muscle_info] = scale_MTparameters(scale,model_info.muscle_info);
+            [sf_model_info.muscle_info] = scale_MTparameters(scale,model_info.muscle_info);
         catch errmsg
             error(['Unable to extract strength scale factor because: ', errmsg.message]);
         end
@@ -226,20 +227,20 @@ for j = 1:length(sf_lMo)
     load Fpparam
     load Faparam
     
-    FMo_in = struct_array_to_double_array(model_info.muscle_info.parameters,'FMo');
-    lMo_in = struct_array_to_double_array(model_info.muscle_info.parameters,'lMo');
-    lTs_in = struct_array_to_double_array(model_info.muscle_info.parameters,'lTs');
-    alphao_in = struct_array_to_double_array(model_info.muscle_info.parameters,'alphao');
-    vMmax_in = struct_array_to_double_array(model_info.muscle_info.parameters,'vMmax');
-    tension = struct_array_to_double_array(model_info.muscle_info.parameters,'specific_tension');
-    aTendon = struct_array_to_double_array(model_info.muscle_info.parameters,'tendon_stiff');
-    shift = struct_array_to_double_array(model_info.muscle_info.parameters,'tendon_stiff_shift');
-    stiffness_shift = struct_array_to_double_array(model_info.muscle_info.parameters,'muscle_pass_stiff_shift');
-    stiffness_scale = struct_array_to_double_array(model_info.muscle_info.parameters,'muscle_pass_stiff_scale');
-    strength = struct_array_to_double_array(model_info.muscle_info.parameters,'muscle_strength');
+    FMo_in = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'FMo');
+    lMo_in = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'lMo');
+    lTs_in = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'lTs');
+    alphao_in = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'alphao');
+    vMmax_in = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'vMmax');
+    tension = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'specific_tension');
+    aTendon = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'tendon_stiff');
+    shift = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'tendon_stiff_shift');
+    stiffness_shift = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'muscle_pass_stiff_shift');
+    stiffness_scale = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'muscle_pass_stiff_scale');
+    strength = struct_array_to_double_array(sf_model_info.muscle_info.parameters,'muscle_strength');
     
-    a = ones(model_info.muscle_info.NMuscle,1)*0.01; % activation
-    fse  = zeros(model_info.muscle_info.NMuscle,1); % tendon force-length characteristic 
+    a = ones(sf_model_info.muscle_info.NMuscle,1)*0.01; % activation
+    fse  = zeros(sf_model_info.muscle_info.NMuscle,1); % tendon force-length characteristic 
     dfse = 0;
     
     vMT  = 0; % MT velocity
@@ -247,9 +248,9 @@ for j = 1:length(sf_lMo)
     MuscMoAsmp = 0; % constant pennation angle
     d = 0.01; % muscle damping
     
-    lMT = zeros(model_info.muscle_info.NMuscle,n);
-    FT = zeros(n,model_info.muscle_info.NMuscle); 
-    M_muscle = zeros(model_info.muscle_info.NMuscle,n);
+    lMT = zeros(sf_model_info.muscle_info.NMuscle,n);
+    FT = zeros(n,sf_model_info.muscle_info.NMuscle); 
+    M_muscle = zeros(sf_model_info.muscle_info.NMuscle,n);
     Tau_pass = zeros(1,n);
     
     for i=1:n
