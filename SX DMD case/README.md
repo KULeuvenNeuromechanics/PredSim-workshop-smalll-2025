@@ -57,11 +57,13 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Data:** passive ROM and clinical stiffness scale values, provided in [Clinical Exam/Clinical_Exam_DMDCase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/Clinical_Exam_DMDcase.xlsx)), reference passive ROM values for typically developing children from Mudge et al., matched to the case’s age, are provided in subfolder [Clinical Exam/Ref_ROM_TD.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/Ref_ROM_TD.xlsx) 
 
+**Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
+
 **Additional information:** The protocol of the clinical examination is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
 
 	Step 3. Shifting the passive force-length curvescaling muscle strength
 
-	- Open [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Code/Personalize_passive_muscle_stiffness_based_on_CE.m) in matlab. This code guides users through the estimation process. 
+	- Open Personalize_passive_muscle_stiffness_based_on_CE.m in matlab. This code guides users through the estimation process. 
 		- Users only have to change the paths (line 19 to line 21). 
 		- If the user will use this code in the future and have additional clinical measurements, the user can update the link between those measurements and the specific muscles (lines 25-60).
 	
