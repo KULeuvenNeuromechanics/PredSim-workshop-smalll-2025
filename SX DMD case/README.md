@@ -8,13 +8,13 @@ In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) 
 
 In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively.
 
-To this end, you will create a settings file that can later be used in PredSim. In this tuturial you will edit [default settings file](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
+To this end, you will create a settings file that can later be used in PredSim. In this tutorial you will edit [default settings file](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
 
-	Step 1. Create a copy of the update_settings file in the Code folder of this tuturial
+	Step 1. Create a copy of the update_settings file in the Code folder of this tutorial
 
 
 ### I. Muscle weakness
-The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores. 
+The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
 
 **Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
 **Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)
@@ -22,38 +22,30 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 	Step 2. Scaling muscle strength
 
-	Go to our [app](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/) and convert the instrumented strength scores (mean joint torques) provided in [Clinical Exam]	(https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx) into percentages relative to the median of percentile curves. 
-
-	In the app: fill in the body mass, height and instrumented strength scores and press on calculate z-score, then the percentages will be calculated and appear. Do this for the hip, knee and ankle joint. The user may export the percentages into a csv file by clicking on export data. 
+	- Open the app (link provided above under Requirements).
+	- Open IWA_DMDcase.xlsx under Clinical Exam (link under Data), take the instrumented strength scores (mean joint torques)
 	
+	- In the app
+		- Enter: body mass, height and mean joint torques
+		- Click Calculate z-score. 
+		The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves
+		- To save the results, click Export data to download a CSV file.
+		- Repeat for each joint: hip, knee, ankle
 	
-	Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
+	- Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
 	
-	 S.settings.muscle_strength = {...       
-	 {'glut_max_r'},1,...                % R_hip_ext
-	 {'iliopsoas_r'},1,...               % R_hip_flex    
-	 {'rect_fem_r' 'vasti_r'},1,...      % R_knee_ext
-	 {'hamstrings_r' 'bifemsh_r'},1,...  % R_knee_bend
-	 {'gastroc_r' 'soleus_r'},1,...      % R_ankle_pf
-	 {'tib_ant_r'},1,...                 % R_ankle_df
-	 {'glut_max_l'},1,...                % L_hip_ext
-	 {'iliopsoas_l'},1,...               % L_hip_flex    
-	 {'rect_fem_l' 'vasti_l'},1,...      % L_knee_ext
-	 {'hamstrings_l' 'bifemsh_l'},1,...  % L_knee_bend
-	 {'gastroc_l' 'soleus_l'},1,...      % L_ankle_pf
-	 {'tib_ant_l'},1};                   % L_ankle_df
+	 S.settings.muscle_strength = {... 
+		{'iliopsoas_r', 'iliopsoas_l'}, 1, ...								% hip_flex
+		{'glut_max_r', 'glut_max_l'}, 1, ...								% hip_ext
+		{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 1, ...			% knee_ext
+		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 1, ...	% knee_flex
+		{'tib_ant_r', 'tib_ant_l'}, 1, ...									% ankle_df
+		{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
+		};
 	  
-	Edit S.settings.muscle_strength in the settings file based on the percentages from the app. 1 corresponds to 100. 
+	- Edit S.settings.muscle_strength in the settings file based on the percentages from the app (for example, 1 = 100%). 
 
-
-The user will express the individual strength scores (i.e., joint moments) as a percentage relative to the median of typically developing children, using our reference database of 153 typically developing children (aged …–…) and the corresponding percentile curves.
-
-Go to our app and calculate the strength percentages for the values provided in 'Clinical Exam'/IWA_DMDcase.
-Link to the app: https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/
-
-**Output:** The user will use the calculated strength percentages (calculated via the app) to model subject-specific muscle weakness via the settings parameter 'S.subject.muscle_strength' in the PredSim code. The settings file for the model is provided in 'Model'/settings_gait1018_Case_DMD.m. The user can already fill in the scaling factors for the strength in this file between 'start edit' and 'stop edit'. 
-
-The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
+**Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
 
 
 ### II. Muscle stiffness
@@ -61,7 +53,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Data:** The passive ROM values and clinical stiffness scale values of the case with DMD are provided in the subfolder 'Clinical Exam'/Clinical_Exam_DMDcase and The reference passive ROM values for typically developing children, matched to the case’s age, are provided in subfolder 'Clinical Exam'/Ref_ROM_TD .
 
-In DMD, contractile tissue is not only lost but also replaced by fat and fibrotic tissue, resulting in increased muscle stiffness and eventually leading to contractures. We modeled this by shifting the passive muscle force-length relationship to shorter fiber lengths through a reduction in the fiber length at which passive muscle force begins to develop. We use the ROM measurements and clinical stiffness scale to estimate this shift. For the ROM measurements, we estimate the difference in fiber length at which the muscle starts to develop passive force between TD and DMD from the difference in joint angle at the end of ROM. The joint angle at the end of ROM of TD children was based on age-related reference data reported by Mudge et al. To estimate the corresponding difference in fiber length, we multiply the difference in measured joint angle at end ROM between TD and DMD (in radians) with the moment arm of the muscles in the anatomical position. This difference in fiber length was normalized to optimal fiber length to compute the shift of the passive force-length relationship. 
+**Background:** In DMD, contractile tissue is not only lost but also replaced by fat and fibrotic tissue, resulting in increased muscle stiffness and eventually leading to contractures. We modeled this by shifting the passive muscle force-length relationship to shorter fiber lengths through a reduction in the fiber length at which passive muscle force begins to develop. We use the ROM measurements and clinical stiffness scale to estimate this shift. For the ROM measurements, we estimate the difference in fiber length at which the muscle starts to develop passive force between TD and DMD from the difference in joint angle at the end of ROM. The joint angle at the end of ROM of TD children was based on age-related reference data reported by Mudge et al. To estimate the corresponding difference in fiber length, we multiply the difference in measured joint angle at end ROM between TD and DMD (in radians) with the moment arm of the muscles in the anatomical position. This difference in fiber length was normalized to optimal fiber length to compute the shift of the passive force-length relationship. 
 For the clinical stiffness scale, the normalized fiber length at which passive force starts to develop was assumed 1 when the clinical stiffness score was 0 (no increased resistance), 0.83 when the score was 1 (minimal increased resistance), 0.67 when the score was 2 (increased resistance), and 0.5 when the score was 3 (highly pronounced resistance) corresponding to a shift of respectively 0, 0.17, 0.33, and 0.5. 
 We shifted the passive force-length relationship by the mean of the shifts estimated based on the ROM and clinical stiffness score.
 
