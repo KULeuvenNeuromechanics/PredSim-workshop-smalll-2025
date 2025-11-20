@@ -8,7 +8,7 @@ In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) 
 
 In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively.
 
-To this end, you will create a settings file that can later be used in PredSim. In this tuturial you will edit [default settings file](code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
+To this end, you will create a settings file that can later be used in PredSim. In this tuturial you will edit [default settings file](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
 
 	Step 1. Create a copy of the update_settings file in the Code folder of this tuturial
 
