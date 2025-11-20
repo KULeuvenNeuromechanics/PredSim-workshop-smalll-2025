@@ -42,8 +42,8 @@ This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mas
 ## Step 6: run a simulation with a weak TA and an exoskeleton
   You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`
 
-## Step 7: evaluate the effect of weakness and exoskeleton assitive
-   You can now evaluate the effect of weakness by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
+## Step 7: evaluate the effect of weakness and exoskeleton assistance
+   You can now evaluate the combined effects of weakness and the assitive device by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
 
 ## Step 8: test different stiffness
 In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
