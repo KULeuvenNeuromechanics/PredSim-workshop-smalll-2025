@@ -38,7 +38,7 @@ The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used t
 
 This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mass of the exoskeleton is ignored for simplicity. Because the default stiffness is 0, the exoskeleton should not affect the gait pattern. Change the stiffness to a desired level (greater than 0). 
 
-## Step 5: simuluate the effects of an ankle-foot orthosis on gait patterns in individuals with foot drop
+## Step 5: simuluate the effects of an ankle-foot orthosis on gaits in individuals with foot drop
   You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. You can now evaluate the combined effects of weakness and the assitive device by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
 
 ## Step 6: test different stiffness
