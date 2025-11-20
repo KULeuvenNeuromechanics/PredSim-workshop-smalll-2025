@@ -17,7 +17,9 @@ To this end, you will create a settings file that can later be used in PredSim. 
 The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
 
 **Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
+
 **Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)
+
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
 
 	Step 2. Scaling muscle strength
