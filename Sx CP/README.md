@@ -1,30 +1,64 @@
-# Modeling neuromusculoskeletal deficits
+# Modeling neuromusculoskeletal deficits in CP
 
 Physics-based computer simulations, that can predict the effect of treatments (e.g., bony and soft tissue correction, ankle-foot-orthoses) on gait in children with cerebral palsy (CP), have the potential to improve clinical decision-making. To this end, an important challenge is to accurately estimate patient-specific neuromusculoskeletal models.
 
-In this tutorial you will model musculoskeletal impairments based on the clinical exam. The clinical exam is part of children's usual clinical care and is a comprehensive assesment of musculoskeletal functioning. In example 1. you will use (I.) manual muscle testing strength scores and (II.) passive Range of Motion (ROM) scores to personalize optimal muscle force and optimal muscle fiber length, respectively.
+In this tutorial you'll(1.) personalize for a CP case. Next, (2.) you will model the effect of surgery and (3.) evaluate your simulation results with experimental data. The workflow you'll apply in this tutorial has been published in [Van Den Bosch et al. (2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01767-w)
 
-**Data:** Passive range of motion and muscle strength scores, provided in the subfolder 'Clinical Exam'/BCN_CP#:
 
-### I. Strength
-The strength is evaluated for the full active range of motion by manual muscle testing. 
- 	
-Strength scores indicate:
-1. Evidence of slight contraction of the muscle but joint motion is not visible
-2. Complete range of motion in gravity eliminated plane
-3. Perfect motion against gravity 
-4. Motion against gravity with some (moderate resistance)
-5. Motion against gravity with maximal resistance
+# I. Personalizing the musculoskeletal model
+In this part you will personalize a model for a child with CP based on a clinical exam. The clinical exam is part of children's usual clinical care and is a comprehensive assesment of musculoskeletal functioning. In example 1. you will use (I.1) manual muscle testing strength scores and (I.2) passive Range of Motion (ROM) scores to personalize optimal muscle force and optimal muscle fiber length, respectively.
 
-### II. Passive range of motion (pROM)
-- Soleus (Silfversköld Test):
-	The patient lies supine, with one knee flexed at 90°. The ankle is moved into maximal dorsiflexion. The maximal dorsiflexion angle is measured (evaluation of the length of soleus). The typical value for dorsiflexion in this situation is 20 to 30 °. (pROM_Ankledf 90_#side)
-- Gastrocnemii (Silfversköld Test): 
-	Tested in a similar position as Soleus. The knee is moved in full extension. At that time we can evaluate whether the length of the gastrocnemius limits the ankle motion, thereby decreasing the maximal dorsiflexion angle. The typical value for dorsiflexion in this situation is 10 to 20°. (pROM_Ankledf 0_#side)
-- Hamstrings (popliteal angle - bilateral):
-	The patient lies supine. The evaluated limb is flexed at the level of the hip. The contralateral limb is flexed. Starting from knee flexion, the knee of the evaluated limb is moved into maximum extension. The deficit until full knee extension is noted (as a negative angle: lack to full extension). The typical value for the bilateral test is -15° to -0°. (p_ROM_Poplbi_#side)
+To this end, you will create a settings file that can later be used in PredSim. In this tuturial you will edit [default settings file](PredSim-workshop-smalll-2025/code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
 
-**Requirements:** OpenSim, CasADi.
+	Step 1. Create a copy of the update_settings file in the Code folder of this tuturial
+
+## I.1 Strength
+The strength is evaluated for the full active range of motion by manual muscle testing (MMT). The user will scale the maximal (active) muscle force based on the strength scores in the Clinical Exam
+
+**Requirements:** Matlab.
+**Data:** MMT scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam)
+**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+
+	Step 2. Scaling muscle strength
+
+	Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
+	
+	 S.settings.muscle_strength = {...       
+	 {'glut_max_r'},1,...                % R_hip_ext
+	 {'iliopsoas_r'},1,...               % R_hip_flex    
+	 {'rect_fem_r' 'vasti_r'},1,...      % R_knee_ext
+	 {'hamstrings_r' 'bifemsh_r'},1,...  % R_knee_bend
+	 {'gastroc_r' 'soleus_r'},1,...      % R_ankle_pf
+	 {'tib_ant_r'},1,...                 % R_ankle_df
+	 {'glut_max_l'},1,...                % L_hip_ext
+	 {'iliopsoas_l'},1,...               % L_hip_flex    
+	 {'rect_fem_l' 'vasti_l'},1,...      % L_knee_ext
+	 {'hamstrings_l' 'bifemsh_l'},1,...  % L_knee_bend
+	 {'gastroc_l' 'soleus_l'},1,...      % L_ankle_pf
+	 {'tib_ant_l'},1};                   % L_ankle_df
+	  
+	Edit S.settings.muscle_strength in the settings file based on the strength scores in the clinical exam. A lower MMT score refers to decreased strength.
+	To 	represent this in the model, maximal active fiber force of a muscle have to be scaled.
+	
+	Clinical Exam to strength scaling factor reference
+	 CE        scaling factor
+	 1           0.05
+	 2           0.1
+	 3           0.3
+	 4           0.5
+	 5           0.7
+
+	 EXAMPLE: 
+	 CE score 'strength_Hpext_R' = 3 
+	 Code: S.settings.muscle_strength = {{'glut_max_r'},0.3}
+
+## I.2 Passive range of motion (pROM)
+During a standardized clinical examination, goniometry is used to measure the passive range of motion (ROM). When the pROM deviates from 
+
+**Requirements:** Matlab, OpenSim, CasADi.
+**Data:** pROM scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam)
+**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+
 
 **How to use the code:**
 The code main_mskClinicalExam.m (PredSim-workshop-bcn-2024/Modelling neuromusculoskeletal deficits/Code/Example 1 - msk Clinical exam) guides the users through the estimation process. Users only have to edit the lines of code that are inbetween % ------ start edit ----- and % ----- end edit -----
