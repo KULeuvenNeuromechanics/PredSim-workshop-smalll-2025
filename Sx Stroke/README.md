@@ -13,7 +13,7 @@ You can now run a simulation with the 2D model, simply by running the `Predsim/m
 - `gait1018_v1_log.txt`: contains the logged information about the simulation
 
 ## Step 2: induce weakness of the tibialis anterior
-The function PredSim-workshop-smalll-2025/code/update_settings.m may be used to update the settings. In this function, add the following lines of code:
+The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
 
 `strength_level = .05; % specify the weakness level (0-1)` <br>
 `S.subject.muscle_strength   = {{'tib_ant_r'}, strength_level};` <br>
@@ -24,7 +24,7 @@ This results in reducing the tibialis anterior strength of the right leg (`tib_a
 `S = update_settings(S);`
 
 ## Step 3: run a simulation with a weak TA
-  You can now run a simulation with the 2D model, simply by running the Predsim/main.m script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`
+  You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`
 
 ## Step 4: evaluate the effect of weakness
    You can now evaluate the effect of weakness by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
