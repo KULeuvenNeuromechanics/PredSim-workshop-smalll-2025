@@ -14,9 +14,9 @@ To this end, you will create a settings file that can later be used in PredSim. 
 ## I.1 Strength
 The strength is evaluated for the full active range of motion by manual muscle testing (MMT). The user will scale the maximal (active) muscle force based on the strength scores in the Clinical Exam
 
-**Requirements:** Matlab.
-**Data:** MMT scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam)  
-**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+**Requirements:** Matlab.   
+**Data:** MMT scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam). T0 refers to pre intervention and T1 to post intervention.       
+**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)   
 
 ### Step 2. Scaling muscle strength
 Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
@@ -55,10 +55,10 @@ length. Therefore, when the pROM is smaller than normative values, there is a cl
 
 To determine the optimal fiber length for contracted muscles, the musculoskeletal model will be put in the same position as during the passive range of motion assessment. The optimal fiber length will then be adjusted so that the modeled net joint torque reaches 15 Nm at the end of the range of motion, matching the clinician’s measured resistance.
 
-**Requirements:** Matlab, OpenSim, CasADi.
-**Data:** pROM scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam).  
-**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
-**Code:**  [main_scale_lMo_sol_gas_hams](PredSim-workshop-smalll-2025/Sx_CP/Code/main_scale_lMo_sol_gas_hams.m) and [main_scale_lMo_iliopsoas](PredSim-workshop-smalll-2025/Sx_CP/Code/main_scale_lMo_illiopsoas.m)   
+**Requirements:** Matlab, OpenSim, CasADi.   
+**Data:** pROM scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
+**Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)      
+**Code:**  [main_scale_lMo_sol_gas_hams](PredSim-workshop-smalll-2025/Sx_CP/Code/main_scale_lMo_sol_gas_hams.m) and [main_scale_lMo_iliopsoas](PredSim-workshop-smalll-2025/Sx_CP/Code/main_scale_lMo_illiopsoas.m)      
 
 ### Step 3. Scaling muscle fiber length of soleus, gastrocnemii and hamstrings
 Add a setting S.settings.scale_MT_params to your update_settings file for all muscles in the model, and define that you want to scale the optimal fiber length parameter ('lMo'):
@@ -127,6 +127,9 @@ Shift the limits for plantar flexion deficits based on the reported range of mot
 # II. Simulate the effect of a surgical intervention
 This patient underwent a bilateral distal femur extension osteotomy, a surgical procedure performed on both thighs to correct a knee extension deficit. In this operation, the surgeon removes a wedge-shaped piece of bone from the lower (distal) part of the femur (thigh bone). This wedge is taken from the anterior part of the distal femur. When the remaining bone ends are stabilised, the femur straightens, allowing the knee to move from a bent position toward a more normal extended position.    
 In the model, this surgical correction shifts the knee geometry, meaning that passive extension torques will begin to act at a more extended (later) knee angle.
+
+**Requirements:** Matlab.   
+**Data:** pROM scores, provided in the [Clinical Exam](PredSim-workshop-smalll-2025/Sx_CP/ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
 
 Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly. 
 
