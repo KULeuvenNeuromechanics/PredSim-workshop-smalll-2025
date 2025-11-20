@@ -14,9 +14,37 @@ To this end, you will create a settings file that can later be used in PredSim. 
 
 
 ### I. Muscle weakness
-The strength was assessed with fixed dynamometry. 
+The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores. 
 
-**Data:** The mean moments of the case with DMD is provided in the subfolder 'Clinical Exam'/IWA_DMDcase
+**Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
+**Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)
+**Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+
+	Step 2. Scaling muscle strength
+
+	Go to our [app](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/) and convert the instrumented strength scores (mean joint torques) provided in [Clinical Exam]	(https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx) into percentages relative to the median of percentile curves. 
+
+	In the app: fill in the body mass, height and instrumented strength scores and press on calculate z-score, then the percentages will be calculated and appear. Do this for the hip, knee and ankle joint. The user may export the percentages into a csv file by clicking on export data. 
+	
+	
+	Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
+	
+	 S.settings.muscle_strength = {...       
+	 {'glut_max_r'},1,...                % R_hip_ext
+	 {'iliopsoas_r'},1,...               % R_hip_flex    
+	 {'rect_fem_r' 'vasti_r'},1,...      % R_knee_ext
+	 {'hamstrings_r' 'bifemsh_r'},1,...  % R_knee_bend
+	 {'gastroc_r' 'soleus_r'},1,...      % R_ankle_pf
+	 {'tib_ant_r'},1,...                 % R_ankle_df
+	 {'glut_max_l'},1,...                % L_hip_ext
+	 {'iliopsoas_l'},1,...               % L_hip_flex    
+	 {'rect_fem_l' 'vasti_l'},1,...      % L_knee_ext
+	 {'hamstrings_l' 'bifemsh_l'},1,...  % L_knee_bend
+	 {'gastroc_l' 'soleus_l'},1,...      % L_ankle_pf
+	 {'tib_ant_l'},1};                   % L_ankle_df
+	  
+	Edit S.settings.muscle_strength in the settings file based on the percentages from the app. 1 corresponds to 100. 
+
 
 The user will express the individual strength scores (i.e., joint moments) as a percentage relative to the median of typically developing children, using our reference database of 153 typically developing children (aged …–…) and the corresponding percentile curves.
 
