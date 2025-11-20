@@ -2,7 +2,7 @@
 
 Physics-based computer simulations that can predict the effect of underlying impairments (e.g., muscle weakness and muscle stiffness) and treatments (e.g., Achilles tendon lengthening) on gait in children with Duchenne muscular dystrophy (DMD) have the potential to improve clinical decision-making. In this section, the user will personalize muscle parameters of a neuromusculoskeletal model based on the instrumented strength assessment and the clinical examination of a case with DMD and the user will simulate an intervention, i.e. Achilles tendon lengthening. 
 
-In this tutorial you'll(1.) personalize for a case with DMD. Next, (2.) you will simulate an Achilles tendon lengthening surgery (3.) evaluate your simulation results with experimental data of the case. The workflow you'll apply in this tutorial has been published in [Vandekerckhove et al.(2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01631-x)
+In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) you will simulate an Achilles tendon lengthening surgery (3.) evaluate your simulation results with experimental data of the case. The workflow you'll apply in this tutorial has been published in [Vandekerckhove et al.(2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01631-x)
 
 ## Personalize muscle parameters based on instrumented assessment and clinical exam
 
