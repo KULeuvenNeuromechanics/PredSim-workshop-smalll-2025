@@ -148,7 +148,7 @@ Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.s
 
 # III. Running PredSim with estimated muscle-tendon parameters:
 change line 21 to [S] = initializeSettings('gait1018');   
-add S = update_settings_pre OR S = update_settings_post on line 22 to load your previously defined settings   
+add S = update_settings_pre(S) OR S = update_settings_post(S) on line 22 to load your previously defined settings   
 add S.misc.gaitmotion_type = 'FullGaitCycle';   
 Run :smiley:
 	
