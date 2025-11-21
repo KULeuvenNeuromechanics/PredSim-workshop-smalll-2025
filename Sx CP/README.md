@@ -13,30 +13,32 @@ To this end, you will create a settings file that can later be used in PredSim. 
 Make clear that in this copy you will work on the pre-surgical personalizations. For example, rename the file to update_settings_pre.m.
 
 ## I.1 Strength
-The strength is evaluated for the full active range of motion by manual muscle testing (MMT). The user will scale the maximal (active) muscle force based on the strength scores in the Clinical Exam
+The strength is evaluated for the full active range of motion by manual muscle testing (MMT). The user will scale the maximal (active) muscle force based on the strength scores in the Clinical Exam. A lower MMT score refers to decreased strength. To represent muscle weakness in the model, maximal active fiber force of the muscles has to be scaled.
 
 **Requirements:** Matlab.   
-**Data:** MMT scores, provided in the [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.       
+**Data:** MMT scores, provided in the folder [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.       
 **Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](../Documentation)   
 
 ### Step 2. Scaling muscle strength
-Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
+In this step you will scale muscle strength for the **muscles around the knee**. 
+
+Copy the setting S.settings.muscle_strength below, and add to your update_settings_pre file. This setting already includes the scaling factors for muscles around other joints than the knee.
 
 	S.settings.muscle_strength = {...       
-		 {'glut_max_r'},1,...                % R_hip_ext   
-		 {'iliopsoas_r'},1,...               % R_hip_flex        
-		 {'rect_fem_r' 'vasti_r'},1,...      % R_knee_ext  
-		 {'hamstrings_r' 'bifemsh_r'},1,...  % R_knee_bend    
-		 {'gastroc_r' 'soleus_r'},1,...      % R_ankle_pf  
-		 {'tib_ant_r'},1,...                 % R_ankle_df  
-		 {'glut_max_l'},1,...                % L_hip_ext  
-		 {'iliopsoas_l'},1,...               % L_hip_flex      
-		 {'rect_fem_l' 'vasti_l'},1,...      % L_knee_ext  
-		 {'hamstrings_l' 'bifemsh_l'},1,...  % L_knee_bend  
-		 {'gastroc_l' 'soleus_l'},1,...      % L_ankle_pf  
-		 {'tib_ant_l'},1};                   % L_ankle_df  
+		 {'glut_max_r'},0.3,...              	% R_hip_ext   
+		 {'glut_max_l'},0.3,...               	% L_hip_ext 
+		 {'iliopsoas_r'},0.7,...            	% R_hip_flex    
+		 {'iliopsoas_l'},0.7,...             	% L_hip_flex  
+		 {'hamstrings_r' 'bifemsh_r'},1,...  	% R_knee_flex %% to edit
+		 {'hamstrings_l' 'bifemsh_l'},1,...  	% L_knee_flex %% to edit
+		 {'rect_fem_r' 'vasti_r'},1,...      	% R_knee_ext  %% to edit
+		 {'rect_fem_l' 'vasti_l'},1,...      	% L_knee_ext  %% to edit
+		 {'gastroc_r' 'soleus_r'},0.3,...     	% R_ankle_pf  
+		 {'gastroc_l' 'soleus_l'},0.5,...     	% L_ankle_pf
+		 {'tib_ant_r'},0.3,...               	% R_ankle_df  
+		 {'tib_ant_l'},0.3};                 	% L_ankle_df 
 	  
-Edit S.settings.muscle_strength in the settings file based on the strength scores in the clinical exam. A lower MMT score refers to decreased strength. To represent muscle weakness in the model, maximal active fiber force of a muscle have to be scaled.
+Edit S.settings.muscle_strength in the settings file based on the strength scores in the clinical exam. 
 	
 	Clinical Exam to strength scaling factor reference
 		 CE        scaling factor
@@ -47,41 +49,58 @@ Edit S.settings.muscle_strength in the settings file based on the strength score
 		 5           0.7
 
 	 EXAMPLE: 
-	 CE score 'strength_Hpext_R' = 3 
+	 CE score 'strength_R_hip_ext' = 3 
 	 In setting: S.settings.muscle_strength = {{'glut_max_r'},0.3}
 
 ## I.2 Passive range of motion (pROM)
-During a standardized clinical examination, goniometry is used to measure the passive range of motion (ROM). The ROM represents the maximum amplitude of the joint motion and is therefore an indication for muscle
-length. Therefore, when the pROM is smaller than normative values, there is a clinical indication for a contracture. Contractures are modelled by reducing optimal fiber length. When optimal fiber length is reduced, muscle fibers will be stretched more at the same muscle-tendon length resulting in higher passive forces. 
+During a standardized clinical examination, goniometry is used to measure the passive range of motion (ROM). The ROM represents the maximum amplitude of the joint motion and is therefore an indication for muscle length. Therefore, when the pROM is smaller than normative values, there is a clinical indication for a contracture. Contractures are modelled by reducing optimal fiber length. When optimal fiber length is reduced, muscle fibers will be stretched more at the same muscle-tendon length resulting in higher passive forces. 
 
 To determine the optimal fiber length for contracted muscles, the musculoskeletal model will be put in the same position as during the passive range of motion assessment. The optimal fiber length will then be adjusted so that the modeled net joint torque reaches 15 Nm at the end of the range of motion, matching the clinician’s measured resistance.
 
 **Requirements:** Matlab, OpenSim, CasADi.   
-**Data:** pROM scores, provided in the [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
+**Data:** pROM scores, provided in the folder [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
 **Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](../Documentation)      
-**Code:**  [main_scale_lMo_sol_gas_hams](Code/main_scale_lMo_sol_gas_hams.m) and [main_scale_lMo_iliopsoas](Code/main_scale_lMo_illiopsoas.m)      
+**Code:**  [main_scale_lMo_sol_gas_hams.m](Code/main_scale_lMo_sol_gas_hams.m) and [main_scale_lMo_iliopsoas.m](Code/main_scale_lMo_illiopsoas.m) provided in the folder [Code](Code).    
 
-### Step 3. Scaling muscle fiber length of soleus, gastrocnemii and hamstrings
-Add a setting S.settings.scale_MT_params to your update_settings file for all muscles in the model, and define that you want to scale the optimal fiber length parameter ('lMo'):
+### Step 3. Scaling muscle fiber length of the hamstrings
+In this step you will scale the optimal muscle fiber length of the hamstrings.
 
-	S.subject.scale_MT_params = {{'soleus_r'},'lMo',1,...
-	                             {'gastroc_r'},'lMo',1,...
-	                             {'hamstrings_r'},'lMo',1,...
-	                             {'iliopsoas_r'},'lMo',1,...
-	                             {'soleus_l'},'lMo',1,...
-	                             {'gastroc_l'},'lMo',1,...
-	                             {'hamstrings_l'},'lMo',1,...
-	                             {'iliopsoas_l'},'lMo',1};
+Open the clinical exam and evaluate the passive range of motion scores against normative values 
+
+		Clinical exam		Normative value
+		pROM_Poplbi			-15° to 0°
+		pROM_Popluni		-35° to 20°
+		pROM_Ankledf0 		 10° to 20°
+		pROM_Ankledf90		 20° to 30° 
+
+As you can see, for the soleus and gastrocnemii there is no indication for a contracture. The scaling factor for optimal fiber length (lMo) will remain 1. 
+
+Add a setting S.settings.scale_MT_params to your update_settings_pre file all muscles in the model to scale lMo:
+
+	S.subject.scale_MT_params = {{'hamstrings_r'},'lMo',1,... 		% pROM_Poplbi_R %% to edit in step 3
+									{'hamstrings_l'},'lMo',1,... 	% pROM_Poplbi_L %% to edit in step 3
+									{'iliopsoas_r'},'lMo',1,...  	% difference pROM_Popluni_L  pROM_Poplbi_L 
+									{'iliopsoas_l'},'lMo',1,... 	% difference pROM_Popluni_R  pROM_Poplbi_R  %% to edit in step 4
+									{'gastroc_r'},'lMo',1,...		% pROM_Ankledf0_R
+									{'gastroc_l'},'lMo',1,...		% pROM_Ankledf0_L
+									{'soleus_r'},'lMo',1,... 		% pROM_Ankledf90_R
+									{'soleus_l'},'lMo',1};			% pROM_Ankledf90_L
+
 	  
-Open [main_scale_lMo_sol_gas_hams](/Code/main_scale_lMo_sol_gas_hams.m) and calculate scaling factors for the soleus, gastrocnemii and hamstrings that have a clinical indication for a contraction in the Clinical exam. The code guides you through the estimation process and you only have to edit the lines of code that are inbetween. Run the code for each muscle and leg.  
+Open [main_scale_lMo_sol_gas_hams](/Code/main_scale_lMo_sol_gas_hams.m) and calculate scaling factors for the hamstrings. The code guides you through the estimation process and you only have to edit the lines of code that are inbetween:
 % ------ start edit -----    
             and   
-% ----- end edit -----
+% ----- end edit -----   
+
+EXAMPLE:
+In this case you want to pick the scaling factor that gives the red line.   
+<img width="369" height="297" alt="lmo scale example" src="https://github.com/user-attachments/assets/2d02ad5f-13ed-464c-884b-abd892525ea2" />   
+**⚠️ Note:** Run the file for both hamstrings
 
 Add the computed scaling factors to S.subject.scale_MT_params. 
 
 ### Step 4. Scaling muscle fiber length of iliopsoas
-Because the evaluation of iliopsoas contractures is more detailed, the iliopsoas will require a different modeling approach. Iliopsoas contractures will lead to a different unilateral ($\theta_{\text{uni}}$). and bilateral ($\theta_{\text{bi}}$) popliteal angle. When assessing the unilateral popliteal angle, the contralateral leg is laying down. Iliopsoas contractures will cause flexion of the contralateral hip and this will be compensated for by anterior pelvis tilt, which in turn will lead to increased hip flexion to position the thigh of the evaluated leg vertically. Increased hip flexion will in turn increase bi-articular hamstrings length and will thus lead to a larger knee extension deficit. The increase in hip flexion angle was determined based on the difference in popliteal angles and the ratio of the average moment arms of all bi-articular hamstrings with respect to the knee and hip:
+Because the evaluation of iliopsoas contractures is more detailed, the iliopsoas will require a different modeling approach. Iliopsoas contractures will lead to a different unilateral ($\theta_{\text{uni}}$). and bilateral ($\theta_{\text{bi}}$) popliteal angle. When assessing the unilateral popliteal angle, the contralateral leg is laying down. Iliopsoas contractures will cause flexion of the contralateral hip and this will be compensated for by anterior pelvis tilt, which in turn will lead to increased hip flexion to position the thigh of the evaluated leg vertically. Increased hip flexion will in turn increase bi-articular hamstrings length and will thus lead to a larger knee extension deficit. The increase in hip flexion angle is determined based on the difference in popliteal angles and the ratio of the average moment arms of all bi-articular hamstrings with respect to the knee and hip:
 
 $$
 \Delta \theta_{\text{hip}} =
@@ -96,7 +115,7 @@ $$
 
 with _n_ the number of bi-articular hamstrings, $ma_{\text{hip}, i}$ and $ma_{\text{knee}, i}$ the moment arm of muscle _i_ around knee and hip when in the position of the bilateral popliteal angle. The contracture of the contralateral iliopsoas is determined by solving for the scaling factor that led to passive torque when the contralateral hip is extended beyond $\Delta \theta_{\text{hip}}$.
 
-Open [main_scale_lMo_illiopsoas](Code/main_scale_lMo_iliiopsoas.m) and calculate scaling factors for the illiopsoas that have a clinical indication for a contraction in the Clinical exam. Again, the code guides you through the estimation process and you only have to edit the lines of code that are inbetween  
+Open [main_scale_lMo_iliopsoas](Code/main_scale_lMo_iliopsoas.m) and calculate scaling factors for the iliopsoas. Again, the code guides you through the estimation process and you only have to edit the lines of code that are inbetween:  
 % ------ start edit -----    
             and   
 % ----- end edit -----
@@ -104,24 +123,22 @@ Open [main_scale_lMo_illiopsoas](Code/main_scale_lMo_iliiopsoas.m) and calculate
 Add the computed scaling factors to S.subject.scale_MT_params. 
 
 ### Step 5. Adjusting coordinate limit torques
-Observed knee extension and plantar flexion deficits were modeled by shifting the coordinate limit torques that model the stiffness of the non-muscle soft tissues around the joint.
+Observed knee extension and plantar flexion deficits are modeled by shifting the coordinate limit torques that model the stiffness of the non-muscle soft tissues around the joint.
 
-Add a setting S.subject.set_limit_torque_coefficients_selected_dofs to your update_settings file for all dofs in the model, and define that you want to scale the optimal fiber length parameter ('lMo'):
+Add a setting S.subject.set_limit_torque_coefficients_selected_dofs to your update_settings file for all dofs in the model.
 
 	S.subject.set_limit_torque_coefficients_selected_dofs = 
 		{{'lumbar_extension'},[-0.7644,11.2154,1.2788,-7.2704], [-0.3716,0.1068],...
              {'hip_flexion_r','hip_flexion_l'},[-2.44,5.05,1.51,-21.88],[-0.6981,1.81],...
-            {'knee_angle_r','knee_angle_l'},[-6.09,33.94,11.03,-11.33],[-2.4,0.13],... 
-             {'ankle_angle_r','ankle_angle_l'},[-2.03,38.11,0.18,-12.12],[-0.74,0.52]};
+            {'knee_angle_r','knee_angle_l'},[-6.09,33.94,11.03,-11.33],[-2.4,0.13],... %% to edit
+             {'ankle_angle_r','ankle_angle_l'},[-2.03,38.11,0.18,-12.12],[-0.4363,0.6109]};
 
-See the [PredSim documentation](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Documentation/SettingsOverview.md) for an extensive description of these parameters. You'll only change the last two values in each line as they represent rotational limits in radians. 
+You'll only change the last two values in each line as they represent rotational limits in radians. See the [PredSim documentation](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Documentation/SettingsOverview.md) for an extensive description of all these parameters. 
+For the knee that means:
 
 	{'knee_angle_r','knee_angle_l'},[... ... ... ...],[flexion, extension]
-	{'ankle_angle_r','ankle_angle_l'},[... ... ... ...],[plantarflexion, dorsiflexion]
 
-Shift the limits such that they represent the observed end ROM angle from the clinical exam for knee extension minus two degrees to obtain around 15 Nm torque at end range of motion. 
-Shift the limits for plantar flexion deficits based on the reported range of motion for the ankle towards plantar flexion. The onset of the coordinate limit torques was changed to 25° plantar flexion or 0° when the score was respectively ‘discrete’ or ‘severe’.
-
+Shift the limits such that they represent the observed end ROM knee extension angle from the clinical exam. The limits for plantar flexion have already been adjusted.
 **⚠️ Note:** All joint limit values below are reported in **radians**, not degrees. 
 	
 	1 rad = 180/pi 
@@ -133,6 +150,9 @@ Shift the limits for plantar flexion deficits based on the reported range of mot
 	angle in radians = 0.5236
 	angle in degrees = 0.5236 *180/pi = 30
 	
+
+### :tada: Congratulations you have personalized your model!  
+To run a simulation with the personalized model scroll down to III. Running PredSim with personalized settings
 
 # II. Simulate the effect of a surgical intervention
 This patient underwent a bilateral distal femur extension osteotomy, a surgical procedure performed on both thighs to correct a knee extension deficit. In this operation, the surgeon removes a wedge-shaped piece of bone from the lower (distal) part of the femur (thigh bone). This wedge is taken from the anterior part of the distal femur. When the remaining bone ends are stabilised, the femur straightens, allowing the knee to move from a bent position toward a more normal extended position.    
@@ -146,9 +166,20 @@ First, copy your pre-surgical update_settings and make clear that in the new cop
 
 Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly. 
 
-# III. Running PredSim with estimated muscle-tendon parameters:
-change line 21 to [S] = initializeSettings('gait1018');   
-add S = update_settings_pre(S) OR S = update_settings_post(S) on line 22 to load your previously defined settings   
-add S.misc.gaitmotion_type = 'FullGaitCycle';   
-Run :smiley:
+# III. Running PredSim with personalized settings
+1. Line 21 - change to  [S] = initializeSettings('gait1018');   
+2. Line 22 - add    	S = update_settings_pre(S) OR S = update_settings_post(S)
+3. Line 23 - add 		S.misc.gaitmotion_type = 'FullGaitCycle';   
+4. Click 'Run' :smiley:
+
+##  Visualizing and plotting the results
+Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+
+To visualize the mot file in OpenSim:
+1. Open the model PredSim/gait1018/gait1018.osim in OpenSim
+2. Load the mot file PredSimResults/gait1018/gait1018_vx.mot in OpenSim
+
+To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
+1. Open the script PlotFigure/run_this_file_to_plot_figures_CP.m in matlab
+2. Change lines 17 to 19 with the mat files containing the simulation results of this case
 	
