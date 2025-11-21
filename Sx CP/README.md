@@ -93,7 +93,7 @@ Open [main_scale_lMo_sol_gas_hams](/Code/main_scale_lMo_sol_gas_hams.m) and calc
 % ----- end edit -----   
 
 EXAMPLE:
-In this case you want to pick the scaling factor that gives the red line.   
+In this case you want to pick the scaling factor that gives the red line. A scaling factor of 60% would be 0.6 in the code.   
 <img width="369" height="297" alt="lmo scale example" src="https://github.com/user-attachments/assets/2d02ad5f-13ed-464c-884b-abd892525ea2" />   
 **⚠️ Note:** Run the file for both hamstrings
 
