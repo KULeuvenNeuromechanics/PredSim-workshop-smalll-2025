@@ -2,7 +2,7 @@
 
 Physics-based computer simulations, that can predict the effect of treatments (e.g., bony and soft tissue correction, ankle-foot-orthoses) on gait in children with cerebral palsy (CP), have the potential to improve clinical decision-making. To this end, an important challenge is to accurately estimate patient-specific neuromusculoskeletal models.
 
-In this tutorial you'll (1.) personalize for a CP case. Next, (2.) you will model the effect of surgery and (3.) evaluate your simulation results. The workflow you'll apply in this tutorial has been published in [Van Den Bosch et al. (2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01767-w)
+In this tutorial you'll (I.) personalize for a CP case. Next, (II.) you will model the effect of surgery and (III.) run a simulation and evaluate your results. The workflow you'll apply in this tutorial has been published in [Van Den Bosch et al. (2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01767-w)
 
 # I. Personalizing the musculoskeletal model
 In this part you will personalize a model for a child with CP based on a clinical exam. The clinical exam is part of children's usual clinical care and is a comprehensive assesment of musculoskeletal functioning. In example 1. you will use (I.1) manual muscle testing strength scores to personalize optimal muscle force and (I.2) passive Range of Motion (ROM) scores  to personalize optimal muscle force and optimal muscle fiber length and coordinate limit torques.
