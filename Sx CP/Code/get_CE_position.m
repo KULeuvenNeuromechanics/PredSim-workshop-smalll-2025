@@ -2,11 +2,11 @@ function [Qs,Qdots,idx_joint,coord_name] = get_CE_position(CE_angle,muscle_toSca
 % Original authors: Ellis Van Can
 % Original date: November 19,2024
 
-if strcmp(side,'r')
-    other_side = 'l';
-elseif strcmp(side,'l')
-    other_side = 'r';
-end
+% if strcmp(side,'r')
+%     other_side = 'l';
+% elseif strcmp(side,'l')
+%     other_side = 'r';
+% end
 if strcmp(muscle_toScale,'soleus')
             coord_name = 'ankle_angle';
             model_toDiffPos = 1;
@@ -21,7 +21,7 @@ elseif strcmp(muscle_toScale,'hamstrings')
             model_changeAngle = ['hip_flexion_',side];
             model_changeDeg = 90;    
 end
-coord_name_side = [coord_name,'_',other_side];
+coord_name_side = [coord_name,'_',side];
 
 % Find joint index in coordinates
 idx_joint = find(strcmp(coordinates,coord_name_side));
