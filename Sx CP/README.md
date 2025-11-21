@@ -146,7 +146,7 @@ First, copy your pre-surgical update_settings and make clear that in the new cop
 
 Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly. 
 
-# III. Running PredSim with estimated muscle-tendon parameters:**
+# III. Running PredSim with estimated muscle-tendon parameters:
 change line 21 to [S] = initializeSettings('gait1018');   
 add S = update_settings_pre OR S = update_settings_post on line 22 to load your previously defined settings   
 add S.misc.gaitmotion_type = 'FullGaitCycle';   
