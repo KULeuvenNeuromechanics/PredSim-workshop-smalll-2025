@@ -50,6 +50,7 @@ The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used t
 `exo1.ankle_stiffness = 0; % ankle stiffness in Nm/rad` <br>
 `exo1.left_right = 'r'; % 'l' for left or 'r' for right` <br>
 `exo1.function_name = 'ankleExoDorsi';` <br>
+`exo1.ankle_offset = 0` <br>
 `S.orthosis.settings{1} = exo1;`
 
 This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mass of the exoskeleton is ignored for simplicity. Because the default stiffness is 0, the exoskeleton should not affect the gait pattern. Change the stiffness to a desired level (greater than 0). 
