@@ -33,7 +33,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
  - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 4.)
 <img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
-4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, the glut_max will be scaled with 22%). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app (keep in mind that 1 = 100%) :
+4. Add a setting `S.settings.muscle_strength` to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, the glut_max will be scaled with 22%). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app (keep in mind that 1 = 100%) :
 
 	 	S.settings.muscle_strength = {... 
 			{'iliopsoas_r', 'iliopsoas_l'}, 0.435, ...									% hip_flex
@@ -64,7 +64,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
  - If the user will use this code in the future and the paths and names of the files have changed, the user will need to change the paths (`line 19 to line 21`).
  - If the user will use this code in the future and have additional clinical measurements, the user can update the link between those measurements and the specific muscles (`lines 25-60`).
 	
-2. Add a setting S.settings.muscle_pass_stiff_shift to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all assessed muscles:
+2. Add a setting `S.settings.muscle_pass_stiff_shift` to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all assessed muscles. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, ...). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app :
 
 	 	S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...
      		{'gastroc_r','gastroc_l'},0.9,...
