@@ -40,7 +40,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
 			};
 	  
-5. Edit S.settings.muscle_strength in the settings file based on the percentages from the app (for example, 1 = 100%). 
+5. Edit S.settings.muscle_strength in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) based on the percentages from the app (for example, 1 = 100%). 
 
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
 
