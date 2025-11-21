@@ -47,10 +47,10 @@ You may notice that healthy (red) generally matches Data better than weak (yello
 ## Step 4: add an ankle-foot orthosis to the model
 The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
 
-`exo1.ankle_stiffness = 0; % ankle stiffness in Nm/rad` <br>
+`exo1.ankle_stiffness = 0; % ankle stiffness in Nm/deg` <br>
 `exo1.left_right = 'r'; % 'l' for left or 'r' for right` <br>
 `exo1.function_name = 'ankleExoDorsi';` <br>
-`exo1.ankle_offset = 0` <br>
+`exo1.ankle_offset = 0 % neutral ankle angle in deg ` <br> 
 `S.orthosis.settings{1} = exo1;`
 
 This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mass of the exoskeleton is ignored for simplicity. Because the default stiffness is 0, the exoskeleton should not affect the gait pattern. Change the stiffness to a desired level (greater than 0). 
@@ -67,9 +67,10 @@ You should see the figure below:
 The results with and without ankle-foot orthosis are similar, because the stiffness was set to 0 Nm.deg.
 
 ## Step 6: test different stiffnesses of the ankle-foot orthosis
-At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
+At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following lines of code to test the effect of an exoskeleton with a different stiffness and neutral angle:
 
 `exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad`
+`exo1.ankle_offset = ; % neutral ankle angle in deg ` <br> 
 
 Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
 
