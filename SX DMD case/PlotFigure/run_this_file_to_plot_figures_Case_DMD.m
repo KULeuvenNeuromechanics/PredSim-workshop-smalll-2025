@@ -14,8 +14,8 @@ clc
 % Construct a cell array with full paths to files with saved results for
 % which you want to appear on the plotted figures.
 results_folder = fullfile(pathRepoFolder,'PredSimResults');
-result_paths{1} = fullfile(results_folder,'gait1018_Case_DMD','gait1018_Case_DMD_v6.mat');
-result_paths{2} = fullfile(results_folder,'gait1018_Case_DMD','gait1018_Case_DMD_v8.mat');
+result_paths{1} = fullfile(results_folder,'gait1018','gait1018_vX.mat');
+result_paths{2} = fullfile(results_folder,'gait1018','gait1018_vX.mat');
 
 
 % Cell array with legend name for each result
