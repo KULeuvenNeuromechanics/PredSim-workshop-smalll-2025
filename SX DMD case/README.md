@@ -120,8 +120,8 @@ Users are now ready to run predictive simulations based on a neuromusculoskeleta
 Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
 To visualize the mot file in OpenSim: 
-1. Open the model [PredSimResults\gait1018\gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) in OpenSim
-2. Load the mot file `PredSimResults\gait1018\gait1018_vx.mot` in OpenSim
+1. Open the model [PredSim/gait1018/gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) in OpenSim
+2. Load the mot file `PredSimResults/gait1018/gait1018_vx.mot` in OpenSim
    
 To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
