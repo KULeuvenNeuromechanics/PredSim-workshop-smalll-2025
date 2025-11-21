@@ -79,14 +79,14 @@ We shifted the passive force-length relationship by the mean of the shifts estim
 
 ### Running PredSim with estimated muscle parameters:
 
-The users will use PredSim (link naar PredSim) to run predictive simulations. 
-You will need to do some small adjustments to ´PredSim/main.m´:
-1. On ´line 20´ and ´line 25´ change ´Falisse_et_al_2022´ to ´gait1018´. We will use the 2D model instead of the default 3D model
-2. Replace ´line 21´ with the following code:
+The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
+You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
+1. On `line 20` and `line 25` change `Falisse_et_al_2022` to `gait1018`. We will use the 2D model instead of the default 3D model
+2. Replace `line 21` with the following code:
    
 	 	S = update_settings(S);
    	 
-Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the ´PredSim/main.m´ script. 
+Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
 
 	
 ## Simulate the effect of Achilles tendon lengthening
