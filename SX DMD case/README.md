@@ -19,7 +19,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
 
-## Step 1. Scaling muscle strength
+#### Step 1. Scaling muscle strength
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
 2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)), take the instrumented strength scores (mean joint torques)
@@ -30,15 +30,15 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
  - To save the results, click Export data to download a CSV file.
  - Repeat for each joint: hip, knee, ankle
 4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
-	
-	 S.settings.muscle_strength = {... 
-		{'iliopsoas_r', 'iliopsoas_l'}, 1, ...								% hip_flex
-		{'glut_max_r', 'glut_max_l'}, 1, ...								% hip_ext
-		{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 1, ...			% knee_ext
-		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 1, ...	% knee_flex
-		{'tib_ant_r', 'tib_ant_l'}, 1, ...									% ankle_df
-		{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
-		};
+
+	 	S.settings.muscle_strength = {... 
+			{'iliopsoas_r', 'iliopsoas_l'}, 1, ...								% hip_flex
+			{'glut_max_r', 'glut_max_l'}, 1, ...								% hip_ext
+			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 1, ...			% knee_ext
+			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 1, ...	% knee_flex
+			{'tib_ant_r', 'tib_ant_l'}, 1, ...									% ankle_df
+			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
+			};
 	  
 5. Edit S.settings.muscle_strength in the settings file based on the percentages from the app (for example, 1 = 100%). 
 
