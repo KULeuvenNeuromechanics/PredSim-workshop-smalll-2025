@@ -94,23 +94,26 @@ Users are now ready to run predictive simulations based on a neuromusculoskeleta
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
 This treatment was often performed in patients with DMD who walk on their toes (tiptoeing gait), but may cause loss of ambulation. 
 
-	Step 4. Simulate an Achilles tendon lengthening surgery
+#### Step 3. Simulate an Achilles tendon lengthening surgery
 	
-	- Add a setting S.subject.scale_MT_params to your update_settings file for all muscles in the model:
-	
-	 S.subject.scale_MT_params = {{'soleus_l', 'soleus_r', 'gastroc_r', 'gastroc_l'}, 'lTs', 1.3};
-	  
-	- Edit S.subject.scale_MT_params to 1.3 in the settings file to scale the the tendon slack length (lTs) of both muscles (left and right) by 1.3, effectively modeling a lengthened Achilles tendon.
+1. Add a setting S.subject.scale_MT_params to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m):
 
-	- Important: Apply this change on top of the previous DMD simulation, meaning you start from the model that already includes DMD-specific muscle weakness and increased muscle stiffness.
+	 	S.subject.scale_MT_params = {{'soleus_l', 'soleus_r', 'gastroc_r', 'gastroc_l'}, 'lTs', 1.3};	
+	 
+2. Edit S.subject.scale_MT_params to 1.3 in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) to scale the the tendon slack length (lTs) of both muscles (left and right) by 1.3, effectively modeling a lengthened Achilles tendon.
+
+Important: Apply this change on top of the previous DMD simulation, meaning you start from the model that already includes DMD-specific muscle weakness and increased muscle stiffness.
 
 ### Running PredSim with estimated muscle parameters:
 
-Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments and a simulated Achilles tendon lengthening.
-1. Use the adapted settings file for the model in 'Model'/settings_gait1018_Case_DMD.m
-2. Adapt the main.m in PredSim: 
-	- fill in the name of settings file on line 20 to initialize the correct settings file: [S] = initializeSettings('gait1018_Case_DMD'); 
-	- fill in the name of the model on line 25: S.subject.name = 'gait1018_Case_DMD';
+The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
+You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
+1. On `line 20` and `line 25` change `Falisse_et_al_2022` to `gait1018`. We will use the 2D model instead of the default 3D model
+2. Replace `line 21` with the following code:
+   
+	 	S = update_settings(S);
+   	 
+Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
 
 ## Plotting the results
 
