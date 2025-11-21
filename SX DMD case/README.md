@@ -56,22 +56,21 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Additional information:** The protocol of the clinical examination is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
 
-	Step 3. Shifting the passive force-length curvescaling muscle strength
+#### Step 2. Shifting the passive force-length curvescaling muscle strength
 
-	- Open Personalize_passive_muscle_stiffness_based_on_CE.m in matlab. This code guides users through the estimation process. 
-		- Users only have to change the paths (line 19 to line 21). 
-		- If the user will use this code in the future and have additional clinical measurements, the user can update the link between those measurements and the specific muscles (lines 25-60).
+1. Open Personalize_passive_muscle_stiffness_based_on_CE.m in matlab. This code guides users through the estimation process.
+ - Users only have to change the paths (line 19 to line 21).
+ - If the user will use this code in the future and have additional clinical measurements, the user can update the link between those measurements and the specific muscles (lines 25-60).
 	
-	- Add a setting S.settings.muscle_pass_stiff_shift to your update_settings file for all muscles in the model:
+2. Add a setting S.settings.muscle_pass_stiff_shift to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all assessed muscles:
+	 	 S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...
+     		{'gastroc_r','gastroc_l'},0.9,...
+     		{'soleus_l', 'soleus_r'}, 0.9,...
+     		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},1,...
+     		{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},1,...
+     		}; 
 	
-	 S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...
-     	{'gastroc_r','gastroc_l'},0.9,...
-     	{'soleus_l', 'soleus_r'}, 0.9,...
-     	{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},1,...
-     	{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},1,...
-     }; 
-	  
-	- Edit S.settings.muscle_pass_stiff_shift in the settings file based on the printed average shift (outcome from Personalize_passive_muscle_stiffness_based_on_CE.m).
+3. Edit S.settings.muscle_pass_stiff_shift in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) based on the printed average shift (outcome from Personalize_passive_muscle_stiffness_based_on_CE.m).
 
 **Background:** In DMD, contractile tissue is not only lost but also replaced by fat and fibrotic tissue, resulting in increased muscle stiffness and eventually leading to contractures. We modeled this by shifting the passive muscle force-length relationship to shorter fiber lengths through a reduction in the fiber length at which passive muscle force begins to develop. We use the ROM measurements and clinical stiffness scale to estimate this shift. For the ROM measurements, we estimate the difference in fiber length at which the muscle starts to develop passive force between TD and DMD from the difference in joint angle at the end of ROM. The joint angle at the end of ROM of TD children was based on age-related reference data reported by Mudge et al. To estimate the corresponding difference in fiber length, we multiply the difference in measured joint angle at end ROM between TD and DMD (in radians) with the moment arm of the muscles in the anatomical position. This difference in fiber length was normalized to optimal fiber length to compute the shift of the passive force-length relationship. 
 For the clinical stiffness scale, the normalized fiber length at which passive force starts to develop was assumed 1 when the clinical stiffness score was 0 (no increased resistance), 0.83 when the score was 1 (minimal increased resistance), 0.67 when the score was 2 (increased resistance), and 0.5 when the score was 3 (highly pronounced resistance) corresponding to a shift of respectively 0, 0.17, 0.33, and 0.5. 
