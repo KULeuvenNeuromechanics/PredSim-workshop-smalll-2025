@@ -69,8 +69,8 @@ The results with and without ankle-foot orthosis are similar, because the stiffn
 ## Step 6: test different stiffnesses of the ankle-foot orthosis
 At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following lines of code to test the effect of an exoskeleton with a different stiffness and neutral angle:
 
-`exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad`
-`exo1.ankle_offset = ; % neutral ankle angle in deg ` <br> 
+`exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad` <br> 
+`exo1.ankle_offset = ; % neutral ankle angle in deg ` 
 
 Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
 
