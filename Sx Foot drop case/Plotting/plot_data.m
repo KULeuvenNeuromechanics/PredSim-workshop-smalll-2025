@@ -36,8 +36,8 @@ hsr              = unique(hsr);
 hsr(diff(hsr)<5) = [];
 
 
-Ajoint(1,1,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_ank_angle(:,1),  hsr, 201),2,'omitnan'));
-Ajoint(1,2,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_ank_angle(:,1),  hsr, 201),2,'omitnan'));
+Ajoint(1,1,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
+Ajoint(1,2,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
 
 Ajoint(2,1,:) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_kne_angle(:,1),  hsr, 201),2,'omitnan');
 Ajoint(2,2,:) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_kne_angle(:,1),  hsr, 201),2,'omitnan');

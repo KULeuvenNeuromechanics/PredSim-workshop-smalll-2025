@@ -27,7 +27,14 @@ for k = 1:length(vs)
     
     % get TA strength
     TA_strength = model_info.muscle_info.parameters(9).muscle_strength;
-    txt = ['k = ', num2str(k_ankle), ' - S = ', num2str(TA_strength)];
+   
+    if TA_strength == .05
+        txt_append = 'weak - '; 
+    else
+        txt_append = 'healthy - ';
+    end
+    
+    txt = [txt_append, 'k = ', num2str(k_ankle)];
     
     is = [8 6 4 9 7 5];
     
@@ -56,6 +63,6 @@ filename = which('compare_devices');
 folder = filename(1:end-18);
 cd(folder);
 
-% exportgraphics(gcf,'Fig.png')
+exportgraphics(gcf,'Fig.png')
 
 
