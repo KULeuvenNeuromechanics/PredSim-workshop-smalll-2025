@@ -15,10 +15,12 @@ close all
 clc
 
 %% Provide the paths to your OpenSim Model, excel with ROM reference values of TD children, and excel with ROM values of your case
+[pathHere,~,~] = fileparts(mfilename('fullpath'));
+[pathRepo,~,~] = fileparts(pathHere);
 
-pathModel = 'C:\GBW_MyPrograms\PredSim-workshop-smalll-2025_vInes\SX DMD case\Model\gait1018_Case_DMD.osim'; 
-pathROM_TD = 'C:\GBW_MyPrograms\PredSim-workshop-smalll-2025_vInes\SX DMD case\Clinical Exam\Ref_ROM_TD.xlsx';
-pathCE_Case = 'C:\GBW_MyPrograms\PredSim-workshop-smalll-2025_vInes\SX DMD case\Clinical Exam\Clinical_Exam_DMDcase.xlsx';
+pathModel = fullfile(pathRepo,'Model','gait1018.osim'); 
+pathROM_TD = fullfile(pathRepo,'Clinical Exam','Ref_ROM_TD.xlsx'); 
+pathCE_Case = fullfile(pathRepo,'Clinical Exam','Clinical_Exam_DMDcase.xlsx');
 
 %% Config table to link clinical examination values to specific muscles 
 
