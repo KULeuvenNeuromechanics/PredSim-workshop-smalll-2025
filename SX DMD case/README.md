@@ -6,7 +6,7 @@ In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) 
 
 ## Personalize muscle parameters based on instrumented assessment and clinical exam
 
-In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively.
+In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively. To save time, the user will only need to personalize the ankle muscles. We provide the hip and knee muscle personalizations.
 
 To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) This function can later be used to run personalized simulations in PredSim.
 
@@ -24,28 +24,26 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
 2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the app
- - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques out of IWA_DMDcase.xlsx
+ - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques provided in IWA_DMDcase.xlsx
 <img width="253" height="342" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/03a05437-0578-417b-8be6-63df50a85069" />
 
  - Click `Calculate z-score`
 <img width="277.5" height="325" alt="Screenshot_app_2" src="https://github.com/user-attachments/assets/306456cb-2707-423f-8b12-c69743abeb36" />
 
- - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 5.)
+ - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 4.)
 <img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
-4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
+4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, the glut_max will be scaled with 22% left and right). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app (keep in mind that 1 = 100%) :
 
 	 	S.settings.muscle_strength = {... 
-			{'iliopsoas_r', 'iliopsoas_l'}, 1, ...								% hip_flex
-			{'glut_max_r', 'glut_max_l'}, 1, ...								% hip_ext
-			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 1, ...			% knee_ext
-			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 1, ...	% knee_flex
-			{'tib_ant_r', 'tib_ant_l'}, 1, ...									% ankle_df
-			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
+			{'iliopsoas_r', 'iliopsoas_l'}, 0.435, ...									% hip_flex
+			{'glut_max_r', 'glut_max_l'}, 0.22, ...										% hip_ext
+			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 0.317, ...				% knee_ext
+			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 0.316, ...		% knee_flex
+			{'tib_ant_r', 'tib_ant_l'}, 1, ...											% ankle_df
+			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 					% ankle_pf
 			};
-	  
-5. Edit S.settings.muscle_strength in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) based on the percentages from the app (for example, 1 = 100%). 
-
+ 
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
 
 
