@@ -51,13 +51,15 @@ for k = 1:length(vs)
     is = [8 6 4 9 7 5];
     
     figure(1)
+    ylabels = {'Dorsiflexion (deg)', 'Knee extension (deg)', 'Hip flexion (deg)','Dorsiflexion (deg)', 'Knee extension (deg)', 'Hip flexion (deg)'};
+    
     for i = 1:6
         subplot(2,3,i)
         plot(R.kinematics.Qs(:,is(i)),'DisplayName',txt, 'linewidth', 1.5); hold on
         title(strrep(R.colheaders.coordinates{is(i)}, '_', '-')); hold on
         ylim([-70 50])
         box off
-        ylabel('Angle (deg)')
+        ylabel(ylabels{i})
         xlabel('Gait cycle (%)')
     end
     
