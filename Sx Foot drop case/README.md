@@ -69,10 +69,15 @@ The results with and without ankle-foot orthosis are similar, because the stiffn
 ## Step 6: test different stiffnesses of the ankle-foot orthosis
 At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following lines of code to test the effect of an exoskeleton with a different stiffness and neutral angle:
 
-`exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad` <br> 
+`exo1.ankle_stiffness = ; % ankle stiffness in Nm/deg` <br> 
 `exo1.ankle_offset = ; % neutral ankle angle in deg ` 
 
 Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
 
 ## Step 7: visualize results in OpenSim
+Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
+To visualize the mot file in OpenSim:
+
+Open the model PredSimResults\gait1018\gait1018.osim in OpenSim
+Load the mot file PredSimResults\gait1018\gait1018_vx.mot in OpenSim
