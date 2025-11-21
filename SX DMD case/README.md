@@ -17,7 +17,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 **Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)
 
-**Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+**Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
 
 #### Step 1. Scaling muscle strength
 
@@ -54,7 +54,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
 
-**Additional information:** The protocol of the clinical examination is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
+**Additional information:** The protocol of the clinical examination is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
 
 #### Step 2. Shifting the passive force-length curvescaling muscle strength
 
@@ -115,7 +115,15 @@ You will need to do some small adjustments to [PredSim/main.m](https://github.co
    	 
 Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
 
-## Plotting the results
+## Visualizing and plotting the results
 
-Use the script in [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) to plot your simulations results against the Experimental Data of the patient.
+Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+
+To visualize the mot file in OpenSim: 
+1. Open the model [PredSimResults\gait1018\gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) in OpenSim
+2. Load the mot file `PredSimResults\gait1018\gait1018_vx.mot` in OpenSim
+   
+To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
+1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
+2. Change `lines 17 to 19` with the mat files containing the simulation results of this case
 
