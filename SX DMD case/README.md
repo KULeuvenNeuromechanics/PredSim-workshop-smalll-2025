@@ -8,10 +8,7 @@ In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) 
 
 In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively.
 
-To this end, you will create a settings file that can later be used in PredSim. In this tutorial you will edit [default settings file](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
-
-	Step 1. Create a copy of the update_settings file in the Code folder of this tutorial
-
+To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) This function can later be used to run personalized simulations in PredSim.
 
 ### I. Muscle weakness
 The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
@@ -22,19 +19,17 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](PredSim-workshop-smalll-2025/Documentation)
 
-	Step 2. Scaling muscle strength
+## Step 1. Scaling muscle strength
 
-	- Open the app (link provided above under Requirements).
-	- Open IWA_DMDcase.xlsx under Clinical Exam (link under Data), take the instrumented strength scores (mean joint torques)
-	
-	- In the app
-		- Enter: body mass, height and mean joint torques
-		- Click Calculate z-score. 
-		The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves
-		- To save the results, click Export data to download a CSV file.
-		- Repeat for each joint: hip, knee, ankle
-	
-	- Add a setting S.settings.muscle_strength to your update_settings file for all muscles in the model:
+1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
+2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)), take the instrumented strength scores (mean joint torques)
+3. In the app
+ - Enter: body mass, height and mean joint torques
+ - Click Calculate z-score 
+   The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves
+ - To save the results, click Export data to download a CSV file.
+ - Repeat for each joint: hip, knee, ankle
+4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
 	
 	 S.settings.muscle_strength = {... 
 		{'iliopsoas_r', 'iliopsoas_l'}, 1, ...								% hip_flex
@@ -45,7 +40,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 		{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 			% ankle_pf
 		};
 	  
-	- Edit S.settings.muscle_strength in the settings file based on the percentages from the app (for example, 1 = 100%). 
+5. Edit S.settings.muscle_strength in the settings file based on the percentages from the app (for example, 1 = 100%). 
 
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
 
