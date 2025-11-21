@@ -38,7 +38,11 @@ You should see the figure below:
 
 ![picture](Plotting/Fig1.png)
 
-There are some deviations with experimental data
+You may notice that healthy (red) generally matches Data better than weak (yellow). This is because this data is from a healthy participant. Most noticable difference occurs for:
+-   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness
+-   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
+-   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which corerspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
+
 
 ## Step 4: add an ankle-foot orthosis to the model
 The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
@@ -59,10 +63,7 @@ You should see the figure below:
 
 ![picture](Plotting/Fig2.png)
 
-You may notice that healthy (red) generally matches Data better than weak (yellow). This is because this data is from a healthy participant. Most noticable difference occurs for:
--   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness
--   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
--   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which corerspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
+The results with and without ankle-foot orthosis are similar, because the stiffness was set to 0 Nm.deg.
 
 ## Step 6: test different stiffnesses of the ankle-foot orthosis
 At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
