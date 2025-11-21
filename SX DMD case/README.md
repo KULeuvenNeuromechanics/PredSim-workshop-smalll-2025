@@ -25,10 +25,10 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)), take the instrumented strength scores (mean joint torques)
 3. In the app
  - Enter: body mass, height and mean joint torques
- - Click Calculate z-score 
+ - Click `Calculate z-score` 
    The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves
- - To save the results, click Export data to download a CSV file.
- - Repeat for each joint: hip, knee, ankle
+ - To save the results, click Export data to download a CSV file
+
 4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
 
 	 	S.settings.muscle_strength = {... 
