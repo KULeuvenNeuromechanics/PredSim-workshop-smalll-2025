@@ -25,8 +25,10 @@ This results in reducing the tibialis anterior strength of the right leg (`tib_a
 
 `S = update_settings(S);`
 
+Make sure `update_settings` is added to your path. Run the script called `PredSim-workshop-smalll-2025\set_up_paths`;
+
 ## Step 3: simulate foot drop during walking
-  You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`. You can now evaluate the effect of weakness by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
+You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`. You can now evaluate the effect of weakness by running the `PredSim-workshop-smalll-2025/Sx Foot drop case/Plotting/compare_devices.m` script. 
 
 ## Step 4: add an ankle-foot orthosis to the model
 The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
@@ -39,11 +41,23 @@ The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used t
 This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mass of the exoskeleton is ignored for simplicity. Because the default stiffness is 0, the exoskeleton should not affect the gait pattern. Change the stiffness to a desired level (greater than 0). 
 
 ## Step 5: simuluate the effects of an ankle-foot orthosis on gaits in individuals with foot drop
-  You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. You can now evaluate the combined effects of weakness and the assitive device by running the `PredSim-workshop-smalll-2025/Sx Stroke/Plotting/compare_devices.m` script. 
+You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. You can now evaluate the combined effects of weakness and the assitive device by running the `PredSim-workshop-smalll-2025/Sx Foot drop case/Plotting/compare_devices.m` script. 
 
-## Step 6: test different stiffness
-In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
+You should see the figure below:
+
+![picture](Plotting/Fig.png)
+
+You may notice that healthy (red) generally matches Data better than weak (yellow). This is because this data is from a healthy participant. Most noticable difference occurs for:
+-   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness
+-   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
+-   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which corerspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
+
+## Step 6: test different stiffnesses of the ankle-foot orthosis
+At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
 
 `exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad`
 
-Repeat Steps 5-6 until you reach a satisfied gait pattern. You may also change the amount of weakness (Step 2). 
+Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
+
+## Step 7: visualize results in OpenSim
+
