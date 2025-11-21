@@ -26,7 +26,8 @@ function [exo] = ankleExoDorsi(init, settings_orthosis)
 exo = Orthosis('exo',init);
 
 % read settings that were passed from main.m
-k_ankle = settings_orthosis.ankle_stiffness; % ankle stiffness in Nm/rad
+k_ankle = settings_orthosis.ankle_stiffness * 180/pi; % ankle stiffness in Nm/rad
+o_ankle = settings_orthosis.ankle_offset    * pi/180; % ankle offset in rad
 side = settings_orthosis.left_right; % 'l' for left or 'r' for right
 
 % get joint angles
@@ -35,7 +36,7 @@ q_ankle = exo.var_coord(['ankle_angle_',side]); % ankle angle in rad;
 % calculate moments
 % T_ankle = k_ankle*(q_ankle+0.1).*smoothIf(q_ankle+0.1,0.05,0);
 % T_ankle = k_ankle*(q_ankle-0.1).*smoothIf(q_ankle-0.1,-.05, 0);
-T_ankle = k_ankle*(q_ankle-0.3);
+T_ankle = k_ankle*(q_ankle-o_ankle);
 T_ankle = [0;0; T_ankle];
 
 % apply exo torque on tibia and calcn
