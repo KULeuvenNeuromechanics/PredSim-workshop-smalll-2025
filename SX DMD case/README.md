@@ -79,11 +79,14 @@ We shifted the passive force-length relationship by the mean of the shifts estim
 
 ### Running PredSim with estimated muscle parameters:
 
-Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments.
-1. Use the adapted settings file for the model in 'Model'/settings_gait1018_Case_DMD.m
-2. Adapt the main.m in PredSim: 
-	- fill in the name of settings file on line 20 to initialize the correct settings file: [S] = initializeSettings('gait1018_Case_DMD'); 
-	- fill in the name of the model on line 25: S.subject.name = 'gait1018_Case_DMD';
+The users will use PredSim (link naar PredSim) to run predictive simulations. 
+You will need to do some small adjustments to ´PredSim/main.m´:
+1. On ´line 20´ and ´line 25´ change ´Falisse_et_al_2022´ to ´gait1018´. We will use the 2D model instead of the default 3D model
+2. Replace ´line 21´ with the following code:
+   
+	 	S = update_settings(S);
+   	 
+Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the ´PredSim/main.m´ script. 
 
 	
 ## Simulate the effect of Achilles tendon lengthening
