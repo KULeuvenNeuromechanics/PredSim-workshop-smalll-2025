@@ -1,8 +1,20 @@
 clear all; close all; clc
 
 % change this to your own paths
-pathRepo = 'C:\GBW_MyPrograms\PredSim';
-pathResults = 'C:\GBW_MyPrograms\PredSimResults';
+filename = which('initializeSettings.m');
+
+PredSimSettingsFolder = fileparts(filename);
+cd(PredSimSettingsFolder)
+cd ..
+PredSimRepo = cd;
+
+addpath(fullfile(cd,'PlotFigures'))
+
+cd(PredSimRepo)
+cd ..
+cd('PredSimResults')
+
+PredSimResultsRepo = cd;
 
 % versions that we want to plot
 vs = [1 7];
@@ -13,7 +25,7 @@ plot_data();
 % plot all versions
 for k = 1:length(vs)
     
-    result_paths = fullfile(pathResults,['gait1018\gait1018_v', num2str(vs(k)), '.mat']);
+    result_paths = fullfile(PredSimResultsRepo,['gait1018\gait1018_v', num2str(vs(k)), '.mat']);
     legend_name = ['gait1018_v', num2str(vs(k)), '.mat'];
 
     load(result_paths,'R','model_info');
