@@ -77,7 +77,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 For the clinical stiffness scale, the normalized fiber length at which passive force starts to develop was assumed 1 when the clinical stiffness score was 0 (no increased resistance), 0.83 when the score was 1 (minimal increased resistance), 0.67 when the score was 2 (increased resistance), and 0.5 when the score was 3 (highly pronounced resistance) corresponding to a shift of respectively 0, 0.17, 0.33, and 0.5. 
 We shifted the passive force-length relationship by the mean of the shifts estimated based on the ROM and clinical stiffness score.
 
-### Running PredSim with estimated muscle parameters:
+#### Step 3. Running PredSim with estimated muscle parameters:
 
 The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
 You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
@@ -94,7 +94,7 @@ Users are now ready to run predictive simulations based on a neuromusculoskeleta
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
 This treatment was often performed in patients with DMD who walk on their toes (tiptoeing gait), but may cause loss of ambulation. 
 
-#### Step 3. Simulate an Achilles tendon lengthening surgery
+#### Step 4. Simulate an Achilles tendon lengthening surgery
 	
 1. Add a setting S.subject.scale_MT_params to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m):
 
@@ -104,7 +104,7 @@ This treatment was often performed in patients with DMD who walk on their toes (
 
 Important: Apply this change on top of the previous DMD simulation, meaning you start from the model that already includes DMD-specific muscle weakness and increased muscle stiffness.
 
-### Running PredSim with estimated muscle parameters:
+#### Step 5. Running PredSim with estimated muscle parameters:
 
 The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
 You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
