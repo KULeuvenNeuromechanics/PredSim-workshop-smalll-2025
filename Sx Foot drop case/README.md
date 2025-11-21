@@ -45,11 +45,19 @@ You can now run a simulation with the 2D model, simply by running the `Predsim/m
 
 You should see the figure below:
 
-![picture](Plotting.Fig.png)
+![picture](Plotting/Fig.png)
 
-## Step 6: test different stiffness
-In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
+You may notice that healthy (red) generally matches Data better than weak (yellow). This is because this data is from a healthy participant. Most noticable difference occurs for:
+-   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness
+-   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
+-   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which corerspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
+
+## Step 6: test different stiffnesses of the ankle-foot orthosis
+At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following line of code to test the effect of an exoskeleton with a different stiffness:
 
 `exo1.ankle_stiffness = ; % ankle stiffness in Nm/rad`
 
-Repeat Steps 5-6 until you reach a satisfied gait pattern. You may also change the amount of weakness (Step 2). 
+Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
+
+## Step 7: visualize results in OpenSim
+
