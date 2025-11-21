@@ -167,10 +167,12 @@ First, copy your pre-surgical update_settings and make clear that in the new cop
 Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly. 
 
 # III. Running PredSim with personalized settings
-1. Line 21 - change to  [S] = initializeSettings('gait1018');   
-2. Line 22 - add    	S = update_settings_pre(S) OR S = update_settings_post(S)
-3. Line 23 - add 		S.misc.gaitmotion_type = 'FullGaitCycle';   
-4. Click 'Run' :smiley:
+1. Line 20 - change to  [S] = initializeSettings('gait1018');   
+2. Line 21 - add    	S = update_settings_pre(S); OR S = update_settings_post(S);
+3. Line 22 - add 		S.misc.gaitmotion_type = 'FullGaitCycle';
+4. line 25 - change to 	S.subject.name = 'gait1018';  
+
+5. Click 'Run' :smiley:
 
 ##  Visualizing and plotting the results
 Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
