@@ -10,6 +10,7 @@ In this part you will personalize a model for a child with CP based on a clinica
 To this end, you will create a settings file that can later be used in PredSim. In this tutorial you will edit You can change the model inputs in the [default settings file](../code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
 
 ### Step 1. Create a copy of the update_settings file in the Code folder of this tutorial
+Make clear that in this copy you will work on the pre-surgical personalizations. For example, rename the file to update_settings_pre.m.
 
 ## I.1 Strength
 The strength is evaluated for the full active range of motion by manual muscle testing (MMT). The user will scale the maximal (active) muscle force based on the strength scores in the Clinical Exam
@@ -141,8 +142,13 @@ In the model, this surgical correction shifts the knee geometry, meaning that pa
 **Data:** pROM scores, provided in the [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
 **Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](../Documentation)   
 
+First, copy your pre-surgical update_settings and make clear that in the new copy you will work on the post-surgical personalizations. For example, rename the file to update_settings_post.m.
+
 Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly. 
 
 # III. Running PredSim with estimated muscle-tendon parameters:**
-
+change line 21 to [S] = initializeSettings('gait1018');
+add S = update_settings_pre OR S = update_settings_post on line 22 to load your previously defined settings
+add S.misc.gaitmotion_type = 'FullGaitCycle';
+Run :smiley:
 	
