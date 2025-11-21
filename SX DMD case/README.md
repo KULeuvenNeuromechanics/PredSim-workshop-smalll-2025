@@ -25,12 +25,12 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the app
  - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques out of IWA_DMDcase.xlsx
-<img width="1684" height="2205" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/a53b851d-54fb-4944-bacb-bd3bd659ccdc" />
- 
- - Click `Calculate z-score`
-<img width="1896" height="2094" alt="Screenshot_app_2" src="https://github.com/user-attachments/assets/c0777e39-d01b-4b3f-9566-a99374431793" />
+<img width="1012" height="1368" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/03a05437-0578-417b-8be6-63df50a85069" />
 
- - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves. 
+ - Click `Calculate z-score`
+<img width="1110" height="1300" alt="Screenshot_app_2" src="https://github.com/user-attachments/assets/e52fd17a-8fb9-4eaa-b32d-9dcc877becab" />
+
+ - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 5.)
 <img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
 4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
