@@ -1,4 +1,5 @@
 clear all; close all; clc
+vs = [1 7]; % versions that we want to plot 
 
 % change this to your own paths
 filename = which('initializeSettings.m');
@@ -16,9 +17,6 @@ cd('PredSimResults')
 
 PredSimResultsRepo = cd;
 
-% versions that we want to plot
-vs = [1 7];
-
 figure(1)
 plot_data();
 
@@ -33,20 +31,21 @@ for k = 1:length(vs)
     % get orthosis stiffness
     if ~isempty(R.S.orthosis.settings)
         k_ankle = R.S.orthosis.settings{1}.ankle_stiffness;
+        txt2 = [' - k = ', num2str(k_ankle)];
     else
-        k_ankle = 0;
+        txt2 = '';
     end
     
     % get TA strength
     TA_strength = model_info.muscle_info.parameters(9).muscle_strength;
    
     if TA_strength == .05
-        txt_append = 'weak - '; 
+        txt_append = 'weak'; 
     else
-        txt_append = 'healthy - ';
+        txt_append = 'healthy';
     end
     
-    txt = [txt_append, 'k = ', num2str(k_ankle)];
+    txt = [txt_append, txt2];
     
     is = [8 6 4 9 7 5];
     
@@ -77,6 +76,6 @@ filename = which('compare_devices');
 folder = filename(1:end-18);
 cd(folder);
 
-exportgraphics(gcf,'Fig.png')
+exportgraphics(gcf,'Fig1.png')
 
 
