@@ -75,9 +75,9 @@ At this time, the ankle-foot orthosis has not done anything, because the stiffne
 Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
 
 ## Step 7: visualize results in OpenSim
-Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
 To visualize the mot file in OpenSim:
 
-Open the model PredSimResults\gait1018\gait1018.osim in OpenSim
-Load the mot file PredSimResults\gait1018\gait1018_vx.mot in OpenSim
+Open the model `PredSim\subjects\gait1018\gait1018.osim` in OpenSim
+Load the mot file `PredSimResults\gait1018\gait1018_vx.mot` in OpenSim
