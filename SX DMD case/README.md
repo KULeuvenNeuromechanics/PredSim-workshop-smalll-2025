@@ -22,12 +22,16 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 #### Step 1. Scaling muscle strength
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
-2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)), take the instrumented strength scores (mean joint torques)
+2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the app
- - Enter: body mass, height and mean joint torques
- - Click `Calculate z-score` 
-   The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves
- - To save the results, click Export data to download a CSV file
+ - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques out of IWA_DMDcase.xlsx
+<img width="1684" height="2205" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/a53b851d-54fb-4944-bacb-bd3bd659ccdc" />
+ 
+ - Click `Calculate z-score`
+<img width="1896" height="2094" alt="Screenshot_app_2" src="https://github.com/user-attachments/assets/c0777e39-d01b-4b3f-9566-a99374431793" />
+
+ - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves. 
+<img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
 4. Add a setting S.settings.muscle_strength to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model:
 
