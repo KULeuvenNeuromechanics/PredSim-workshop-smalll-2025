@@ -87,7 +87,7 @@ Add a setting S.settings.scale_MT_params to your update_settings_pre file all mu
 									{'soleus_l'},'lMo',1};			% pROM_Ankledf90_L
 
 	  
-Open [main_scale_lMo_sol_gas_hams](/Code/main_scale_lMo_sol_gas_hams.m) and calculate scaling factors for the hamstrings. The code guides you through the estimation process and you only have to edit the lines of code that are inbetween:
+Open [main_scale_lMo_sol_gas_hams](/Code/main_scale_lMo_sol_gas_hams.m) and calculate scaling factors for the hamstrings. The code guides you through the estimation process and you only have to edit the lines of code that are inbetween:   
 % ------ start edit -----    
             and   
 % ----- end edit -----   
