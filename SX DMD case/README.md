@@ -61,9 +61,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 #### Step 2. Shifting the passive force-length curvescaling muscle strength
 
 1. In matlab navigate to `PredSim-workshop-smalll-2025\SX DMD case\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m` (eventueel Link hier toevoegen). This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
- - For future use:
-  - Update lines 18-23 if the file paths or filenames change
-  - Update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
+ - For future use: update lines 18-23 if the file paths or filenames change and update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
 
 2. Run `Personalize_passive_muscle_stiffness_based_on_CE.m` by clicking the green Run button. This script computes the start of the passive muscle force–length curve based on clinical examination data. It returns the normalized muscle length at which passive force begins, personalized using (1) ROM values and (2) the clinical stiffness scale. After running the script, matlab prints a table showing the shift calculated from ROM data, the shift from the clinical stiffness scale, and the average of the two.
 
