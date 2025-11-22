@@ -139,8 +139,8 @@ plot_figures(result_paths,legend_names,figure_settings);
 
 %% add Experimental Data
 
-load('ExpData_DMD0022_v2.mat');
-ExpData = ExpData_DMD0022;
+load('ExpData_Case_DMD.mat');
+ExpData = ExpData_Case_DMD;
 
 joints_ref_DMD = {'pelvis_tilt',...
     'hip_flexion',...
@@ -156,12 +156,6 @@ idx_jref_DMD = strcmp(ExpData.kinematics.colheaders,joints_ref_DMD{i});
         DMDdata = ExpData.kinematics.mean(:,idx_jref_DMD);
         meanPlusSTD_DMD = ExpData.kinematics.mean(:,idx_jref_DMD) + 2*ExpData.kinematics.sd(:,idx_jref_DMD);
         meanMinusSTD_DMD = ExpData.kinematics.mean(:,idx_jref_DMD) - 2*ExpData.kinematics.sd(:,idx_jref_DMD);
-        %stepQ = (size(Qs_opt(ww(k)).m,1)-1)/(size(DMDdata,1)-1);
-        %intervalQ = 1:stepQ:size(Qs_opt(ww(k)).m,1);
-        %sampleQ = 1:size(Qs_opt(ww(k)).m,1);
-        %DMDdata = interp1(intervalQ,DMDdata,sampleQ);
-        %hold on
-        %plot(DMDdata ,'k' ,'linewidth',line_linewidth);
         hold on
         figure(2);
         subplot(2,2,number_subplot(i));
