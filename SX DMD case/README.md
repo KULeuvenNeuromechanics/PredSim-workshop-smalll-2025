@@ -8,7 +8,7 @@ In this tutorial the user will (1.) personalize for a case with DMD. Next, (2.) 
 
 In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively. To save time, the user will only need to personalize the ankle muscles. We provide the hip and knee muscle personalizations.
 
-To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) This function can later be used to run personalized simulations in PredSim.
+To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This function can later be used to run personalized simulations in PredSim.
 
 ### I. Muscle weakness
 The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
@@ -22,7 +22,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 #### Step 1. Scaling muscle strength
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
-2. Open IWA_DMDcase.xlsx under Clinical Exam ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
+2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the app
  - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques provided in IWA_DMDcase.xlsx
 <img width="253" height="342" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/03a05437-0578-417b-8be6-63df50a85069" />
@@ -33,7 +33,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
  - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 4.)
 <img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
-4. Add a setting `S.settings.muscle_strength` to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all muscles in the model. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, the glut_max will be scaled with 22%). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app (keep in mind that 1 = 100%) :
+4. Open MATLAB and navigate to `PredSim-workshop-smalll-2025/code`. Open the function `update_settings.m`. You will add the setting `S.settings.muscle_strength` to this function to scale the model’s muscle strengths using the percentage values calculated in the app. Specifically, copy and paste the code below into `update_settings.m`. We have already provided scaling factors for the hip and knee muscles (e.g., the strength of glut_max is scaled to 22% of its original value (i.e., multiplied by 0.22)). You only need to update the scaling factors for `tib_ant`, `gastroc`, and `soleus` using the percentages you calculated in the app (a strength value of 100% means the scaling factor should be 1 (not 100)) :
 
 	 	S.settings.muscle_strength = {... 
 			{'iliopsoas_r', 'iliopsoas_l'}, 0.435, ...									% hip_flex
@@ -60,11 +60,14 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 #### Step 2. Shifting the passive force-length curvescaling muscle strength
 
-1. Open [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SX%20DMD%20case/Code/Personalize_passive_muscle_stiffness_based_on_CE.m) in matlab. This code guides users through the estimation process.
- - If the user will use this code in the future and the paths and names of the files have changed, the user will need to change the paths (`line 19 to line 21`).
- - If the user will use this code in the future and have additional clinical measurements, the user can update the link between those measurements and the specific muscles (`lines 25-60`).
-	
-2. Add a setting `S.settings.muscle_pass_stiff_shift` to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) for all assessed muscles. Specifically, copy the code below and paste it in this function. We already provided the scaling factors for the hip and knee muscles (for example, ...). You only need to edit the scaling factors of tib_ant, gastroc, and soleaus to the percentages you calculated in the app :
+1. In matlab navigate to `PredSim-workshop-smalll-2025\SX DMD case\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m` (eventueel Link hier toevoegen). This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
+ - For future use:
+  - Update lines 18-23 if the file paths or filenames change
+  - Update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
+
+2. Run `Personalize_passive_muscle_stiffness_based_on_CE.m` by clicking the green Run button. This script computes the start of the passive muscle force–length curve based on clinical examination data. It returns the normalized muscle length at which passive force begins, personalized using (1) ROM values and (2) the clinical stiffness scale. After running the script, matlab prints a table showing the shift calculated from ROM data, the shift from the clinical stiffness scale, and the average of the two.
+
+3. Go back to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.settings.muscle_pass_stiff_shift` to shift the passive force–length curves based on the clinical exam. Specifically, copy and paste the code below into `update_settings.m`. We have already provided the shifts for the hip and knee muscles. You only need to update the shifts for `gastroc` and `soleus` using the average shift printed after running `Personalize_passive_muscle_stiffness_based_on_CE.m` (outcome from 2.) :
 
 	 	S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...
      		{'gastroc_r','gastroc_l'},0.9,...
@@ -72,8 +75,6 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
      		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},1,...
      		{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},1,...
      		}; 	 	 
-	
-3. Edit S.settings.muscle_pass_stiff_shift in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) based on the printed average shift (outcome from Personalize_passive_muscle_stiffness_based_on_CE.m).
 
 **Background:** In DMD, contractile tissue is not only lost but also replaced by fat and fibrotic tissue, resulting in increased muscle stiffness and eventually leading to contractures. We modeled this by shifting the passive muscle force-length relationship to shorter fiber lengths through a reduction in the fiber length at which passive muscle force begins to develop. We use the ROM measurements and clinical stiffness scale to estimate this shift. For the ROM measurements, we estimate the difference in fiber length at which the muscle starts to develop passive force between TD and DMD from the difference in joint angle at the end of ROM. The joint angle at the end of ROM of TD children was based on age-related reference data reported by Mudge et al. To estimate the corresponding difference in fiber length, we multiply the difference in measured joint angle at end ROM between TD and DMD (in radians) with the moment arm of the muscles in the anatomical position. This difference in fiber length was normalized to optimal fiber length to compute the shift of the passive force-length relationship. 
 For the clinical stiffness scale, the normalized fiber length at which passive force starts to develop was assumed 1 when the clinical stiffness score was 0 (no increased resistance), 0.83 when the score was 1 (minimal increased resistance), 0.67 when the score was 2 (increased resistance), and 0.5 when the score was 3 (highly pronounced resistance) corresponding to a shift of respectively 0, 0.17, 0.33, and 0.5. 
@@ -91,7 +92,7 @@ You will need to do some small adjustments to [PredSim/main.m](https://github.co
 Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
 
 	
-## Simulate the effect of Achilles tendon lengthening
+## Optional: simulate the effect of Achilles tendon lengthening
 
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
 This treatment was often performed in patients with DMD who walk on their toes (tiptoeing gait), but may cause loss of ambulation. 
