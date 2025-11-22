@@ -15,14 +15,14 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 **Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
 
-**Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx)
+**Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx)
 
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
 
 #### Step 1. Scaling muscle strength
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
-2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/Clinical%20Exam/IWA_DMDcase.xlsx))
+2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the app
  - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques provided in IWA_DMDcase.xlsx
 <img width="253" height="342" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/03a05437-0578-417b-8be6-63df50a85069" />
@@ -52,15 +52,15 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Requirements:** OpenSim, Matlab.
 
-**Data:** passive ROM and clinical stiffness scale values, provided in [Clinical Exam/Clinical_Exam_DMDCase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/Clinical%20Exam/Clinical_Exam_DMDcase.xlsx), reference passive ROM values for typically developing children from Mudge et al., matched to the case’s age, are provided in subfolder [Clinical Exam/Ref_ROM_TD.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/Clinical%20Exam/Ref_ROM_TD.xlsx) 
+**Data:** passive ROM and clinical stiffness scale values, provided in [Clinical Exam/Clinical_Exam_DMDCase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/Clinical_Exam_DMDcase.xlsx), reference passive ROM values for typically developing children from Mudge et al., matched to the case’s age, are provided in subfolder [Clinical Exam/Ref_ROM_TD.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/Ref_ROM_TD.xlsx) 
 
-**Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
+**Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
 
 **Additional information:** The protocol of the clinical examination is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
 
 #### Step 2. Shifting the passive force-length curvescaling muscle strength
 
-1. In matlab navigate to `PredSim-workshop-smalll-2025\S1 DMD case\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m` (eventueel Link hier toevoegen). This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
+1. In matlab navigate to `PredSim-workshop-smalll-2025\S1 DMD\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m` (eventueel Link hier toevoegen). This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
  - For future use: update lines 18-23 if the file paths or filenames change and update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
 
 2. Run `Personalize_passive_muscle_stiffness_based_on_CE.m` by clicking the green Run button. This script computes the start of the passive muscle force–length curve based on clinical examination data. It returns the normalized muscle length at which passive force begins, personalized using (1) ROM values and (2) the clinical stiffness scale. After running the script, matlab prints a table showing the shift calculated from ROM data, the shift from the clinical stiffness scale, and the average of the two.
@@ -125,6 +125,6 @@ To visualize the mot file in OpenSim:
 2. Load the mot file `PredSimResults/gait1018/gait1018_vx.mot` in OpenSim
    
 To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
-1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD%20case/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
+1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
 2. Change `lines 17 to 19` with the mat files containing the simulation results of this case
 
