@@ -24,9 +24,9 @@ osim_path = fullfile(PredSim_path,'Subjects','gait1018','gait1018.osim');
 
 %% 3 Get the passive range of motion (pROM) scores from the clinical exam
 % ------- start edit -------
-muscle_toScale = 'hamstrings'; % Options: 'soleus', 'gastrocnemii','hamstrings'
+muscle_toScale = 'soleus'; % Options: 'soleus', 'gastrocnemii','hamstrings'
 side = 'r'; % Options: 'l', 'r' 
-CE_angle = -70 ; % Passive ROM angle Clinical Exam
+CE_angle = 10 ; % Passive ROM angle Clinical Exam
 
 % ------- stop edit -------
 
@@ -43,7 +43,7 @@ end
 [sf_lMo_prev] = get_sf_lMo(muscle_toScale,side,sf_lMo_prev);
 
 %% 4 put the model in position of clinical exam
-[f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(subject_name, osim_path, PredSim_path);
+[f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(osim_path, PredSim_path);
 [Qs,Qdots,idx_joint,coord_name] = get_CE_position(CE_angle,muscle_toScale,side,coordinates);
 
 %% 5. evaluate scaling factor
@@ -66,7 +66,7 @@ end
 % ------- start edit -------
 
 % Define scaling factor range
-sf_lMo = flip([0.85:0.01:1]); 
+sf_lMo = flip([0.9:0.01:0.93]); 
 
 % ------- stop edit -------
 

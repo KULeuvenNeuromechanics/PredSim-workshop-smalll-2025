@@ -2,7 +2,7 @@
 
 
 % Original authors: Ellis Van Can
-% Original date: November 19,2024
+% Original date: November 19,2025
 
 clc; clear; close all
 
@@ -23,14 +23,15 @@ subject_name = 'CP_SMALLL';
 osim_path = fullfile(PredSim_path,'Subjects','gait1018','gait1018.osim');
 
 %% 3 Get the passive range of motion (pROM) scores from the clinical exam
+% ------- start edit -------
 muscle_toScale = 'iliopsoas'; 
-side = 'r'; % Options: 'l', 'r' 
+side = 'r'; % side on which the Clinical Exam is performed; options: 'l', 'r' 
 CE_angle_uni = -80 ; 
 CE_angle_bi = -70 ; 
 % ------- stop edit -------
 
     % NOTE:
-    % The length (and thus scaling) of other muscles (e.g. soleus, gastrocnemii)
+    % The length (and thus scaling) of other muscles (e.g. soleus, gastrocnemii, hamstrings)
     % also affects the joint posture during the clinical exam.
     % Therefore, CE_angle should represent the posture that results from the
     % (possibly scaled) distal muscle-tendon lengths used in this model.
@@ -42,7 +43,7 @@ end
 [sf_lMo_prev] = get_sf_lMo(muscle_toScale,side,sf_lMo_prev);
 
 %% 4. get model info
-[f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(subject_name, osim_path, PredSim_path);
+[f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(osim_path, PredSim_path);
 
 %% 5. get delta hip
 hip_name_side = ['hip_flexion_',side];
@@ -87,7 +88,7 @@ delta_hip = (CE_angle_bi-CE_angle_uni) * (sum(ratio)/i_hamsting);
 % ------- start edit -------
 
 % Define scaling factor range
-sf_lMo = flip([0.85:0.01:1]); 
+sf_lMo = flip([0.73:0.01:0.8]); 
 
 % ------- stop edit -------
 

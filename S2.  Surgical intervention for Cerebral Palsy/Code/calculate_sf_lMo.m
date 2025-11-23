@@ -10,7 +10,7 @@ coord_name_side = [coord_name,'_',side];
 
 for j = 1:length(sf_lMo)
     if strcmp(muscle_toScale,'soleus')
-        scale.subject.scale_MT_params = {{['soleus_',side]},'lMo',sf_lMo_prev(j)};
+        scale.subject.scale_MT_params = {{['soleus_',side]},'lMo',sf_lMo(j)};
     elseif strcmp(muscle_toScale,'gastrocnemii')
         scale.subject.scale_MT_params = {{['soleus_',side]},'lMo',sf_lMo_prev.(side).soleus,...
             {['gastroc_',side]},'lMo',sf_lMo_prev(j)};
