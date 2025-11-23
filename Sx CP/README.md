@@ -178,10 +178,11 @@ Evaluate in CE_CP_T1 the knee extension pROM post surgery and change S.subject.s
 Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
 To visualize the mot file in OpenSim:
-1. Open the model PredSim/gait1018/gait1018.osim in OpenSim
-2. Load the mot file PredSimResults/gait1018/gait1018_vx.mot in OpenSim
-
+1. Open the model (File > Open Model...) PredSim/gait1018/gait1018.osim in OpenSim 
+2. Load the .mot file (File > Load Motion...) PredSimResults/gait1018/gait1018_vx.mot in OpenSim
+3. 
 To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
-1. Open the script PlotFigure/run_this_file_to_plot_figures_CP.m in matlab
-2. Change lines 17 to 19 with the mat files containing the simulation results of this case
+1. Open the script ..\PredSim\PlotFigures\run_this_file_to_plot_figures.m in matlab
+2. Change lines 15 to 28 with the mat files containing the simulation results of this case
+STILL ON DOING: add scripts to visualize experimental data
 	
