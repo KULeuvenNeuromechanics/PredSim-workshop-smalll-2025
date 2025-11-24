@@ -81,7 +81,7 @@ Before this, you should have run a reference simulation (2D model, no impairment
 1. Line 20 - `[S] = initializeSettings('gait1018');`
 2. Line 25 - `S.subject.name = 'gait1018';`
 
-*If you have not run the reference simulation yet, you should either follow the instructions in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main), or modify the three lines above in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m), then click the green 'Run' button.* 
+*If you have not run the reference simulation yet, you should either follow the instructions in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main), or modify the two lines above in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m), then click the green 'Run' button.* 
 
 To run a predictive simulation with the 2D model including DMD-specific impairments:
 1. Line 21 - add `S = update_settings(S)` in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m). This will update the settings of the 2D model with the calculated muscle weakness and stiffness.
