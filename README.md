@@ -38,9 +38,9 @@ To visualize the simulation in OpenSim:
 3. Click on 'File > Load Motion...' and navigate to the mot file of your simulation `PredSimResults/gait1018/gait1018_v1.mot`
 4. Click on the 'Play forward' button to see the motion. You may also adapt the playback speed.
 
-The video should look similar to one shown below
+The video should look similar to the one shown below:
 
-![picture](Plotting/walking_2D_model.gif)
+![picture](walking_2D_model.gif)
 
 **Note**: this is a relatively simple 2D model without arms. PredSim can also be used with more realistic, 3D models (see [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim)).
 
