@@ -27,7 +27,7 @@ Here you can find the links to the dependencies
 
 ## Running a reference 2D simulation with PredSim
 
-Before going to the hands-on tutorials, the user should run a reference 2D simulation with PredSim. 
+Before going to the hands-on tutorials, the user should run a reference 2D simulation with [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim). 
 
 1. Open Matlab
 2. Navigate to your `PredSim` folder in Matlab
@@ -37,6 +37,8 @@ Before going to the hands-on tutorials, the user should run a reference 2D simul
    - Line 22 - `S.misc.gaitmotion_type = 'FullGaitCycle';`
    - Line 25 - `S.subject.name = 'gait1018';`
 5. Click on the green 'Run' button
+
+Congratulations your first simulation with the 2D model is running! 
 
 
    
