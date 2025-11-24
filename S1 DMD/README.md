@@ -6,7 +6,7 @@ The workflow you'll apply in this tutorial has been published in [Vandekerckhove
 
 ## Personalize muscle parameters based on instrumented assessment and clinical exam
 
-In this section the user will use (I.) instrumented strength scores and (II.) passive Range of Motion (ROM) scores and clinical stiffness scale scores to personalize active muscle force and passive muscle stiffness, respectively. To save time, the user will only need to personalize the ankle muscles. We provide the hip and knee muscle personalizations.
+In this section the user will use instrumented strength scores (step 1), and passive Range of Motion (ROM) scores and clinical stiffness scale scores (step 2) to personalize active muscle force and passive muscle stiffness, respectively. To save time, the user will only need to personalize the ankle muscles. We provide the hip and knee muscle personalizations.
 
 To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This function can later be used to run personalized simulations in PredSim.
 
