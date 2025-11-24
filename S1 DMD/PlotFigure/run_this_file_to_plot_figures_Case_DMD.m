@@ -3,17 +3,12 @@ clear
 close all
 clc
 
-%% Get paths for later use
-[pathHere,~,~] = fileparts(mfilename('fullpath'));
-[pathRepo,~,~] = fileparts(pathHere);
-[pathRepoFolder,~,~] = fileparts(pathRepo);
-
 %% General settings
 % These settings will apply to all figures
 
 % Construct a cell array with full paths to files with saved results for
 % which you want to appear on the plotted figures.
-results_folder = fullfile(pathRepoFolder,'PredSimResults');
+results_folder = fullfile('C:\GBW_MyPrograms\PredSimResults');
 result_paths{1} = fullfile(results_folder,'gait1018','gait1018_v1.mat');
 result_paths{2} = fullfile(results_folder,'gait1018','gait1018_v2.mat');
 
