@@ -100,7 +100,7 @@ To visualize the mot file in OpenSim:
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
-2. Line 11 - change `results_folder = fullfile('C:\GBW_MyPrograms\PredSimResults');` to the path of your `PredSimResults` folder 
+2. Line 11 - change the path in `results_folder = fullfile('C:\GBW_MyPrograms\PredSimResults');` to the path of your `PredSimResults` folder 
 3. Update **Lines 12 to 13** with the `.mat` files that contain your simulation results:
    - Line 12 - replace `gait1018_v1.mat` with the `.mat` file containing your **reference simulation** *(If the reference simulation was the first simulation you ran with this 2D model, the results are stored in v1)*
    - Line 13 - replace `gait1018_v2.mat` with the `.mat` file containing your **DMD simulation** *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v2)*
