@@ -52,5 +52,11 @@ To visualize the mot file in OpenSim:
 3. Click on 'File > Load Motion...' and navigate to the mot file of your simulation `PredSimResults/gait1018/gait1018_v1.mot`
 4. Click on the 'Play forward' button to see the motion. You may also adapt the playback speed.
 
+## Adding PredSim-workshop-smalll-2025 to path
+Before starting one of the three cases, make sure that this repository is added to your Matlab path.
 
-   
+1. Either download or clone [the current repository](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025)
+1. Open Matlab
+2. Navigate to the `PredSim-workshop-smalll-2025` folder
+3. Open the script called `set_up_paths.m`
+5. Click on the green 'Run' button
