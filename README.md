@@ -5,25 +5,11 @@ Welcome to the Workshop on Predictive Simulations of Human Movement repository!
 This repo contains the resources used during the workshop. Below is a list of the 3 hands-on tutorials:
 - S1 DMD
 - S2 CP
-- S2 Dropfoot
+- S3 Dropfoot
 
 Seminar specific information can be found in the respective folders.
 
-## Dependencies
-
-The examples and assignments in this repo have some dependencies.
-
-| Seminar | Windows   | MATLAB     | CasADi  | PredSim  |
-|----------|:--------:|:--------:|:--------:|:--------:|
-| Sx Stroke                                               | ☑️   | ☑️  | ☑️  | ☑️  |
-| Sx CP                                                   | ☑️   | ☑️  | ☑️  |  ☑️ |
-| Sx DMD                                                  | ☑️   | ☑️  | ☑️  | ☑️  |
-
-
-Here you can find the links to the dependencies
-- [CasADi](https://web.casadi.org/get/)
-- [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim)
-
+**Dependencies**: This workshop requires [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) and [its dependencies](https://github.com/KULeuvenNeuromechanics/PredSim?tab=readme-ov-file#running-predsim-on-a-local-machine).
 
 ## Running a reference 2D simulation with PredSim
 
@@ -37,7 +23,7 @@ Before going to the hands-on tutorials, the user should run a reference 2D simul
    - Line 25 - `S.subject.name = 'gait1018';`
 5. Click on the green 'Run' button
 
-Congratulations your first simulation with the 2D model is running! 
+Congratulations your first simulation with the 2D model is running! Running this type of simulation typically takes about 1-5 minutes, depending on your specific hardware.
 
 ## PredSimResults
 Once your simulation is done, the results are stored in `PredSimResults\gait1018` as `gait1018_v1`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number. If this is the first time you ran a simulation, the results are stored in files starting with `gait1018_v1`. The following files are created:
