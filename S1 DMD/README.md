@@ -13,22 +13,22 @@ To this end, you will edit the function [PredSim-workshop-smalll-2025/code/updat
 ### Step 1. Scaling muscle strength to model muscle weakness
 The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
 
-**Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
+**Requirements:** web app [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
 
 **Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx)
 
-**Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
+**Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation) (Optional content you can explore if you want to learn more)
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
 2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
-3. In the app
- - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques provided in IWA_DMDcase.xlsx
+3. In the web app
+ - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques that are given in the excel file ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
 <img width="253" height="342" alt="Screenshot_app_1" src="https://github.com/user-attachments/assets/03a05437-0578-417b-8be6-63df50a85069" />
 
  - Click `Calculate z-score`
 <img width="277.5" height="325" alt="Screenshot_app_2" src="https://github.com/user-attachments/assets/306456cb-2707-423f-8b12-c69743abeb36" />
 
- - The app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 4.)
+ - The web app will automatically plot the subject-specific torques on the TD percentile curves and compute z-scores as well as percentages relative to the median of the percentile curves (indicated via the red rectangle on the image below). You will use these percentages to scale the muscle strength of the model (in 4.)
 <img width="4123" height="2071" alt="Screenshot_app_3" src="https://github.com/user-attachments/assets/1b742f52-eeff-413b-8f81-34579b370783" />
 
 4. Open matlab and navigate to `PredSim-workshop-smalll-2025/code` in matlab. Open the function `update_settings.m`. You will add the setting `S.settings.muscle_strength` to this function to scale the model’s muscle strengths using the percentage values calculated in the app. Specifically, copy and paste the code below into `update_settings.m`. We have already provided scaling factors for the hip and knee muscles (e.g., the strength of glut_max is scaled to 22% of its original value (i.e., multiplied by 0.22)). You only need to update the scaling factors for `tib_ant`, `gastroc`, and `soleus` using the percentages you calculated in the app (remember: a strength value of 100% means the scaling factor should be 1 (not 100)) :
@@ -54,7 +54,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 **Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
 
-**Additional information:** The protocol of the clinical examination is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
+**Additional information:** The protocol of the clinical examination is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation) (Optional content you can explore if you want to learn more)
 
 1. In matlab navigate to `PredSim-workshop-smalll-2025\S1 DMD\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m`. This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
  - For future use: update lines 18-23 if the file paths or filenames change and update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
