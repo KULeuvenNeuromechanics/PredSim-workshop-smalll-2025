@@ -10,7 +10,7 @@ clc
 % Construct a cell array with full paths to files with saved results for
 % which you want to appear on the plotted figures.
 % ------- start edit -------
-pathRepo = 'C:\GBW_MyPrograms\PredSim'
+pathRepo = 'C:\GBW_MyPrograms\PredSim';
 results_folder = 'C:\GBW_MyPrograms\PredSimResults';
 
 %  add the paths of the figures you want to plot
@@ -21,7 +21,7 @@ results_folder = 'C:\GBW_MyPrograms\PredSimResults';
 
 results_path = struct( ...
     'reference',   fullfile(results_folder,'gait1018','gait1018_v25.mat'), ...
-    'pre_surgery', fullfile(results_folder,'gait1018','gait1018_v25.mat'), ...
+    'pre_surgery', fullfile(results_folder,'gait1018','gait1018_v23.mat'), ...
     'post_surgery',fullfile(results_folder,'gait1018','gait1018_v24.mat'));
 
 % disable/enable the visualisation of experimental kinematics
@@ -138,8 +138,10 @@ fig_count = fig_count+1;
 
 %%
 result_fieldnames = fieldnames(results_path);
+
 for i = 1:length(result_fieldnames)
     resultName = result_fieldnames{i};
+
     result_paths{i} = results_path.(resultName);
 end
 
@@ -152,6 +154,7 @@ if experimental_kinematics
         plot_pre_surgery(result_paths{idx_pre})
     end
     if isfield(results_path, 'post_surgery') 
-        plot_post_surgery(pathRepo,result_paths)
+        idx_post = find(strcmp(result_fieldnames,'post_surgery'));
+        plot_post_surgery(result_paths{idx_post})
     end
 end

@@ -1,4 +1,4 @@
-function [] = plot_pre_surgery(result_paths)
+function [] = plot_post_surgery(result_paths)
 %%% plot results SMALLL
 %%% pre surgery
 % Original authors: Ellis Van Can
@@ -29,57 +29,63 @@ colors_other_left = ([34,34,34; 128,82,134;230,107,76;177,129,177]/255); % 199,6
 % which you want to appear on the plotted figures.
 
 
-legend_names = {'Inverse Kinematics','Pre-surgery'};
+legend_names = {'Inverse Kinematics','Post-surgery'};
 
 
 %% IK files
 IKResultsFolder = fullfile('C:\GBW_MyPrograms\PredSim-workshop-smalll-2025\S2.  Surgical intervention for Cerebral Palsy\IK');
-FilePath.IK.trial1 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_pre_1'),'.mot'];
+FilePath.IK.trial1 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_post_1'),'.mot'];
 IK.trial1 = ReadMotFile(FilePath.IK.trial1);
 
-%%%%% trial 1
-GC.trial1{1} = 318:1521;
-GC.trial1{2} = 1521:2592;
-GC.trial1{3} = 2592:3678;
-GC.trial1{4} = 3678:4778;
-GC.trial1{5} = 4778:5922;
+%%%%% trial 1 
+GC.trial1{1} = [1460:2503];
+GC.trial1{2} = [2503:3747];
+GC.trial1{3} = [3747:4933];
 
 % find indices in time vector that match FC instances
-GC_IK.trial1{1} = find(IK.trial1.data(:,1)==round((GC.trial1{1}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{1}(end)/1000),2));
-GC_IK.trial1{2} = find(IK.trial1.data(:,1)==round((GC.trial1{2}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{2}(end)/1000),2));
-GC_IK.trial1{3} = find(IK.trial1.data(:,1)==round((GC.trial1{3}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{3}(end)/1000),2));
-GC_IK.trial1{4} = find(IK.trial1.data(:,1)==round((GC.trial1{4}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{4}(end)/1000),2));
-GC_IK.trial1{5} = find(IK.trial1.data(:,1)==round((GC.trial1{5}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{5}(end)/1000),2));
+GC_IK.trial1{1} = [find(IK.trial1.data(:,1)==round((GC.trial1{1}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{1}(end)/1000),2))];
+GC_IK.trial1{2} = [find(IK.trial1.data(:,1)==round((GC.trial1{2}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{2}(end)/1000),2))];
+GC_IK.trial1{3} = [find(IK.trial1.data(:,1)==round((GC.trial1{3}(1)/1000),2)):find(IK.trial1.data(:,1)==round((GC.trial1{3}(end)/1000),2))];
 
-% get IK rFS - rFS
 IK.trial1.GC{1} = IK.trial1.data(GC_IK.trial1{1},2:end);
 IK.trial1.GC{2} = IK.trial1.data(GC_IK.trial1{2},2:end);
 IK.trial1.GC{3} = IK.trial1.data(GC_IK.trial1{3},2:end);
-IK.trial1.GC{4} = IK.trial1.data(GC_IK.trial1{4},2:end);
-IK.trial1.GC{5} = IK.trial1.data(GC_IK.trial1{5},2:end);
 
 %%%%% trial 2
-FilePath.IK.trial2 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_pre_2'),'.mot'];
+FilePath.IK.trial2 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_post_2'),'.mot'];
 IK.trial2 = ReadMotFile(FilePath.IK.trial2);
 
-GC.trial2{1} = 1030:2220;
-GC.trial2{2} = 2220:3331;
-GC.trial2{3} = 3331:4417;
+GC.trial2{1} = [2383:3531];
+GC.trial2{2} = [3531:4692];
+
 
 % find indices in time vector that match FC instances
-GC_IK.trial2{1} = find(IK.trial2.data(:,1)==round((GC.trial2{1}(1)/1000),2)):find(IK.trial2.data(:,1)==round((GC.trial2{1}(end)/1000),2));
-GC_IK.trial2{2} = find(IK.trial2.data(:,1)==round((GC.trial2{2}(1)/1000),2)):find(IK.trial2.data(:,1)==round((GC.trial2{2}(end)/1000),2));
-GC_IK.trial2{3} = find(IK.trial2.data(:,1)==round((GC.trial2{3}(1)/1000),2)):find(IK.trial2.data(:,1)==round((GC.trial2{3}(end)/1000),2));
+GC_IK.trial2{1} = [find(IK.trial2.data(:,1)==round((GC.trial2{1}(1)/1000),2)):find(IK.trial2.data(:,1)==round((GC.trial2{1}(end)/1000),2))];
+GC_IK.trial2{2} = [find(IK.trial2.data(:,1)==round((GC.trial2{2}(1)/1000),2)):find(IK.trial2.data(:,1)==round((GC.trial2{2}(end)/1000),2))];
 
-% get IK rFS - rFS
+%IK
 IK.trial2.GC{1} = IK.trial2.data(GC_IK.trial2{1},2:end);
 IK.trial2.GC{2} = IK.trial2.data(GC_IK.trial2{2},2:end);
-IK.trial2.GC{3} = IK.trial2.data(GC_IK.trial2{3},2:end);
+
+%%%% trial 3
+FilePath.IK.trial3 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_post_3'),'.mot'];
+IK.trial3 = ReadMotFile(FilePath.IK.trial3);
+
+GC.trial3{1} = [2469:3603];
+GC.trial3{2} = [3603:4758];
 
 
-% % %% check IK
+% find indices in time vector that match FC instances
+GC_IK.trial3{1} = [find(IK.trial3.data(:,1)==round((GC.trial3{1}(1)/1000),2)):find(IK.trial3.data(:,1)==round((GC.trial3{1}(end)/1000),2))];
+GC_IK.trial3{2} = [find(IK.trial3.data(:,1)==round((GC.trial3{2}(1)/1000),2)):find(IK.trial3.data(:,1)==round((GC.trial3{2}(end)/1000),2))];
+
+% IK
+IK.trial3.GC{1} = IK.trial3.data(GC_IK.trial3{1},2:end);
+IK.trial3.GC{2} = IK.trial3.data(GC_IK.trial3{2},2:end);
+
+% %% check IK
 % figure
-% for trialNum = [1 2]
+% for trialNum = [1 2 3]
 %     for j = 1:length(IK.(sprintf('trial%d', trialNum)).GC)
 %         for i = 1:size(IK.trial2.GC{1},2)
 %         subplot(8,4,i)
@@ -122,7 +128,7 @@ for idx_AngleIK = 1:length(IK.names)
 end
 
 
-fig3 = figure;
+fig4 = figure;
 colororder({'k','k'});
 for idx_AngleIK = 1:length(IK.names)
     AngleName = IK.names{idx_AngleIK};
@@ -174,5 +180,5 @@ end
 legend1 = legend(legend_names);
 set(legend1,...
     'Position',[0.677123632983556 0.103763141299236 0.236785717759814 0.118925488587332]);
-sgtitle('Pre-surgery: simulation results vs. experimental kinematics')
+sgtitle('Post-surgery: simulation results vs. experimental kinematics')
 end

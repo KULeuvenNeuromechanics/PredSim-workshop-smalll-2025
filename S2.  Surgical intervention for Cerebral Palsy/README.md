@@ -182,7 +182,7 @@ To visualize the mot file in OpenSim:
 2. Load the .mot file (File > Load Motion...) PredSimResults/gait1018/gait1018_vx.mot in OpenSim
 3. 
 To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
-1. Open the script ..\PredSim\PlotFigures\run_this_file_to_plot_figures.m in matlab
-2. Change lines 15 to 28 with the mat files containing the simulation results of this case
-STILL ON DOING: add scripts to visualize experimental data
+1. Open the script run_this_file_to_plot_figures_CP_SMALLL.m in matlab
+2. Change lines 13 to 28 with the mat files containing the simulation results of this case
+
 	
