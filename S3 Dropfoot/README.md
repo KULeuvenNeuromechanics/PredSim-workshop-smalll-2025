@@ -1,6 +1,6 @@
 # Simulate the effects of an ankle-foot orthosis on gait patterns in individuals with dropfoot
 
-Dropfoot (or dropfoot) is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior. It is usually a symptom of a greater problem, not a disease in itself. Dropfoot is characterized by inability or impaired ability to raise the toes or raise the foot from the ankle (dorsiflexion).
+Dropfoot (or dropfoot) is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior (e.g., [Stewart, 2008](https://pubmed.ncbi.nlm.nih.gov/18502948/)). It is usually a symptom of a greater problem, not a disease in itself. Dropfoot is characterized by inability or impaired ability to raise the toes or raise the foot from the ankle (i.e., dorsiflexion).
 
 In this case study, you are going to investigate gait patterns associated with dropfoot by:
 1. Inducing weakness to the model's tibialis anterior muscle. After inducing weakness, you will predict the resulting gait pattern and its deviations from a healthy gait pattern.
