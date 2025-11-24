@@ -31,6 +31,12 @@ Before going to the hands-on tutorials, the user should run a reference 2D simul
 
 1. Open Matlab
 2. Navigate to your `PredSim` folder in Matlab
-3. Open `main.m` in Matlab by clicking on it
-4. During this workshop the user will run predictive simulations with the 2D model instead of the default 3D model and the user will run Full gait cycles instead of the default Half gait cycle simulations. Therefore, adjust the following lines in `main.m`:
+3. Open the script `main.m` in Matlab by clicking on it
+4. During this workshop the user will run predictive simulations with the 2D model instead of the default 3D model and the user will run Full gait cycle simulations instead of the default Half gait cycle simulations. Therefore, adjust the following lines in `main.m`:
+   - Line 20 - `[S] = initializeSettings('gait1018');`
+   - Line 22 - `S.misc.gaitmotion_type = 'FullGaitCycle';`
+   - Line 25 - `S.subject.name = 'gait1018';`
+5. Click on the green 'Run' button
+
+
    
