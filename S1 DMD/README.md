@@ -139,7 +139,7 @@ To plot the kinematics of your simulations and compare them to the Experimental 
       
 3. Modify **Line 22** to:
 
-	 	legend_names = {'Reference simulation', 'DMD simulation'};
+	 	legend_names = {'Reference simulation', 'DMD simulation', 'Simulated Achilles tendon lengthening'};
  
 4. Click on the green 'Run' button
 
