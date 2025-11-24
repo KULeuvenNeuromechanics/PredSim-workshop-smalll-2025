@@ -1,36 +1,36 @@
-# Simulate the effects of an ankle-foot orthosis on gait patterns in individuals with foot drop
+# Simulate the effects of an ankle-foot orthosis on gait patterns in individuals with dropfoot
 
-Foot drop is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior. It is usually a symptom of a greater problem, not a disease in itself. Foot drop is characterized by inability or impaired ability to raise the toes or raise the foot from the ankle (dorsiflexion).
+Dropfoot (or dropfoot) is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior. It is usually a symptom of a greater problem, not a disease in itself. Dropfoot is characterized by inability or impaired ability to raise the toes or raise the foot from the ankle (dorsiflexion).
 
-In this case study, you are going to investigate gait patterns associated with foot by:
-1. Modeling weakness of the tibialis anterior. You will predict the gait pattern associated with this weakness, and compare it to a healthy gait pattern.
-2. Modeling the effect of a passive ankle-foot orthosis that delivers ankle dorsiflexion torque. You will predict the gait pattern associated with using this assitive device in combination with weakness of the tibialis anterior, and compare to a gait pattern with weakness of the tibialis anterior but without using the ankle-foot orthosis.
+In this case study, you are going to investigate gait patterns associated with dropfoot by:
+1. Inducing weakness to the model's tibialis anterior muscle. After inducing weakness, you will predict the resulting gait pattern and its deviations from a healthy gait pattern.
+2. Adding a passive ankle dorsiflexion ankle-foot orthosis to the model. After adding the ankle-foot orhosis, you will predict the resulting gait pattern. You will compare the predicted gait both with a healthy gait pattern, and with an abnormal gait pattern due to weakness of the tibialis anterior (obtained in Step 1). 
 
-## Step 1: run a reference simulation with the 2D model
-Make sure you have PredSim and associated dependencies installed (see https://github.com/KULeuvenNeuromechanics/PredSim). We will be using the 2D model called `gait1018`. Because PredSim is using the 3D model by default, we need to make a small adjustment to the main.m script. On `line 20` and `line 25` of `PredSim/main.m`, change `'Falisse_et_al_2022'` with `'gait1018'`. See the [documentation of PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) for further information.
+## Step 0: run a reference simulation with the 2D model
+If you have not already done so, you need to run a reference simulation of healthy walking with the 2D model. Please follow the steps explained [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#running-a-reference-2d-simulation-with-predsim).
 
-You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the first time you ran a simulation, the results are stored in files starting with `gait1018_v1`. The following files are created:
-- `gait1018_v1.mat`: contains all the output variables that can be processed and visualized using MATLAB
-- `gait1018_v1.mot`: contains the motion files of the simulation, which can be visualized using OpenSim
-- `gait1018_v1_log.txt`: contains the logged information about the simulation
-
-## Step 2: induce weakness of the tibialis anterior
-The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
+## Step 1.1: induce weakness to the tibialis anterior
+Next, you will induce weakness to the model's tibialis anterior. To do so, use the function `PredSim-workshop-smalll-2025/code/update_settings.m` to update the settings. In this function, add the following lines of code:
 
 `strength_level = .05; % specify the strength level (0-1)` <br>
 `S.subject.muscle_strength   = {{'tib_ant_r'}, strength_level};` <br>
-`S.misc.gaitmotion_type = 'FullGaitCycle';`
 
-This results in reducing the tibialis anterior strength of the right leg (`tib_ant_r`) to 5% of its default level. Next, replace `line 21` of `Predsim/main.m` (currently empty) with the following line of code:
+This results in reducing the tibialis anterior strength of the right leg (`tib_ant_r`) to 5% of its default level. 
+
+Next, replace `line 21` of `Predsim/main.m` (currently empty) with the following line of code:
 
 `S = update_settings(S);`
 
-Make sure `update_settings` is added to your path. Run the script called `PredSim-workshop-smalll-2025\set_up_paths`;
+This is required to make sure that `Predsim` uses the updated settings.
 
-## Step 3: simulate foot drop during walking
-You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`. You can now evaluate the effect of weakness by running the `PredSim-workshop-smalll-2025/Sx Foot drop case/Plotting/compare_devices.m` script. 
+## Step 1.2: simulate dropfoot during walking
+You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. 
 
-Before you run `compare_devices.m`, specify the versions we want to plot. To plots `v1` and `v2`, set `line 2` to:
+**bug fixing**: if you get an error saying `'update_settings' is not found in the current folder or on the MATLAB path`, run the script called `PredSim-workshop-smalll-2025\set_up_paths`. See [explanation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim) for more details.
+
+If all went well, you can now evaluate visualize the resulting gait pattern in OpenSim. Follow the instructions mentioned [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim). Note: if this is the second time you ran a simulation, the results are stored in files starting with `gait1018_v2`. 
+
+You can also visualize the resulting joint angles by running the `PredSim-workshop-smalll-2025/S3 dropfoot case/Plotting/compare_devices.m` script. Before you run `compare_devices.m`, specify the versions we want to plot. To plots `v1` and `v2`, set `line 2` to:
 
 `vs = [1, 2]`;
 
@@ -38,25 +38,28 @@ You should see the figure below:
 
 ![picture](Plotting/Fig1.png)
 
-You may notice that healthy (red) generally matches Data better than weak (yellow). This is because this data is from a healthy participant. Most noticable difference occurs for:
--   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness
+The grey lines show experimental data from a healthy participant (data source: [van der Zee et al., 2022](https://www.nature.com/articles/s41597-022-01817-1)). You may notice that there are differences between healthy data (grey) and the healthy simulation (red). These differences are in part due to using a 2D model instead of a (more accurate) 3D model. In addition, differences between simulation and data are also due to the fact that our understanding of human walking is currently incomplete. We are still actively improving our simulations to yield better agreement with experimental data (e.g. [d'Hondt et al., 2024](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012219); [Afschrift et al., 2025](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012713)). Despite differences with data, the healthy simulation (red) generally matches data (grye) better than the simulation with imposed weakness of the tibialis anterior (yellow). Most noticable difference occurs for:
+-   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the TA weakness.
 -   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
 -   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which corerspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
 
+## Step 2.1: add an ankle-foot orthosis to the model
+After inducing weakness in Step 1, you are now ready to try and normalize the gait pattern by adding an ankle-foot orthosis to the model. Like before, you can use the function `PredSim-workshop-smalll-2025/code/update_settings.m` to adjust the model and accomplish this. In this function, add the following lines of code:
 
-## Step 4: add an ankle-foot orthosis to the model
-The function `PredSim-workshop-smalll-2025/code/update_settings.m` may be used to update the settings. In this function, add the following lines of code:
-
-`exo1.ankle_stiffness = 0; % ankle stiffness in Nm/deg` <br>
+`exo1.ankle_stiffness = 2; % ankle stiffness in Nm/deg` <br>
 `exo1.left_right = 'r'; % 'l' for left or 'r' for right` <br>
 `exo1.function_name = 'ankleExoDorsi';` <br>
-`exo1.ankle_offset = 0 % neutral ankle angle in deg ` <br> 
+`exo1.ankle_offset = 15; % neutral ankle angle in deg ` <br> 
 `S.orthosis.settings{1} = exo1;`
 
-This adds an exoskeleton with a stiffness of 0 Nm/rad to the right foot. The mass of the exoskeleton is ignored for simplicity. Because the default stiffness is 0, the exoskeleton should not affect the gait pattern. Change the stiffness to a desired level (greater than 0). 
+This adds an exoskeleton with a stiffness of 2 Nm/rad and a neutral ankle angle of 15 deg dorsiflexion to the right foot. The mass of the exoskeleton is ignored for simplicity. 
 
-## Step 5: simuluate the effects of an ankle-foot orthosis on gaits in individuals with foot drop
-You can now run a simulation with the 2D model, simply by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. If this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. You can now evaluate the combined effects of weakness and the assitive device by running the `PredSim-workshop-smalll-2025/Sx Foot drop case/Plotting/compare_devices.m` script. Before you run `compare_devices.m`, specify the versions we want to plot. To plots `v1`, `v2` and `v3`, set `line 2` to:
+## Step 2.2: simuluate the effects of an ankle-foot orthosis on gaits in individuals with dropfoot
+You can now run a simulation by running the `Predsim/main.m` script. Once your simulation is done, the results are stored in `PredSimResults\gait1018`. 
+
+If all went well, you can visualize the resulting gait pattern in OpenSim. Follow the instructions mentioned [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim). Note: if this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. **Invisible ankle-foot orthosis**: at the moment, the ankle-foot orthosis is invisible in OpenSim. 
+
+Like before, you can visualize the joint angles using the `PredSim-workshop-smalll-2025/S3 dropfoot case/Plotting/compare_devices.m` script. Before you run `compare_devices.m`, specify the versions we want to plot. To plots `v1`, `v2` and `v3`, set `line 2` to:
 
 `vs = [1, 2, 3]`;
 
@@ -64,20 +67,12 @@ You should see the figure below:
 
 ![picture](Plotting/Fig2.png)
 
-The results with and without ankle-foot orthosis are similar, because the stiffness was set to 0 Nm.deg.
+The grey, red and yellow lines are the same as before. The simulation with weakness and the ankle-foot orthosis is shown in purple. There are still differences with the simulated healthy gait (red), but these are smaller than the differences with the gait with imposed weakness (yellow). Thus, adding the ankle-foot orthosis reduced gait deviations.
 
-## Step 6: test different stiffnesses of the ankle-foot orthosis
-At this time, the ankle-foot orthosis has not done anything, because the stiffness was set to 0 Nm/deg. In `PredSim-workshop-smalll-2025/code/update_settings.m`, adjust the following lines of code to test the effect of an exoskeleton with a different stiffness and neutral angle:
+## Optional Step 2.3: test different stiffnesses and/or neutral angles of the ankle-foot orthosis
+If you want, you can change the stiffness and/or neutral ankle angle of the ankle-foot orthosis to see if you can further improve the gait pattern. To do so, adjust the following lines of code in `PredSim-workshop-smalll-2025/code/update_settings.m`:
 
-`exo1.ankle_stiffness = ; % ankle stiffness in Nm/deg` <br> 
-`exo1.ankle_offset = ; % neutral ankle angle in deg ` 
+`exo1.ankle_stiffness = 2; % ankle stiffness in Nm/deg` <br> 
+`exo1.ankle_offset = 15; % neutral ankle angle in deg ` 
 
-Repeat Steps 5-6 until the gait pattern with TA weakness better resembles a healthy gait pattern.
-
-## Step 7: visualize results in OpenSim
-Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
-
-To visualize the mot file in OpenSim:
-
-Open the model `PredSim\subjects\gait1018\gait1018.osim` in OpenSim
-Load the mot file `PredSimResults\gait1018\gait1018_vx.mot` in OpenSim
+Replace the numbers `2` and `15` with numbers of your choosing. Repeat Step 2.2 to simulate the resulting gait pattern. 
