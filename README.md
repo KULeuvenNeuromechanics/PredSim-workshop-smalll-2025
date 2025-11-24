@@ -40,5 +40,15 @@ Before going to the hands-on tutorials, the user should run a reference 2D simul
 
 Congratulations your first simulation with the 2D model is running! 
 
+## Visualizing your simulation results in OpenSim
+
+Once your simulation is done, the results are stored in `PredSimResults\gait1018` as `gait1018_v1`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+
+To visualize the mot file in OpenSim:
+1. Open OpenSim
+2. Click on 'File > Open Model...' and navigate to the 2D model `PredSim/gait1018/gait1018.osim`
+3. Click on 'File > Load Motion...' and navigate to the mot file of your simulation `PredSimResults/gait1018/gait1018_v1.mot`
+4. Click on the 'Play forward' button to see the motion. You may also adapt the speed.
+
 
    
