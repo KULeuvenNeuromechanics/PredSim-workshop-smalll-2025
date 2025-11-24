@@ -10,7 +10,7 @@ In this section the user will use (I.) instrumented strength scores and (II.) pa
 
 To this end, you will edit the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m). This function can later be used to run personalized simulations in PredSim.
 
-### I. Muscle weakness
+### Step 1. Scaling muscle strength to model muscle weakness
 The strength was assessed with fixed dynamometry. The user will scale the maximal active muscle force based on the instrumented strength scores to model subject-specific muscle weakness.
 
 **Requirements:** [Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)
@@ -18,8 +18,6 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 **Data:** Instrumented strength scores (mean joint torques), provided in [Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx)
 
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
-
-#### Step 1. Scaling muscle strength
 
 1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
 2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
@@ -47,7 +45,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
 
 
-### II. Muscle stiffness
+### Step 2. Shifting the passive force-length curve to model passive muscle stiffness
 Muscle stiffness was evaluated through passive ROM and clinical stiffness scale. The user will estimate the start of the passive force-length curves of the muscles based on the passive ROM and clinical stiffness scale to model subject-specific passive muscle stiffness. 
 
 **Requirements:** OpenSim, Matlab.
@@ -57,8 +55,6 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 **Code:** [Code/Personalize_passive_muscle_stiffness_based_on_CE.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Code/Personalize_passive_muscle_stiffness_based_on_CE.m)
 
 **Additional information:** The protocol of the clinical examination is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation)
-
-#### Step 2. Shifting the passive force-length curvescaling muscle strength
 
 1. In matlab navigate to `PredSim-workshop-smalll-2025\S1 DMD\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m`. This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
  - For future use: update lines 18-23 if the file paths or filenames change and update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
@@ -78,7 +74,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 For the clinical stiffness scale, the normalized fiber length at which passive force starts to develop was assumed 1 when the clinical stiffness score was 0 (no increased resistance), 0.83 when the score was 1 (minimal increased resistance), 0.67 when the score was 2 (increased resistance), and 0.5 when the score was 3 (highly pronounced resistance) corresponding to a shift of respectively 0, 0.17, 0.33, and 0.5. 
 We shifted the passive force-length relationship by the mean of the shifts estimated based on the ROM and clinical stiffness score.
 
-#### Step 3. Running PredSim with estimated muscle parameters:
+### Step 3. Running PredSim with estimated muscle parameters:
 
 The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments. 
 Before this, you should have run a reference simulation (2D model, no impairments) by following the steps in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main). Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab. Ensure that the file contains already the following settings: 
@@ -92,7 +88,7 @@ To run a predictive simulation with the 2D model including DMD-specific impairme
 4. Line 21 - add `S = update_settings(S)` in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m). This will update the settings of the 2D model with the calculated muscle weakness and stiffness.
 5. Click on the green 'Run' button
 
-#### Step 4. Visualizing and plotting the results
+### Step 4. Visualizing and plotting the results
 
 Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
@@ -114,7 +110,7 @@ To plot the kinematics of your simulations and compare them to the Experimental 
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
 This treatment was often performed in patients with DMD who walk on their toes (tiptoeing gait), but may cause loss of ambulation. 
 
-#### Step 5. Simulate an Achilles tendon lengthening surgery
+### Step 5. Simulate an Achilles tendon lengthening surgery
 
 1. Go to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.subject.scale_MT_params` to scale the tendon slack length (lTs) in order to simulate a Achilles tendon lengthening. Specifically, copy the code below into `update_settings.m`. This line will scale the tendon slack length (lTs) of both muscles (left and right) by 1.3 :
 
@@ -122,13 +118,13 @@ This treatment was often performed in patients with DMD who walk on their toes (
 
 Important: Do not change the other settings in `update_settings.m`. This way, you will simulate an Achilles tendon lengthening on a model that has DMD-specific muscle weakness and stiffness. 
 
-#### Step 6. Running PredSim with estimated muscle parameters:
+### Step 6. Running PredSim with estimated muscle parameters:
 
 The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments and simulated Achilles tendon lengthening. 
 1. Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab.
 2. Click on the green 'Run' button
 
-#### Step 7. Visualizing and plotting the results
+### Step 7. Visualizing and plotting the results
 
 See **step 4** to visualize your simulation results in OpenSim 
    
