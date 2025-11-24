@@ -79,8 +79,7 @@ We shifted the passive force-length relationship by the mean of the shifts estim
 The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments. 
 Before this, you should have run a reference simulation (2D model, no impairments) by following the steps in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main). Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab. Ensure that the file contains already the following settings: 
 1. Line 20 - `[S] = initializeSettings('gait1018');`
-2. Line 22 - `S.misc.gaitmotion_type = 'FullGaitCycle';`
-3. Line 25 - `S.subject.name = 'gait1018';`
+2. Line 25 - `S.subject.name = 'gait1018';`
 
 *If you have not run the reference simulation yet, you should either follow the instructions in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main), or modify the three lines above in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m), then click the green 'Run' button.* 
 
