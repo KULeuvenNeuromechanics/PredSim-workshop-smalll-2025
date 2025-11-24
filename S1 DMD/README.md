@@ -100,10 +100,11 @@ To visualize the mot file in OpenSim:
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
-2. Update **Lines 17 to 18** with the `.mat` files that contain your simulation results:
-   - Line 17 - replace `gait1018_v1.mat` with the `.mat` file containing your **reference simulation** *(If the reference simulation was the first simulation you ran with this 2D model, the results are stored in v1)*
-   - Line 18 - replace `gait1018_v2.mat` with the `.mat` file containing your **DMD simulation** *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v2)*
-3. Click on the green 'Run' button
+2. Line 11 - change `results_folder = fullfile('C:\GBW_MyPrograms\PredSimResults');` to the path of your `PredSimResults` folder 
+3. Update **Lines 12 to 13** with the `.mat` files that contain your simulation results:
+   - Line 12 - replace `gait1018_v1.mat` with the `.mat` file containing your **reference simulation** *(If the reference simulation was the first simulation you ran with this 2D model, the results are stored in v1)*
+   - Line 13 - replace `gait1018_v2.mat` with the `.mat` file containing your **DMD simulation** *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v2)*
+4. Click on the green 'Run' button
 
 ## Optional: simulate the effect of Achilles tendon lengthening
 
@@ -130,11 +131,11 @@ See **step 4** to visualize your simulation results in OpenSim
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
-2. Add **Line 19** with the `.mat` files that contain the results of your **simulated Achilles tendon lengthening**. Specifically, copy the code below to **Line 19**. *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v3, otherwise adapt vx)* :
+2. Add **Line 14** with the `.mat` files that contain the results of your **simulated Achilles tendon lengthening**. Specifically, copy the code below to **Line 19**. *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v3, otherwise adapt vx)* :
 
 	 	result_paths{3} = fullfile(results_folder,'gait1018','gait1018_v3.mat');
       
-3. Modify **Line 22** to:
+3. Modify **Line 17** to:
 
 	 	legend_names = {'Reference simulation', 'DMD simulation', 'Simulated Achilles tendon lengthening'};
  
