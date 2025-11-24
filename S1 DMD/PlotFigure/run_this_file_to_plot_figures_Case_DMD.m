@@ -14,12 +14,12 @@ clc
 % Construct a cell array with full paths to files with saved results for
 % which you want to appear on the plotted figures.
 results_folder = fullfile(pathRepoFolder,'PredSimResults');
-result_paths{1} = fullfile(results_folder,'gait1018','gait1018_vX.mat');
-result_paths{2} = fullfile(results_folder,'gait1018','gait1018_vX.mat');
+result_paths{1} = fullfile(results_folder,'gait1018','gait1018_v1.mat');
+result_paths{2} = fullfile(results_folder,'gait1018','gait1018_v2.mat');
 
 
 % Cell array with legend name for each result
-legend_names = {'DMD simulation', 'DMD simulation with AT lengthening'};
+legend_names = {'Reference simulation', 'DMD simulation'};
 
 % Path to the folder where figures are saved
 figure_folder = results_folder;
