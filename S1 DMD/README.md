@@ -63,7 +63,7 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 1. In matlab navigate to `PredSim-workshop-smalll-2025\S1 DMD\Muscle stiffness code` and open the script `Personalize_passive_muscle_stiffness_based_on_CE.m` (eventueel Link hier toevoegen). This code guides users through the estimation process of passive muscle stiffness based on clinical assessments.
  - For future use: update lines 18-23 if the file paths or filenames change and update lines 27-62 if new clinical measurements are added and need to be linked to specific muscles
 
-2. Run `Personalize_passive_muscle_stiffness_based_on_CE.m` by clicking the green Run button. This script computes the start of the passive muscle force–length curve based on clinical examination data. It returns the normalized muscle length at which passive force begins, personalized using (1) ROM values and (2) the clinical stiffness scale. After running the script, matlab prints a table showing the shift calculated from ROM data, the shift from the clinical stiffness scale, and the average of the two.
+2. Run `Personalize_passive_muscle_stiffness_based_on_CE.m` by clicking the green 'Run' button. This script computes the start of the passive muscle force–length curve based on clinical examination data. It returns the normalized muscle length at which passive force begins, personalized using (1) ROM values and (2) the clinical stiffness scale. After running the script, matlab prints a table showing the shift calculated from ROM data, the shift from the clinical stiffness scale, and the average of the two.
 
 3. Go back to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.settings.muscle_pass_stiff_shift` to shift the passive force–length curves based on the clinical exam. Specifically, copy and paste the code below into `update_settings.m`. We have already provided the shifts for the hip and knee muscles. You only need to update the shifts for `gastroc` and `soleus` using the average shift printed after running `Personalize_passive_muscle_stiffness_based_on_CE.m` (outcome from 2.) :
 
@@ -80,51 +80,68 @@ We shifted the passive force-length relationship by the mean of the shifts estim
 
 #### Step 3. Running PredSim with estimated muscle parameters:
 
-The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
-You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
-1. On `line 20` and `line 25` change `Falisse_et_al_2022` to `gait1018`. We will use the 2D model instead of the default 3D model
-2. Replace `line 21` with the following code:
-   
-	 	S = update_settings(S);
-   	 
-Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
+The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments. 
+Before this, you should have run a reference simulation (2D model, no impairments) by following the steps in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main). Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab. Ensure that the file contains the following settings: 
+1. Line 20 - `[S] = initializeSettings('gait1018');`
+2. Line 22 - `S.misc.gaitmotion_type = 'FullGaitCycle';`
+3. Line 25 - `S.subject.name = 'gait1018';`
+*If you have not run the reference simulation yet, you should either follow the instructions in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main), or modify the three lines above in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m), then click the green 'Run' button.* 
 
-	
+To run a predictive simulation with the 2D model including DMD-specific impairments:  
+4. Line 21 - add `S = update_settings(S)` in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m). This will update the settings of the 2D model with the calculated muscle weakness and stiffness. 
+5. Click on the green 'Run' button
+
+#### Step 4. Visualizing and plotting the results
+
+Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+
+To visualize the mot file in OpenSim: 
+1. Open OpenSim
+2. Click on 'File > Open Model...' and navigate to the 2D model [PredSim/gait1018/gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) 
+3. Click on 'File > Load Motion...' and navigate to the mot file of your simulation `PredSimResults/gait1018/gait1018_vx.mot`
+4. Click on the 'Play forward' button to see the motion. You may also adapt the speed. 
+   
+To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
+1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
+2. Update **Lines 17 to 18** with the `.mat` files that contain your simulation results:
+   - Line 17 - replace `gait1018_v1.mat` with the `.mat` file containing your **reference simulation** *(If the reference simulation was the first simulation you ran with this 2D model, the results are stored in v1)*
+   - Line 18 - replace `gait1018_v2.mat` with the `.mat` file containing your **DMD simulation** *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v2)*
+3. Click on the green 'Run' button
+
 ## Optional: simulate the effect of Achilles tendon lengthening
 
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
 This treatment was often performed in patients with DMD who walk on their toes (tiptoeing gait), but may cause loss of ambulation. 
 
-#### Step 4. Simulate an Achilles tendon lengthening surgery
-	
-1. Add a setting S.subject.scale_MT_params to the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m):
+#### Step 5. Simulate an Achilles tendon lengthening surgery
+
+1. Go to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.subject.scale_MT_params` to scale the tendon slack length (lTs) in order to simulate a Achilles tendon lengthening. Specifically, copy the code below into `update_settings.m`. This line will scale the tendon slack length (lTs) of both muscles (left and right) by 1.3 :
 
 	 	S.subject.scale_MT_params = {{'soleus_l', 'soleus_r', 'gastroc_r', 'gastroc_l'}, 'lTs', 1.3};	
-	 
-2. Edit S.subject.scale_MT_params to 1.3 in the function [PredSim-workshop-smalll-2025/code/update_settings.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/code/update_settings.m) to scale the the tendon slack length (lTs) of both muscles (left and right) by 1.3, effectively modeling a lengthened Achilles tendon.
 
-Important: Apply this change on top of the previous DMD simulation, meaning you start from the model that already includes DMD-specific muscle weakness and increased muscle stiffness.
+Important: Do not change the other settings in `update_settings.m`. This way, you will simulate an Achilles tendon lengthening on a model that has DMD-specific muscle weakness and stiffness. 
 
-#### Step 5. Running PredSim with estimated muscle parameters:
+#### Step 6. Running PredSim with estimated muscle parameters:
 
-The users will use [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) to run predictive simulations. 
-You will need to do some small adjustments to [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m):
-1. On `line 20` and `line 25` change `Falisse_et_al_2022` to `gait1018`. We will use the 2D model instead of the default 3D model
-2. Replace `line 21` with the following code:
+The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments and simulated Achilles tendon lengthening. 
+1. Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab.
+2. Click on the green 'Run' button
+
+#### Step 7. Visualizing and plotting the results
+
+See **step 4** to visualize your simulation results in OpenSim 
    
-	 	S = update_settings(S);
-   	 
-Users are now ready to run predictive simulations based on a neuromusculoskeletal model with DMD-specific impairments, by simply running the [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) script. 
-
-## Visualizing and plotting the results
-
-Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
-
-To visualize the mot file in OpenSim: 
-1. Open the model [PredSim/gait1018/gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) in OpenSim
-2. Load the mot file `PredSimResults/gait1018/gait1018_vx.mot` in OpenSim
-   
-To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
+To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
-2. Change `lines 17 to 19` with the mat files containing the simulation results of this case
+2. Add **Line 19** with the `.mat` files that contain the results of your **simulated Achilles tendon lengthening**. Specifically, copy the code below to **Line 19**. *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v3, otherwise adapt vx)* :
+
+	 	result_paths{3} = fullfile(results_folder,'gait1018','gait1018_v3.mat');
+      
+3. Modify **Line 22** to:
+
+	 	legend_names = {'Reference simulation', 'DMD simulation'};
+ 
+4. Click on the green 'Run' button
+
+
 
