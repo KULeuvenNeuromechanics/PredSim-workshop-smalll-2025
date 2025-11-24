@@ -19,7 +19,7 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 
 **Additional information:** The protocol of the instrumented strength assessment is provided in [Documentation](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/Documentation) (Optional content you can explore if you want to learn more)
 
-1. Open the app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
+1. Open the web app ([Anthropometric-related percentile curves for muscle strength of typically developing children](https://shiny.gbiomed.kuleuven.be/Z-score_calculator_muscle_strength/)).
 2. Open the excel with the mean joint torques from the instrumented weakness assessment provided in the Clinical Exam folder ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
 3. In the web app
  - Click on the tab `Ankle muscle strength` and enter body mass, height and mean ankle joint torques that are given in the excel file ([Clinical Exam/IWA_DMDcase.xlsx](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/Clinical%20Exam/IWA_DMDcase.xlsx))
