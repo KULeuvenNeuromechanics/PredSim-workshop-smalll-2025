@@ -24,8 +24,7 @@ Before going to the hands-on tutorials, the user should run a reference 2D simul
 5. Click on the green 'Run' button
 
 Congratulations your first simulation with the 2D model is running! Running this type of simulation typically takes about 1-5 minutes, depending on your specific hardware.
-After the iterations complete, verify the solver’s termination message in the MATLAB command window. If MATLAB reports **“EXIT: Optimal solution found.”**, then the optimization completed successfully and an optimal solution was obtained.
-If the message differs (e.g., exceeded iteration limit, infeasible problem, or no convergence), then the simulation did not successfully find an optimal solution.
+After the iterations complete, verify the solver’s termination message in the MATLAB command window. If MATLAB reports **“EXIT: Optimal solution found.”**, then the optimization completed successfully and an optimal solution was obtained. If the message differs (e.g., exceeded iteration limit, infeasible problem, or no convergence), then the simulation did not successfully find an optimal solution.
 
 ## PredSimResults
 Once your simulation is done, the results are stored in `PredSimResults\gait1018` as `gait1018_v1`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number. If this is the first time you ran a simulation, the results are stored in files starting with `gait1018_v1`. The following files are created:
