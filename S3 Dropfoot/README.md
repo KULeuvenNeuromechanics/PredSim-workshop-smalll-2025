@@ -1,16 +1,19 @@
 # Simulate the effects of an ankle-foot orthosis on gait patterns in individuals with dropfoot
 
-Dropfoot (or dropfoot) is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior (e.g., [Stewart, 2008](https://pubmed.ncbi.nlm.nih.gov/18502948/)). It is usually a symptom of a greater problem, not a disease in itself. Dropfoot is characterized by inability or impaired ability to raise the toes or raise the foot from the ankle (i.e., dorsiflexion).
+Dropfoot (or foot drop) is a gait abnormality in which the dropping of the forefoot happens out of weakness, irritation or damage to the deep fibular nerve or paralysis of the muscles in the anterior portion of the lower leg such as the tibialis anterior (e.g., [Stewart, 2008](https://pubmed.ncbi.nlm.nih.gov/18502948/)). It is usually a symptom of a greater problem, not a disease in itself. Dropfoot is characterized by inability or impaired ability to raise the toes or raise the 
+foot from the ankle (i.e., dorsiflexion).
 
-In this case study, you are going to investigate gait patterns associated with dropfoot in 2 steps:
-1. Inducing weakness to the model's tibialis anterior muscle. After inducing weakness, you will predict the resulting gait pattern and its deviations from a healthy gait pattern.
+An ankle-foot orthosis is a brace worn on the lower leg, ankle, and foot to provide support, stability, and control movement. Ankle-foot orthoses may improve gait in individuals with dropfoot, as they could prevent the foot from dropping  (e.g., [Stewart, 2008](https://pubmed.ncbi.nlm.nih.gov/18502948/)). However, it is difficult to predict how the properties of an ankle-foot orthosis (e.g. rotational stiffness, neutral angle) influence gait. What is optimal for one individual may not be optimal for another. Predictive simulations may be used to predict the combined effects of specific individual deficits (e.g. dropfoot) and device properties (e.g. ankle-foot orthosis stiffness) on gait patterns. 
+
+In this case study, you are going to investigate the effects of an ankle-foot orthosis on gait patterns in individuals with dropfoot in 2 steps:
+1. Simulate dropfoot by inducing weakness to the model's tibialis anterior muscle. After inducing weakness, you will predict the resulting gait pattern and its deviations from a healthy gait pattern.
 2. Adding a passive ankle dorsiflexion ankle-foot orthosis to the model. After adding the ankle-foot orhosis, you will predict the resulting gait pattern. You will compare the predicted gait both with a healthy gait pattern, and with an abnormal gait pattern due to weakness of the tibialis anterior (obtained in Step 1). 
 
 ## Step 0: run a reference simulation with the 2D model
 If you have not already done so, you need to run a reference simulation of healthy walking with the 2D model. Please follow the steps explained [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#running-a-reference-2d-simulation-with-predsim).
 
-## Step 1.1: induce weakness to the tibialis anterior
-Next, you will induce weakness to the model's tibialis anterior. To do so, use the function `PredSim-workshop-smalll-2025/code/update_settings.m` to update the settings. In this function, add the following lines of code:
+## Step 1.1: inducing weakness to the tibialis anterior
+Next, you will induce weakness to the model's tibialis anterior. To do so, edit the function `PredSim-workshop-smalll-2025/code/update_settings.m` to update the settings. In this function, add the following lines of code:
 
 `strength_level = .05; % specify the strength level (0-1)` <br>
 `S.subject.muscle_strength   = {{'tib_ant_r'}, strength_level};` <br>
@@ -44,7 +47,7 @@ The grey lines show experimental data from a healthy participant (data source: [
 -   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which correspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
 
 ## Step 2.1: add an ankle-foot orthosis to the model
-After inducing weakness in Step 1, you are now ready to try and normalize the gait pattern by adding an ankle-foot orthosis to the model. Like before, you can use the function `PredSim-workshop-smalll-2025/code/update_settings.m` to adjust the model and accomplish this. In this function, add the following lines of code:
+After inducing weakness in Step 1, you are now ready to try and normalize the gait pattern by adding an ankle-foot orthosis to the model. Like before, you can edit the function `PredSim-workshop-smalll-2025/code/update_settings.m` to adjust the model and accomplish this. In this function, add the following lines of code:
 
 `exo1.ankle_stiffness = 2; % ankle stiffness in Nm/deg` <br>
 `exo1.left_right = 'r'; % 'l' for left or 'r' for right` <br>
@@ -76,4 +79,4 @@ If you want, you can change the weakness level, ankle-foot orthosis stiffness an
 `exo1.ankle_stiffness = 2; % ankle stiffness in Nm/deg` <br> 
 `exo1.ankle_offset = 15; % neutral ankle angle in deg ` 
 
-Replace (one of) the numbers `.05` `2` and `15` with (a) number(s) of your choosing. Repeat Step 2.2 to simulate the resulting gait pattern. 
+Replace (one of) the numbers `.05`, `2` and `15` with (a) number(s) of your choosing. Repeat Step 2.2 to simulate the resulting gait pattern. 
