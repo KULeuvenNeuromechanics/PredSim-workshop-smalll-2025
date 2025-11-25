@@ -7,7 +7,7 @@ In this tutorial you'll (I.) personalize for a CP case. Next, (II.) you will mod
 # I. Personalizing the musculoskeletal model
 In this part you will personalize a model for a child with CP based on a clinical exam. The clinical exam is part of children's usual clinical care and is a comprehensive assesment of musculoskeletal functioning. In example 1. you will use (I.1) manual muscle testing strength scores to personalize optimal muscle force and (I.2) passive Range of Motion (ROM) scores  to personalize optimal muscle force and optimal muscle fiber length and coordinate limit torques.
 
-To this end, you will create a settings file that can later be used in PredSim. In this tutorial you will edit You can change the model inputs in the [default settings file](../code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
+To this end, you will create a settings file that can later be used in PredSim. In this tutorial you will change the model inputs in the [default settings file](../code/update_settings.m). This file can later be used to run personalized simulations in PredSim.
 
 ### Step 1. Create a copy of the update_settings file in the Code folder of this tutorial
 Make clear that in this copy you will work on the pre-surgical personalizations. For example, rename the file to update_settings_pre.m.
