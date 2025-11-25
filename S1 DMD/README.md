@@ -34,12 +34,15 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 4. Open matlab and navigate to `PredSim-workshop-smalll-2025/code` in matlab. Open the function `update_settings.m`. You will add the setting `S.settings.muscle_strength` to this function to scale the model’s muscle strengths using the percentage values calculated in the web app. Specifically, copy and paste the code below into `update_settings.m`. We have already provided scaling factors for the hip and knee muscles (e.g., the strength of glut_max is scaled to 22% of its original value (i.e., multiplied by 0.22)). You only need to update the scaling factors for `tib_ant`, `gastroc`, and `soleus` using the percentages you calculated in the web app (remember: a strength value of 100% means the scaling factor should be 1 (not 100)) :
 
 	 	S.settings.muscle_strength = {... 
-			{'iliopsoas_r', 'iliopsoas_l'}, 0.435, ...									% hip_flex
-			{'glut_max_r', 'glut_max_l'}, 0.22, ...										% hip_ext
-			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 0.317, ...				% knee_ext
-			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 0.316, ...		% knee_flex
-			{'tib_ant_r', 'tib_ant_l'}, 1, ...											% ankle_df
-			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 					% ankle_pf
+			{'iliopsoas_r', 'iliopsoas_l'}, 0.435, ...									% hip_flex (provided)
+			{'glut_max_r', 'glut_max_l'}, 0.22, ...										% hip_ext (provided) 
+			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 0.317, ...				% knee_ext (provided)
+			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 0.316, ...		% knee_flex (provided)
+
+   			% REPLACE THE '1' VALUES BELOW WITH YOUR OWN SCALING FACTORS FROM THE WEB APP
+   			% (Remember: 100% = scaling factor 1.0, 50% = 0.5, etc.)
+			{'tib_ant_r', 'tib_ant_l'}, 1, ...											% ankle_df (insert your scaling factor)
+			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 					% ankle_pf (insert your scaling factor)
 			};
  
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
@@ -63,11 +66,16 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 
 3. Go back to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.settings.muscle_pass_stiff_shift` to shift the passive force–length curves based on the clinical exam. Specifically, copy and paste the code below into `update_settings.m`. We have already provided the shifts for the hip and knee muscles. You only need to update the shifts for `gastroc` and `soleus` using the average shift printed after running `Personalize_passive_muscle_stiffness_based_on_CE.m` (outcome from 2.) :
 
-	 	S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...
-     		{'gastroc_r','gastroc_l'},0.9,...
-     		{'soleus_l', 'soleus_r'}, 0.9,...
-     		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},0.90839,...
-     		{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},0.82002,...
+	 	S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...							% ankle_df (provided)
+
+   			% REPLACE THE '0.9' VALUES BELOW WITH YOUR OWN AVERAGE SHIFTS
+   			% (Use the average shifts printed in the Matlab command window after running the script.)
+   
+     		{'gastroc_r','gastroc_l'},0.9,...											% gastroc (insert your shift value)
+     		{'soleus_l', 'soleus_r'}, 0.9,...											% soleus (insert your shift value)
+			
+     		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},0.90839,...		% knee_flex (provided)
+     		{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},0.82002,...		% hip_flex (provided)
      		}; 	 	 
 
 **Background:** In DMD, contractile tissue is not only lost but also replaced by fat and fibrotic tissue, resulting in increased muscle stiffness and eventually leading to contractures. We modeled this by shifting the passive muscle force-length relationship to shorter fiber lengths through a reduction in the fiber length at which passive muscle force begins to develop. We use the ROM measurements and clinical stiffness scale to estimate this shift. For the ROM measurements, we estimate the difference in fiber length at which the muscle starts to develop passive force between TD and DMD from the difference in joint angle at the end of ROM. The joint angle at the end of ROM of TD children was based on age-related reference data reported by Mudge et al. To estimate the corresponding difference in fiber length, we multiply the difference in measured joint angle at end ROM between TD and DMD (in radians) with the moment arm of the muscles in the anatomical position. This difference in fiber length was normalized to optimal fiber length to compute the shift of the passive force-length relationship. 
