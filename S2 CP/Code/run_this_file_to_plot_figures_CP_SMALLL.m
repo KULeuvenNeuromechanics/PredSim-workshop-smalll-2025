@@ -3,14 +3,12 @@ clear
 close all
 clc
 
-%% Get paths for later use
-
 %% General settings
 % These settings will apply to all figures
 % Construct a cell array with full paths to files with saved results for
 % which you want to appear on the plotted figures.
-% ------- start edit -------
-pathRepo = 'C:\GBW_MyPrograms\PredSim';
+
+% -------    start edit  -------
 results_folder = 'C:\GBW_MyPrograms\PredSimResults';
 
 %  add the paths of the figures you want to plot
@@ -20,11 +18,11 @@ results_folder = 'C:\GBW_MyPrograms\PredSimResults';
     % only post surgery is plotted 
 
 results_path = struct( ...
-    'reference',   fullfile(results_folder,'gait1018','gait1018_v25.mat'), ...
-    'pre_surgery', fullfile(results_folder,'gait1018','gait1018_v23.mat'), ...
-    'post_surgery',fullfile(results_folder,'gait1018','gait1018_v24.mat'));
+    'reference',   fullfile(results_folder,'gait1018','gait1018_v28.mat'), ...
+    'pre_surgery', fullfile(results_folder,'gait1018','gait1018_v26.mat'), ...
+    'post_surgery',fullfile(results_folder,'gait1018','gait1018_v27.mat'));
 
-% disable/enable the visualisation of experimental kinematics
+% enable/disable the visualisation of experimental kinematics
 experimental_kinematics = 1; % options: 1 (yes) 0 (no)
 
 % legend for your figure
@@ -36,8 +34,11 @@ figure_folder = results_folder;
 % Common part of the filename for all saved figures
 figure_savename = 'ComparisonSimulations_CP_SMALLL';
 
-% ------- stop edit -------
 
+% -------    stop edit  -------
+
+[pathRepo,~,~] = fileparts(mfilename('fullpath'));
+IKResultsFolder = fullfile(fileparts(pathRepo), 'IK');
 %% Settings for each figure to be made
 % "figure_settings" is a cell array where each cell contains a struct with
 % the settings for a single figure.
@@ -151,10 +152,10 @@ plot_figures(result_paths,legend_names,figure_settings);
 if experimental_kinematics
     if isfield(results_path, 'pre_surgery')
         idx_pre = find(strcmp(result_fieldnames,'pre_surgery'));
-        plot_pre_surgery(result_paths{idx_pre})
+        plot_pre_surgery(result_paths{idx_pre},IKResultsFolder)
     end
     if isfield(results_path, 'post_surgery') 
         idx_post = find(strcmp(result_fieldnames,'post_surgery'));
-        plot_post_surgery(result_paths{idx_post})
+        plot_post_surgery(result_paths{idx_post},IKResultsFolder)
     end
 end

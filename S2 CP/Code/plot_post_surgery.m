@@ -1,4 +1,5 @@
-function [] = plot_post_surgery(result_paths)
+function [] = plot_post_surgery(result_paths,IKResultsFolder)
+
 % plot_pre_surgery
 %   Plots and compares post-surgery simulation results with experimental
 %   inverse kinematics (IK) for subject CP_SMALLL. The function loads IK
@@ -48,7 +49,6 @@ legend_names = {'Inverse Kinematics','Post-surgery'};
 
 
 %% IK files
-IKResultsFolder = fullfile('C:\GBW_MyPrograms\PredSim-workshop-smalll-2025\S2.  Surgical intervention for Cerebral Palsy\IK');
 FilePath.IK.trial1 = [fullfile(IKResultsFolder,'CP_SMALLL_IK_post_1'),'.mot'];
 IK.trial1 = ReadMotFile(FilePath.IK.trial1);
 
