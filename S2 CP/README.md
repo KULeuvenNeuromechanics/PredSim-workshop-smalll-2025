@@ -4,6 +4,9 @@ Physics-based computer simulations, that can predict the effect of treatments (e
 
 In this tutorial you will (I.) personalize for a child with Cerebral Palsy(CP). Next, (II.) you will model the effect of surgery and (III.) run a simulation and evaluate your results. The workflow you will apply in this tutorial has been published in [Van Den Bosch et al. (2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01767-w)
 
+## Step 0: run a reference simulation with the 2D model
+If you have not already done so, you need to run a reference simulation of healthy walking with the 2D model. Please follow the steps explained [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#running-a-reference-2d-simulation-with-predsim).
+
 # I. Personalizing the musculoskeletal model
 ### **Background:**   
 In this part you will personalize a model for a child with CP based on a clinical exam. The clinical exam is part of children's usual clinical care and is a comprehensive assesment of musculoskeletal functioning. 
