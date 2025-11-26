@@ -181,7 +181,7 @@ Open the post surgery clinical exam ([CE_CP_T1](ClinicalExam)) in your ClinicalE
 Evaluate the knee extension pROM post surgery in CE_CP_T1  and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly, as you did in step 5.
 
 # III. Running PredSim with personalized settings
-### Step 1: open [main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m)) in your ⚠️PredSim folder
+### Step 1: open [main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in your ⚠️PredSim folder
 
 ### Step 2: adapt the code for your simulation
 1. Line 20 - change to  [S] = initializeSettings('gait1018');   
