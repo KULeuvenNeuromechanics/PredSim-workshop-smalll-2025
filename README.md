@@ -4,7 +4,7 @@ Welcome to the Workshop on Predictive Simulations of Human Movement repository!
 
 This workshop is organized by Tom Buurke (UMCG), Friedl De Groote, Tim van der Zee, Ines Vandekerckhove and Ellis Van Can (KU Leuven).
 
-You can find the workshop program [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SMALLL%20PredSim%20Workshop%20Program.pdf).
+You can find the workshop program [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SMALLL%20PredSim%20Workshop%20Program.pdf) and the slide hand-outs [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/SMALLL%20PredSim%20Workshop%20Handouts.pdf).
 
 This repo contains the resources used during the workshop. Below is a list of the 3 hands-on tutorials:
 - S1 DMD
