@@ -1,6 +1,6 @@
-# Workshop on Predictive Simulations of Human Movement - SMALLL 2025
+# Workshop Digital Twins - SMALLL 2025
 
-Welcome to the Workshop on Predictive Simulations of Human Movement repository!
+Welcome to the SMALLL 2025 Workshop on Digital Twins repository!
 
 This workshop is organized by Tom Buurke (UMCG), Friedl De Groote, Tim van der Zee, Ines Vandekerckhove and Ellis Van Can (KU Leuven).
 
