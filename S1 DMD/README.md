@@ -95,9 +95,9 @@ The user will run a predictive simulation in [PredSim](https://github.com/KULeuv
 
 ### Step 4. Visualizing and plotting the results
 
-Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx` as explained [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#predsimresults).
 
-To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim)
+To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim).
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PredSim-workshop-smalll-2025/S1 DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
@@ -128,7 +128,7 @@ The user will run a predictive simulation in [PredSim](https://github.com/KULeuv
 
 ### Step 7. Visualizing and plotting the results
 
-See **step 4** to visualize your simulation results in OpenSim 
+To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim).
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
