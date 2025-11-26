@@ -92,6 +92,7 @@ The user will run a predictive simulation in [PredSim](https://github.com/KULeuv
 2. Open the script `main.m` in Matlab by clicking on it ([PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m))
 3. Line 21 in `main.m` - add `S = update_settings(S);` This will update the settings of the 2D model with the calculated muscle weakness and stiffness.
 4. Click on the green 'Run' button
+5. After the iterations complete, check if you see **“EXIT: Optimal solution found.”** in the Matlab command window, then the optimization completed successfully and an optimal solution was obtained. Congratulations! 
 
 ### Step 4. Visualizing and plotting the results
 
@@ -123,14 +124,19 @@ Important: Do not change the other settings in `update_settings.m`. This way, yo
 ### Step 6. Running PredSim with estimated muscle parameters:
 
 The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments and simulated Achilles tendon lengthening. 
-1. Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab.
-2. Click on the green 'Run' button
+1. In Matlab navigate to the `PredSim` folder
+2. Open the script `main.m` in Matlab by clicking on it ([PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m))
+3. Click on the green 'Run' button
+4. After the iterations complete, check if you see **“EXIT: Optimal solution found.”** in the Matlab command window, then the optimization completed successfully and an optimal solution was obtained.
+
+⚠️ Note the message **“Converged to a point of local infeasibility. Problem may be infeasible.”** This indicates that no solution could be found. This may suggest that performing an Achilles tendon lengthening in this patient carries a risk of loss of ambulation.
 
 ### Step 7. Visualizing and plotting the results
 
 To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim).
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
+⚠️ Note that plotting the kinematics of the last simulation is not very useful because no solution was found (see visualization in OpenSim). The instructions below are therefore primarly intended for future use after the workshop. 
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
 2. Add **Line 14** with the `.mat` files that contain the results of your **simulated Achilles tendon lengthening**. Specifically, copy the code below to **Line 14**. *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v3, otherwise adapt vx)* :
 
