@@ -135,8 +135,7 @@ The user will run a predictive simulation in [PredSim](https://github.com/KULeuv
 
 To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim).
    
-To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
-⚠️ Note that plotting the kinematics of the last simulation is not very useful because no solution was found (see visualization in OpenSim). The instructions below are therefore primarly intended for future use after the workshop. 
+To plot the kinematics of your simulations and compare them to the Experimental Data of the patient (⚠️ Note that plotting the kinematics of the last simulation is not very useful because no solution was found (see visualization in OpenSim). The instructions below are therefore primarly intended for future use after the workshop.):  
 1. Open the script [PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
 2. Add **Line 14** with the `.mat` files that contain the results of your **simulated Achilles tendon lengthening**. Specifically, copy the code below to **Line 14**. *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v3, otherwise adapt vx)* :
 
