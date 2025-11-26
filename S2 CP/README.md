@@ -193,11 +193,11 @@ Evaluate the knee extension pROM post surgery in CE_CP_T1  and change S.subject.
 ##  Visualizing and plotting the results
 Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Every time you run a simulation, the results are saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation always has the highest version number.
 
-### To visualize the mot file in OpenSim:
+### To visualize the motion in OpenSim:
 1. Open the model (File > Open Model...) PredSim/gait1018/gait1018.osim in OpenSim 
 2. Load the .mot file (File > Load Motion...) PredSimResults/gait1018/gait1018_vx.mot in OpenSim
    
-### To plot the kinematics of your simulations and compare it to the experimental data of the patient:
+### To visualize the kinematics of your simulations and compare it to the experimental data of the patient:
 1. Open the script [run_this_file_to_plot_figures_CP_SMALLL.m](Code/run_this_file_to_plot_figures_CP_SMALLL.m)
 2. Change lines 12 to 29 with the .mat files containing the simulation results that you want to plot
 
