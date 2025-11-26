@@ -100,6 +100,10 @@ To plot the kinematics of your simulations and compare them to the Experimental 
    - Line 13 - replace `gait1018_v2.mat` with the `.mat` file containing your **DMD simulation** *(If the DMD simulation was the second simulation you ran with this 2D model, the results are stored in v2)*
 4. Click on the green 'Run' button
 
+You should see the figure below: 
+![Figure results_DMD_plot](https://github.com/user-attachments/assets/cea3ea64-e184-4616-aabd-718eab426919)
+
+
 ## Optional: simulate the effect of Achilles tendon lengthening
 
 In this section, the user will simulate an Achilles tendon release in the DMD case to predict the effect of this intervention. 
