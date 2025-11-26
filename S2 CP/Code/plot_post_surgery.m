@@ -1,33 +1,48 @@
 function [] = plot_post_surgery(result_paths)
-%%% plot results SMALLL
-%%% pre surgery
-% Original authors: Ellis Van Can
+% plot_pre_surgery
+%   Plots and compares post-surgery simulation results with experimental
+%   inverse kinematics (IK) for subject CP_SMALLL. The function loads IK
+%   data from predefined .mot files, extracts multiple gait cycles
+%   (right foot strike to right foot strike), time-normalises them to
+%   0–100% gait, and computes mean ± standard deviation envelopes for a
+%   selected set of joint angles. These IK envelopes are plotted together
+%   with the corresponding simulated joint trajectories from a PredSim
+%   results file, allowing visual comparison of model and experiment.
+%
+% INPUT:
+%   - result_paths -
+%   * string/char with full path to a .mat file containing:
+%       > R          : struct with simulation results, including
+%                     R.kinematics.Qs (time-normalised joint angles)
+%       > model_info : struct with model information (not used directly
+%                     for plotting in this function, but expected in file)
+%
+% DEPENDENCIES / EXPECTED FORMAT:
+%   - IK .mot files are hard-coded inside the function and must exist in
+%     the specified IKResultsFolder.
+%   - ReadMotFile            : function to read .mot files into a struct
+%                              with fields 'data' and 'names'
+%   - ResampleNoEdgeEffects  : function used to resample gait cycles to
+%                              100 points (0–100% gait cycle)
+%   - R.colheaders.coordinates must contain the same coordinate names as
+%     used in the IK files (e.g. 'hip_flexion_r', 'knee_angle_r', etc.).
+%
+% OUTPUT:
+%   - (none)
+%   * Creates a multi-subplot figure showing mean ± SD experimental IK
+%     envelopes with overlaid post-surgery simulated kinematics for the
+%     selected joint angles, and adds a legend distinguishing IK and
+%     simulation curves.
+
+% Original author: Ellis Van Can
 % Original date: November 23,2025
+
+% Last edit by: 
+% Last edit date: 
+% --------------------------------------------------------------------------
 clear figure_settings
 %% General settings
 % These settings will apply to all figures
-%%%%% IK
-% Sequences
-IKseq_pelvis = [{'pelvis_list'} {'pelvis_tx'} {'pelvis_ty'} {'lumbar_extension'} ];
-IKseq_right = [{'hip_flexion_r'} {'knee_angle_r'} {'ankle_angle_r'}];
-IKseq_left = [{'hip_flexion_l'} {'knee_angle_l'} {'ankle_angle_l'} ];
-
-% Colors
-colors_torso_pelvis = ([1, 35, 60;22, 73, 106;42, 111, 151;70, 138, 173;104, 163, 191;136, 184, 206;167, 205, 221]/255);
-colors_left = ([38, 23, 26; 78, 36, 35;118, 48, 43;157, 64, 56;196, 80, 69;206, 110, 100;216, 139, 131]/255);
-colors_right = ([8, 28, 21; 35, 67, 50;61, 106, 79;94, 145, 108;132, 172, 143;175, 202, 182;218, 231, 221]/255);
-
-colors_PredSim = [247, 185, 61; 72, 205, 134; 70, 79, 240] / 255;
-% colors_other_pelvis =([34,34,34; 72,96,173;128,82,134;177,129,177]/255);
-% colors_other_right = ([34,34,34; 73,184,0;128,82,134;177,129,177]/255); % 53,134,0
-% colors_other_left = ([34,34,34; 230,107,76;128,82,134;177,129,177]/255); % 199,62,29 als 2e
-colors_other_pelvis =([34,34,34; 128,82,134;72,96,173;177,129,177]/255);
-colors_other_right = ([34,34,34; 128,82,134;73,184,0;177,129,177]/255); % 53,134,0
-colors_other_left = ([34,34,34; 128,82,134;230,107,76;177,129,177]/255); % 199,62,29 als 2e
-%% pre
-% Construct a cell array with full paths to files with saved results for
-% which you want to appear on the plotted figures.
-
 
 legend_names = {'Inverse Kinematics','Post-surgery'};
 

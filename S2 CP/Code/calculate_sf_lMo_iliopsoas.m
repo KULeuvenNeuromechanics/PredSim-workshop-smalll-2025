@@ -1,6 +1,94 @@
 function calculate_sf_lMo_iliopsoas(sf_lMo,muscle_toScale,side,model_info,sf_lMo_prev,Qs,Qdots,coordinates,f_lMT_vMT_dM,idx_joint,coord_name,CE_angle)
+% calculate_sf_lMo_iliopsoas
+%   Evaluates the effect of different optimal fibre length scaling factors
+%   (lMo) for iliopsoas (and associated muscles) on the passive
+%   torque–angle relationship around a selected joint during a clinical
+%   exam–like posture. For each scaling factor in sf_lMo, the function:
+%   (1) updates muscle–tendon parameters via scale_MTparameters,
+%   (2) solves Hill-type muscle–tendon force equilibrium over a range of
+%   joint angles using fsolve and getHilldiffFun_usingCasadiFunction,
+%   (3) computes the resulting muscle moments and passive joint torque,
+%   and (4) plots the total passive torque versus joint angle. The figure
+%   can be used to visually select a scaling factor that best matches the
+%   clinically observed passive torque at the clinical exam angle.
+%
+% INPUT:
+%   - sf_lMo -
+%   * vector with candidate scaling factors for the iliopsoas optimal
+%     fibre length (expressed as multiplicative factors, e.g. 0.9–1.1)
+%
+%   - muscle_toScale -
+%   * string/char specifying which muscle group is being scaled; expected
+%     to include 'iliopsoas' (other options are handled for completeness):
+%       > 'soleus'
+%       > 'gastrocnemii'
+%       > 'hamstrings'
+%       > 'iliopsoas'
+%
+%   - side -
+%   * string/char indicating the side of the muscle to scale:
+%       > 'l' : left
+%       > 'r' : right
+%
+%   - model_info -
+%   * struct containing model and muscle information, including
+%     model_info.muscle_info.parameters with fields such as FMo, lMo,
+%     lTs, alphao, vMmax, specific_tension, tendon_stiff, etc.
+%
+%   - sf_lMo_prev -
+%   * struct with previously defined lMo scaling factors for other
+%     muscles and/or sides, organised as:
+%       sf_lMo_prev.(side).soleus
+%       sf_lMo_prev.(side).gastrocnemii
+%       sf_lMo_prev.(side).hamstrings
+%       sf_lMo_prev.(other_side).hamstrings
+%     These are used to keep distal and contralateral muscles at their
+%     already-chosen scaling while varying iliopsoas.
+%
+%   - Qs -
+%   * matrix (n × nCoordinates) of joint angles (in radians) over the
+%     range of motion used to evaluate passive torque; typically generated
+%     by a get_CE_position* function
+%
+%   - Qdots -
+%   * matrix (n × nCoordinates) of joint angular velocities; usually zero
+%     for quasi-static passive analyses
+%
+%   - coordinates -
+%   * cell array of coordinate names from the model, consistent with the
+%     columns expected by f_lMT_vMT_dM
+%
+%   - f_lMT_vMT_dM -
+%   * CasADi function handle that returns muscle–tendon lengths,
+%     velocities and moment arms:
+%       [lMT, vMT, MA] = f_lMT_vMT_dM(Qs(i,:), Qdots(i,:))
+%
+%   - idx_joint -
+%   * index of the joint coordinate in 'coordinates' about which the
+%     passive torque–angle relationship is evaluated
+%
+%   - coord_name -
+%   * base name of the joint coordinate (e.g. 'hip_flexion'); used for
+%     passing to getLimitTorque and for labeling the plot
+%
+%   - CE_angle -
+%   * clinical exam angle (in degrees) at which the passive torque is
+%     typically compared; used only for plotting a vertical reference line
+%
+% OUTPUT:
+%   - (none)
+%   * The function produces a figure with curves of total passive joint
+%     torque versus joint angle for each scaling factor in sf_lMo, and
+%     adds a legend indicating the percentage lMo scaling.
+
 % Original authors: Bram Van Den Bosch, Ellis Van Can
-% Original date: November 19,2024
+% Original date: September 13, 2024
+
+% Last edit by: Ellis Van Can
+% Last edit date: November 19, 2025
+% --------------------------------------------------------------------------
+
+
 % Loop that evaluates the scaling factors
 close all % close previous figs
 

@@ -1,7 +1,62 @@
 function [MA] = calculate_MA_iliopsoas(side,model_info,sf_lMo_prev,coordinates,f_lMT_vMT_dM,CE_angle)
+% calculate_MA_iliopsoas
+%   Computes muscle–tendon moment arms (MA) for a hamstrings-based clinical
+%   exam posture, to be used in the calibration of iliopsoas parameters.
+%   The function:
+%   (1) builds a quasi-static clinical exam configuration using
+%       get_CE_position with muscle_toScale = 'hamstrings',
+%   (2) applies previously chosen lMo scaling factors for soleus,
+%       gastrocnemii and hamstrings on the selected side,
+%   (3) updates muscle–tendon parameters via scale_MTparameters, and
+%   (4) evaluates the CasADi function f_lMT_vMT_dM to obtain muscle–tendon
+%       lengths, velocities and moment arms over the defined range of
+%       joint angles.
+%   The computed moment arms are returned for further use (e.g. in
+%   passive torque calculations or iliopsoas calibration routines).
+%
+% INPUT:
+%   - side -
+%   * string/char indicating the side of interest:
+%       > 'l' : left
+%       > 'r' : right
+%
+%   - model_info -
+%   * struct containing model and muscle information, including
+%     model_info.muscle_info.parameters with fields such as FMo, lMo,
+%     lTs, alphao, vMmax, specific_tension, tendon_stiff, etc.
+%
+%   - sf_lMo_prev -
+%   * struct with previously defined lMo scaling factors for distal and
+%     hamstring muscles on the selected side, organised as:
+%       sf_lMo_prev.(side).soleus
+%       sf_lMo_prev.(side).gastrocnemii
+%       sf_lMo_prev.(side).hamstrings
+%     These are applied before computing moment arms.
+%
+%   - coordinates -
+%   * cell array of coordinate names from the model; passed to
+%     get_CE_position and used by f_lMT_vMT_dM
+%
+%   - f_lMT_vMT_dM -
+%   * CasADi function handle returning muscle–tendon lengths, velocities
+%     and moment arms:
+%       [lMT, vMT, MA] = f_lMT_vMT_dM(Qs(i,:), Qdots(i,:))
+%
+%   - CE_angle -
+%   * clinical exam knee angle (in degrees) around which a ±20° range of
+%     motion is constructed by get_CE_position for the hamstrings posture
+%
+% OUTPUT:
+%   - MA -
+%   * matrix of muscle–tendon moment arms (size: NMuscle × NCoordinates)
+%     evaluated over the clinical exam range of motion; as returned by
+%     f_lMT_vMT_dM (last evaluated step)
 % Original authors: Bram Van Den Bosch, Ellis Van Can
-% Original date: November 19,2024
-% Loop that evaluates the scaling factors
+% Original date: September 13, 2024
+
+% Last edit by: Ellis Van Can
+% Last edit date: November 19, 2025
+% --------------------------------------------------------------------------
 close all % close previous figs
 sf_lMo = 1;
 

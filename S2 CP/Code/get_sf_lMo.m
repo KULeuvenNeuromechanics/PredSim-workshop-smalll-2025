@@ -1,6 +1,41 @@
 function [sf_lMo] = get_sf_lMo(muscle_toScale,side,sf_lMo)
-% Original authors: Ellis Van Can
-% Original date: November 19,2024
+%   Queries and updates muscle fibre length scaling factors (lMo) for 
+%   muscles that influence the clinical exam posture of the muscle
+%   currently being scaled. Depending on the selected muscle and side,
+%   this function opens an input dialog to enter or adjust scaling factors
+%   for soleus, gastrocnemii and/or hamstrings, using previously stored
+%   values as defaults when available.
+%
+% INPUT:
+%   - muscle_toScale -
+%   * string/char specifying the muscle currently being scaled
+%     > 'gastrocnemii' : asks for soleus scaling on selected side
+%     > 'hamstrings'   : asks for soleus and gastrocnemii on selected side
+%     > 'iliopsoas'    : asks for soleus, gastrocnemii and hamstrings on
+%                        selected side, and hamstrings on contralateral side
+%
+%   - side -
+%   * string/char indicating the side of the muscle to scale
+%     > 'l' : left
+%     > 'r' : right
+%
+%   - sf_lMo -
+%   * structure containing previously defined scaling factors, organised as
+%     sf_lMo.(side).<muscle_name>
+%     - Can be empty on first call; then defaults of 1 are used
+%     - Existing values are used as default entries in the dialog box
+%
+% OUTPUT:
+%   - sf_lMo -
+%   * updated structure with (new) scaling factors for the relevant muscles
+%     on the selected and, if applicable, contralateral side
+
+% Original author: Ellis Van Can
+% Original date: November 19,2025
+
+% Last edit by:
+% Last edit date:
+% --------------------------------------------------------------------------
 
 if strcmp(side,'r')
     other_side = 'l';
