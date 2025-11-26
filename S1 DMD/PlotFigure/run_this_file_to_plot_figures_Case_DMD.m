@@ -155,6 +155,23 @@ idx_jref_DMD = strcmp(ExpData.kinematics.colheaders,joints_ref_DMD{i});
         figure(2);
         subplot(2,2,number_subplot(i));
         z=[1:1:100];
-        fill([z fliplr(z)],[meanPlusSTD_DMD' fliplr(meanMinusSTD_DMD')], [0 0 0] );
-        alpha(.25);
+        fill([z fliplr(z)],[meanPlusSTD_DMD' fliplr(meanMinusSTD_DMD')], [0 0 0], 'EdgeColor', 'none' );
+        alpha(.20);   
+
+        % Set ylabel and y-limits for specific subplots 
+        switch number_subplot(i)
+            case 1  % subplot 1: ankle
+                ylabel('Ankle dorsiflexion angle (°)', 'FontSize', 14);
+                ylim([-60 20]);
+            case 2  % subplot 2: hip
+                ylabel('Hip flexion angle (°)', 'FontSize', 14);
+            case 3  % subplot 3: knee
+                ylabel('Knee extension angle (°)', 'FontSize', 14);
+            case 4  % subplot 4: pelvis
+                ylabel('Posterior pelvic tilt angle (°)', 'FontSize', 14);
+                ylim([-20 0]);
+        end
+
+        % Increase font size for axes (ticks, labels, titles)
+        set(gca, 'FontSize', 14);
 end
