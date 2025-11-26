@@ -23,9 +23,10 @@ osim_path = fullfile(PredSim_path,'Subjects','gait1018','gait1018.osim');
 %% 3 Get the passive range of motion (pROM) scores from the clinical exam
 % -------   start edit   -------
 muscle_toScale = 'iliopsoas'; 
-side = 'r'; % side on which the Clinical Exam is performed; options: 'l', 'r' 
-CE_angle_uni = -80 ; 
-CE_angle_bi = -70 ; 
+
+CE_side = 'l'; % side on which the Clinical Exam is performed; options: 'l', 'r' 
+CE_angle_uni = -60 ; 
+CE_angle_bi = -50 ; 
 % -------   stop edit   -------
 
     % NOTE:
@@ -34,23 +35,23 @@ CE_angle_bi = -70 ;
     % Therefore, CE_angle should represent the posture that results from the
     % (possibly scaled) distal muscle-tendon lengths used in this model.
 
-if ~exist('sf_lMo_prev','var') || ~isfield(sf_lMo_prev, side)
-    sf_lMo_prev.(side) = {};
+if ~exist('sf_lMo_prev','var') || ~isfield(sf_lMo_prev, CE_side)
+    sf_lMo_prev.(CE_side) = {};
 end
 
-[sf_lMo_prev] = get_sf_lMo(muscle_toScale,side,sf_lMo_prev);
+[sf_lMo_prev] = get_sf_lMo(muscle_toScale,CE_side,sf_lMo_prev);
 
 %% 4. get model info
 [f_lMT_vMT_dM, model_info,coordinates] = generatePolynomials(osim_path, PredSim_path);
 
 %% 5. get delta hip
-hip_name_side = ['hip_flexion_',side];
-knee_name_side = ['knee_angle_',side];
+hip_name_side = ['hip_flexion_',CE_side];
+knee_name_side = ['knee_angle_',CE_side];
 idx_hip = find(strcmp(coordinates,hip_name_side));
 idx_knee = find(strcmp(coordinates,knee_name_side));
 
 % get moment arms
-[MA] = calculate_MA_iliopsoas(side,model_info,sf_lMo_prev,coordinates,f_lMT_vMT_dM,CE_angle_bi);
+[MA] = calculate_MA_iliopsoas(CE_side,model_info,sf_lMo_prev,coordinates,f_lMT_vMT_dM,CE_angle_bi);
 
 idx_biarticulair = find(all(MA(:, [idx_hip idx_knee]) ~= 0, 2));
 i_hamsting = 1;
@@ -66,7 +67,7 @@ end
 delta_hip = (CE_angle_bi-CE_angle_uni) * (sum(ratio)/i_hamsting);
 
 %% 5. put the model in position of delta hip
-[Qs,Qdots,idx_joint,coord_name] = get_CE_position_iliopsoas(delta_hip,side,coordinates);
+[Qs,Qdots,idx_joint,coord_name] = get_CE_position_iliopsoas(delta_hip,CE_side,coordinates);
 %% 6. evaluate scaling factor
 %% Background
 % The contracture of the !!! contralateral !!! iliopsoas is determined by solving
@@ -94,6 +95,6 @@ sf_lMo = flip([0.7:0.1:1]);
 % -------   stop edit   -------
 
 
-calculate_sf_lMo_iliopsoas(sf_lMo,muscle_toScale,side,model_info,sf_lMo_prev,Qs,Qdots,coordinates,f_lMT_vMT_dM,idx_joint,coord_name,delta_hip)
+calculate_sf_lMo_iliopsoas(sf_lMo,muscle_toScale,CE_side,model_info,sf_lMo_prev,Qs,Qdots,coordinates,f_lMT_vMT_dM,idx_joint,coord_name,delta_hip)
 
 
