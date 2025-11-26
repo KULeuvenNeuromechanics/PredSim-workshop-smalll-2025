@@ -41,11 +41,8 @@ The strength was assessed with fixed dynamometry. The user will scale the maxima
 			{'glut_max_r', 'glut_max_l'}, 0.22, ...										% hip_ext (provided) 
 			{'rect_fem_r', 'vasti_r', 'rect_fem_l', 'vasti_l'}, 0.317, ...				% knee_ext (provided)
 			{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'}, 0.316, ...		% knee_flex (provided)
-
-   			% REPLACE THE '1' VALUES BELOW WITH YOUR OWN SCALING FACTORS FROM THE WEB APP
-   			% (Remember: 100% = scaling factor 1.0, 50% = 0.5, etc.)
-			{'tib_ant_r', 'tib_ant_l'}, 1, ...											% ankle_df (insert your scaling factor)
-			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 					% ankle_pf (insert your scaling factor)
+			{'tib_ant_r', 'tib_ant_l'}, 1, ...											% ankle_df (REPLACE THE '1' VALUES ON THIS LINE WITH YOUR OWN SCALING FACTORS FROM THE WEB APP (Remember: 100% = scaling factor 1.0, 50% = 0.5, etc.))
+			{'gastroc_r', 'gastroc_l', 'soleus_r', 'soleus_l'}, 1,... 					% ankle_pf (REPLACE THE '1' VALUES ON THIS LINE WITH YOUR OWN SCALING FACTORS FROM THE WEB APP (Remember: 100% = scaling factor 1.0, 50% = 0.5, etc.))
 			};
  
 **Background:** The muscles in the model are represented as Hill-type muscle–tendon units. The muscle–tendon unit consists of an active contractile element in parallel with a passive element, which is in series with a tendon. The muscle force arises from both the active contractile component and the passive elastic element. The most common parametrization of this model assumes that maximal isometric force, and passive muscle and tendon stiffness are coupled. Therefore, they all scale with maximal isometric force. However, in DMD, active and passive muscle forces do not decrease simultaneously. The loss of contractile tissue is accompanied by its replacement with fat and fibrotic tissue, resulting in a decline in active muscle force while passive muscle stiffness increases. Therefore, we modeled muscle weakness by scaling only the active force component, rather than scaling maximal isometric force that also scales the passive elements.
@@ -70,13 +67,8 @@ Muscle stiffness was evaluated through passive ROM and clinical stiffness scale.
 3. Go back to `update_settings.m` in matlab (located in `PredSim-workshop-small-2025/code`) and add the setting `S.settings.muscle_pass_stiff_shift` to shift the passive force–length curves based on the clinical exam. Specifically, copy and paste the code below into `update_settings.m`. We have already provided the shifts for the hip and knee muscles. You only need to update the shifts for `gastroc` and `soleus` using the average shift printed after running `Personalize_passive_muscle_stiffness_based_on_CE.m` (outcome from 2.) :
 
 	 	S.subject.muscle_pass_stiff_shift = {{'tib_'},0.9,...							% ankle_df (provided)
-
-   			% REPLACE THE '0.9' VALUES BELOW WITH YOUR OWN AVERAGE SHIFTS
-   			% (Use the average shifts printed in the Matlab command window after running the script.)
-   
-     		{'gastroc_r','gastroc_l'},0.9,...											% gastroc (insert your shift value)
-     		{'soleus_l', 'soleus_r'}, 0.9,...											% soleus (insert your shift value)
-			
+     		{'gastroc_r','gastroc_l'},0.9,...											% gastroc (REPLACE THE '0.9' VALUES ON THIS LINE WITH YOUR OWN AVERAGE SHIFTS (Use the average shifts printed in the Matlab command window after running the script.))
+     		{'soleus_l', 'soleus_r'}, 0.9,...											% soleus (REPLACE THE '0.9' VALUES ON THIS LINE WITH YOUR OWN AVERAGE SHIFTS (Use the average shifts printed in the Matlab command window after running the script.))
      		{'bifemsh_r',  'bifemsh_l', 'hamstrings_r', 'hamstrings_l'},0.90839,...		% knee_flex (provided)
      		{'iliopsoas_r', 'iliopsoas_l', 'rect_fem_r', 'rect_fem_l'},0.82002,...		% hip_flex (provided)
      		}; 	 	 
