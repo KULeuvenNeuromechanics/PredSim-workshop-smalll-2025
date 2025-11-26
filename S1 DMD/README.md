@@ -4,6 +4,9 @@ Physics-based computer simulations that can predict the effect of underlying imp
 
 The workflow you'll apply in this tutorial has been published in [Vandekerckhove et al.(2025)](https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-025-01631-x)
 
+### Step 0. Run a reference simulation with the 2D model
+If you have not already done so, you need to run a reference simulation of healthy walking with the 2D model. Please follow the steps explained [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025?tab=readme-ov-file#running-a-reference-2d-simulation-with-predsim).
+
 ## Personalize muscle parameters based on instrumented assessment and clinical exam
 
 In this section the user will use instrumented strength scores (step 1), and passive Range of Motion (ROM) scores and clinical stiffness scale scores (step 2) to personalize active muscle force and passive muscle stiffness, respectively. To save time, the user will only need to personalize the ankle muscles. We provide the hip and knee muscle personalizations.
@@ -85,25 +88,16 @@ We shifted the passive force-length relationship by the mean of the shifts estim
 ### Step 3. Running PredSim with estimated muscle parameters:
 
 The user will run a predictive simulation in [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim) using a 2D model with DMD-specific muscle impairments. 
-Before this, you should have run a reference simulation (2D model, no impairments) by following the steps in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main). Open [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m) in matlab. Ensure that the file contains already the following settings: 
-1. Line 20 - `[S] = initializeSettings('gait1018');`
-2. Line 25 - `S.subject.name = 'gait1018';`
-
-*If you have not run the reference simulation yet, you should either follow the instructions in the main [README](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main), or modify the two lines above in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m), then click the green 'Run' button.* 
-
-To run a predictive simulation with the 2D model including DMD-specific impairments:
-1. Line 21 - add `S = update_settings(S);` in [PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m). This will update the settings of the 2D model with the calculated muscle weakness and stiffness.
-2. Click on the green 'Run' button
+1. In Matlab navigate to the `PredSim` folder
+2. Open the script `main.m` in Matlab by clicking on it ([PredSim/main.m](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/main.m))
+3. Line 21 in `main.m` - add `S = update_settings(S);` This will update the settings of the 2D model with the calculated muscle weakness and stiffness.
+4. Click on the green 'Run' button
 
 ### Step 4. Visualizing and plotting the results
 
 Once your simulations are done, the results are stored in `PredSimResults\gait1018` as `gait1018_vx`. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
 
-To visualize the mot file in OpenSim: 
-1. Open OpenSim
-2. Click on 'File > Open Model...' and navigate to the 2D model [PredSim/gait1018/gait1018.osim](https://github.com/KULeuvenNeuromechanics/PredSim/blob/master/Subjects/gait1018/gait1018.osim) 
-3. Click on 'File > Load Motion...' and navigate to the mot file of your simulation `PredSimResults/gait1018/gait1018_vx.mot`
-4. Click on the 'Play forward' button to see the motion. You may also adapt the speed. 
+To visualize the mot file in OpenSim follow the steps described [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025))
    
 To plot the kinematics of your simulations and compare them to the Experimental Data of the patient:
 1. Open the script [PredSim-workshop-smalll-2025/S1 DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/blob/main/S1%20DMD/PlotFigure/run_this_file_to_plot_figures_Case_DMD.m) in matlab
