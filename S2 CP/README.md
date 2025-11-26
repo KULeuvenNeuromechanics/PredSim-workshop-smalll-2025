@@ -170,13 +170,13 @@ This patient underwent a bilateral distal femur extension osteotomy, a surgical 
 In the model, this surgical correction shifts the knee geometry, this means that passive extension torques will begin to act at a more extended (= less negative) knee angle.
 
 **Requirements:** Matlab.   
-**Data:** pROM scores, provided in the [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
+**Data:** pROM scores in the clinical exam (CE), provided in the [Clinical Exam](ClinicalExam). T0 refers to pre intervention and T1 to post intervention.   
 **Additional information:** The protocol of the clinical exam, and normative values are provided in [Documentation](../Documentation)   
 
 ### Step 1: open [update_settings_post.m](Code/update_settings_post.m) in your Code folder and copy+paste all the settings that you previously defined in your pre-surgical settings (update_settings_pre.m)
 
 ### Step 2: Evaluate the clinical exam and change the knee extension deficit setting
-Open the post surgery clinical exam ([CE_CP_T1](ClinicalExam)) in your ClinicalExam folder.   
+Open the clinical exam post surgery ([CE_CP_T1](ClinicalExam)) in your ClinicalExam folder. (T0 refers to pre intervention and T1 to post intervention) 
 
 Evaluate the knee extension pROM post surgery in CE_CP_T1  and change S.subject.set_limit_torque_coefficients_selected_dofs = ...{'knee_angle_r','knee_angle_l'}, accordingly, as you did in step 5.
 
@@ -191,14 +191,15 @@ Evaluate the knee extension pROM post surgery in CE_CP_T1  and change S.subject.
 ### Step 3: Click the green :arrow_forward: button at the top of your screen to run the simulation :smiley:
 
 ##  Visualizing and plotting the results
-Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Each time you run a simulation, it is saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation will always have the highest version number.
+Once your simulations are done, the results are stored in PredSimResults\gait1018 as gait1018_vx. Every time you run a simulation, the results are saved with an incremental version number: v1, v2, v3, v4, … The most recently run simulation always has the highest version number.
 
-To visualize the mot file in OpenSim:
+### To visualize the mot file in OpenSim:
 1. Open the model (File > Open Model...) PredSim/gait1018/gait1018.osim in OpenSim 
 2. Load the .mot file (File > Load Motion...) PredSimResults/gait1018/gait1018_vx.mot in OpenSim
    
-To plot the kinematics of your simulations and compare it to the Experimental Data of the patient:
-1. Open the script run_this_file_to_plot_figures_CP_SMALLL.m in matlab
-2. Change lines 13 to 28 with the mat files containing the simulation results of this case
+### To plot the kinematics of your simulations and compare it to the experimental data of the patient:
+1. Open the script [run_this_file_to_plot_figures_CP_SMALLL.m](Code/run_this_file_to_plot_figures_CP_SMALLL.m)
+2. Change lines 12 to 29 with the .mat files containing the simulation results that you want to plot
 
+	**⚠️ Be aware** that the simulations are based on a simplified 2D musculoskeletal model, while the experimental data represent full 3D 	kinematics. Consequently, differences between simulated and experimental curves may partly arise from model simplifications rather than 	true biomechanical discrepancies.	
 	
