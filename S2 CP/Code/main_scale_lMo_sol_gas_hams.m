@@ -76,8 +76,9 @@ end
 
 % -------    start edit  -------
 
-% Define scaling factor range
-% sf_lMo = flip([start range : step size : end range]);
+% Define scaling factor range 
+% (sf_lMo = flip([start range : step size : end range]);
+
 sf_lMo = flip([0.7:0.1:1]); 
 
 % -------    stop edit   -------
