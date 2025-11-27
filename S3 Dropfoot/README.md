@@ -41,7 +41,7 @@ You should see the figure below:
 
 ![picture](Plotting/Fig1.png)
 
-The grey lines show experimental data from a healthy participant (data source: [van der Zee et al., 2022](https://www.nature.com/articles/s41597-022-01817-1)). You may notice that there are differences between healthy data (grey) and the healthy simulation (red). These differences are in part due to using a 2D model instead of a (more accurate) 3D model. In addition, differences between simulation and data are also due to the fact that our understanding of human walking is currently incomplete. We are still actively improving our simulations to yield better agreement with experimental data (e.g. [d'Hondt et al., 2024](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012219); [Afschrift et al., 2025](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012713)). Despite differences with data, the healthy simulation (red) generally matches data (grey) better than the simulation with imposed weakness of the tibialis anterior (yellow). Most noticable difference occurs for:
+The grey shaded region shows experimental data from nine healthy participants (data source: [van der Zee et al., 2022](https://www.nature.com/articles/s41597-022-01817-1)). You may notice that there are differences between healthy data (grey) and the healthy simulation (red). These differences are in part due to using a 2D model instead of a (more accurate) 3D model. In addition, differences between simulation and data are also due to the fact that our understanding of human walking is currently incomplete. We are still actively improving our simulations to yield better agreement with experimental data (e.g. [d'Hondt et al., 2024](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012219); [Afschrift et al., 2025](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1012713)). Despite differences with data, the healthy simulation (red) generally matches data (grey) better than the simulation with imposed weakness of the tibialis anterior (yellow). Most noticable difference occurs for:
 -   Right ankle: weak (yellow) has smaller (i.e. more negative) ankle angles, which correspond to more plantar flexion. This is due to the tibialis anterior weakness.
 -   Right knee: weak (yellow) has smaller (i.e. more negative) knee angles, which correspond to more flexion. This may be a compensation to make sure the foot clears the ground during swing.
 -   Left knee: weak (yellow) has larger (i.e. more positive) knee angles, which correspond to more extension. This may be a compensation to help ground clearance of the right foot during swing.
@@ -62,7 +62,7 @@ You can now run a simulation by running the `Predsim/main.m` script. Once your s
 
 If all went well, you can visualize the resulting gait pattern in OpenSim. Follow the instructions mentioned [here](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main?tab=readme-ov-file#visualizing-your-simulation-results-in-opensim). Note: if this is the third time you ran a simulation, the results are stored in files starting with `gait1018_v3`. **Invisible ankle-foot orthosis**: at the moment, it is not possible yet to visualize the ankle-foot orthosis itself in OpenSim, only its effects on gait. 
 
-Like before, you can visualize the joint angles using the `PredSim-workshop-smalll-2025/S3 Dropfoot/Plotting/compare_devices.m` script. Before you run `compare_devices.m`, specify the versions we want to plot. To plots `v1`, `v2` and `v3`, set `line 2` to:
+Like before, you can visualize the joint angles using the `PredSim-workshop-smalll-2025/S3 Dropfoot/Plotting/compare_devices.m` script. Before you run `compare_devices.m`, specify the versions we want to plot. To plot `v1`, `v2` and `v3`, set `line 2` to:
 
 `vs = [1, 2, 3]`;
 
@@ -70,7 +70,7 @@ You should see the figure below:
 
 ![picture](Plotting/Fig2.png)
 
-The grey, red and yellow lines are the same as before. The simulation with weakness and the ankle-foot orthosis is shown in purple. There are still differences with the simulated healthy gait (red), but these are smaller than the differences with the gait with imposed weakness (yellow). Thus, adding the ankle-foot orthosis reduced gait deviations.
+The grey shaded area, red lines and yellow lines are the same as before. The simulation with weakness and the ankle-foot orthosis is shown in purple. There are still differences with the simulated healthy gait (red), but these are smaller than the differences with the gait with imposed weakness (yellow). Thus, adding the ankle-foot orthosis reduced gait deviations.
 
 ## Optional Step 2.3: test different stiffnesses and/or neutral angles of the ankle-foot orthosis
 If you want, you can change the weakness level, ankle-foot orthosis stiffness and/or neutral  angle to gain more insight into the effect of weakness and/or assitive devices. To do so, adjust the following lines of code in `PredSim-workshop-smalll-2025/code/update_settings.m`:
