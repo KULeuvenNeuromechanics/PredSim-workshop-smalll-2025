@@ -1,5 +1,5 @@
 clear all; close all; clc
-vs = [1]; % versions that we want to plot 
+vs = [1 7 23]; % versions that we want to plot 
 
 % change this to your own paths
 filename = which('initializeSettings.m');
@@ -77,6 +77,6 @@ folder = filename(1:end-18);
 cd(folder);
 
 
-% exportgraphics(gcf,'Fig3.png')
+exportgraphics(gcf,'Fig2.png')
 
 
