@@ -49,11 +49,16 @@ The video should look similar to the one shown below:
 
 **Note**: this is a relatively simple 2D model without arms. PredSim can also be used with more realistic, 3D models (see [PredSim](https://github.com/KULeuvenNeuromechanics/PredSim)).
 
-## Adding PredSim-workshop-smalll-2025 to path
+## Getting started with one of the cases
 Before starting one of the three cases, make sure that this repository is added to your Matlab path.
 
 1. Either download or clone [the current repository](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025)
-1. Open Matlab
-2. Navigate to the `PredSim-workshop-smalll-2025` folder
-3. Open the script called `set_up_paths.m`
+2. Open Matlab
+3. Navigate to the `PredSim-workshop-smalll-2025` folder
+4. Open the script called `set_up_paths.m`
 5. Click on the green 'Run' button
+
+Now you're ready to start with one the three cases!
+- [S1 DMD](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/S1%20DMD)
+- [S2 CP](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/S2%20CP)
+- [S3 Dropfoot](https://github.com/KULeuvenNeuromechanics/PredSim-workshop-smalll-2025/tree/main/S3%20Dropfoot)
