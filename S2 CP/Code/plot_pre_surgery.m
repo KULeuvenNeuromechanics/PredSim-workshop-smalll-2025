@@ -174,7 +174,7 @@ load(result_paths,'R','model_info');
 % kinematics/kinetics
 for idx_AngleIK = 1:length(IK.names)
     AngleName = IK.names{idx_AngleIK};
-    find(strcmp(R.colheaders.coordinates,AngleName))
+    find(strcmp(R.colheaders.coordinates,AngleName));
 
      ydata= R.kinematics.(figure_settings.variables{1});
 
