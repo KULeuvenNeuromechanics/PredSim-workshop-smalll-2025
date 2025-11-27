@@ -1,5 +1,5 @@
 clear all; close all; clc
-vs = 1; % versions that we want to plot 
+vs = [1]; % versions that we want to plot 
 
 % change this to your own paths
 filename = which('initializeSettings.m');
@@ -56,7 +56,7 @@ for k = 1:length(vs)
         subplot(2,3,i)
         plot(R.kinematics.Qs(:,is(i)),'DisplayName',txt, 'linewidth', 1.5); hold on
         title(strrep(R.colheaders.coordinates{is(i)}, '_', '-')); hold on
-        ylim([-70 50])
+        ylim([-70 70])
         box off
         ylabel(ylabels{i})
         xlabel('Gait cycle (%)')
@@ -77,6 +77,6 @@ folder = filename(1:end-18);
 cd(folder);
 
 
-% exportgraphics(gcf,'Fig2.png')
+% exportgraphics(gcf,'Fig3.png')
 
 

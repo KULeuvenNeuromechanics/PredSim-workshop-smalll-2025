@@ -4,7 +4,8 @@ function [] = plot_data()
 trial = 1;
 
 %% Load and process data
-load(strcat('p1_5StridesData_trial20.mat'),'data');
+for pp = 1:9
+load(strcat(['p', num2str(pp), '_5StridesData_trial20.mat']),'data');
     
 % Extract grfs for each trial
 if isempty(data(trial).Force)==1 
@@ -36,27 +37,36 @@ hsr              = unique(hsr);
 hsr(diff(hsr)<5) = [];
 
 
-Ajoint(1,1,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
-Ajoint(1,2,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
+Ajoint(1,1,:,pp) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
+Ajoint(1,2,:,pp) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_ank_angle(:,1),  hsr, 201),2,'omitnan')) + 15;
 
-Ajoint(2,1,:) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_kne_angle(:,1),  hsr, 201),2,'omitnan');
-Ajoint(2,2,:) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_kne_angle(:,1),  hsr, 201),2,'omitnan');
+Ajoint(2,1,:,pp) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_kne_angle(:,1),  hsr, 201),2,'omitnan');
+Ajoint(2,2,:,pp) =   mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_kne_angle(:,1),  hsr, 201),2,'omitnan');
 
-Ajoint(3,1,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_hip_angle(:,1),  hsr, 201),2,'omitnan'));
-Ajoint(3,2,:) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_hip_angle(:,1),  hsr, 201),2,'omitnan'));
+Ajoint(3,1,:,pp) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.l_hip_angle(:,1),  hsr, 201),2,'omitnan'));
+Ajoint(3,2,:,pp) = (mean(interpolate_to_percgaitcycle(    data(trial).Link_Model_Based.r_hip_angle(:,1),  hsr, 201),2,'omitnan'));
+
+end
 
 
 %% Plot 
 for j = 1:2
     for i = 1:3
+        
         subplot(2,3,(j-1)*3 + i);
-        plot(linspace(0,100,201), squeeze(Ajoint(i,j,:)),'linewidth',2, 'color', [.5 .5 .5], 'Displayname', 'Data (healthy)'); hold on
-
-%         ylim([-70 25]); ylabel('Angle (deg)')
+        z = linspace(0,100,201);
+        meanPlusSTD = squeeze(mean(Ajoint(i,j,:,:),4)) + squeeze(std(Ajoint(i,j,:,:),1,4));
+        meanMinusSTD = squeeze(mean(Ajoint(i,j,:,:),4)) -  squeeze(std(Ajoint(i,j,:,:),1,4));
+               
+        fill([z fliplr(z)],[meanPlusSTD' fliplr(meanMinusSTD')], [0 0 0], 'EdgeColor', 'none' ,'Displayname', 'Data (healthy)'); hold on
+        alpha(.20); 
+        
+        ylim([-70 25]); ylabel('Angle (deg)')
 
     end
 
 end
+
 
 %%
 function[xi] = interpolate_to_percgaitcycle(x,segm,npoints)
